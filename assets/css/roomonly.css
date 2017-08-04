@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'LCD-Bold';
+    src:url('../webfonts/LCD-Bold.ttf.woff') format('woff'),
+        url('../webfonts/LCD-Bold.ttf.svg#LCD-Bold') format('svg'),
+        url('../webfonts/LCD-Bold.ttf.eot'),
+        url('../webfonts/LCD-Bold.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Modern Sans';
+    src: url('../webfonts/ModernSans.eot');
+    src: url('../webfonts/ModernSans.eot?#iefix') format('embedded-opentype'),
+        url('../webfonts/ModernSans.woff') format('woff'),
+        url('../webfonts/ModernSans.ttf') format('truetype'),
+        url('../webfonts/ModernSans.svg#ModernSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+.moderne, h1 {
+    font-family: 'Modern Sans';
+}
+.lcd  {
+    font-family: 'LCD-Bold';
+}
+.giant-text {
+    font-size: 4em;
+}

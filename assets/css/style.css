@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'LCD-Bold';
+    src:url('../webfonts/LCD-Bold.ttf.woff') format('woff'),
+        url('../webfonts/LCD-Bold.ttf.svg#LCD-Bold') format('svg'),
+        url('../webfonts/LCD-Bold.ttf.eot'),
+        url('../webfonts/LCD-Bold.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Modern Sans';
+    src: url('../webfonts/ModernSans.eot');
+    src: url('../webfonts/ModernSans.eot?#iefix') format('embedded-opentype'),
+        url('../webfonts/ModernSans.woff') format('woff'),
+        url('../webfonts/ModernSans.ttf') format('truetype'),
+        url('../webfonts/ModernSans.svg#ModernSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.moderne, h1 {
+    font-family: 'Modern Sans';
+}
+.lcd  {
+    font-family: 'LCD-Bold';
+}
+
+body.mt {
+    padding-top: 60px;
+    background-image: url(../images/bggrid.png);
+    background-position: center;
+    background-attachment: fixed;
+}
+.no-gutter [class*='row'] {
+    margin-right: 0;
+    margin-left: 0;
+}
+.no-gutter [class*='col-'] {
+    padding-right:0 !important;
+    padding-left:0 !important;
+}
+.navbar-brand {
+    padding: 8px 15px;
+}
+.navbar-brand img:hover {
+    height: 50px;
+}
+.navbar-brand img {
+    height: 45px;
+    transition: .3s ease;
+}
+.btn {
+    transition: .5s ease;
+}
+.panel-heading {
+    padding: 2px 15px;
+}
+
+.people-icons {
+    font-size: 5em;
+}
+.panel {
+    box-shadow: 1px 3px 4px 1px rgba(0,0,0,0.35) !important;
+}
+.people-icons > span {
+    display: inline-block;
+    width: 75px;
+    text-align: center;
+}
+
+.people-icons .fa-female {
+    color: red;
+}
+.people-icons .fa-male {
+    color: blue;
+}
+
+.giant-text {
+    font-size: 4em;
+}
+
+.edit-link {
+    color: white !important;
+}
+
+.puzzle-container {
+    border-bottom: solid 1px #bbb;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.scroll-height {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.checklist-item {
+    padding: 10px 0;
+    border-bottom: dashed 1px grey;
+    vertical-align: bottom;
+    font-size: 2em;
+}
+
+.highlight {
+    font-weight: bold;
+    border-left: solid 5px black;
+}
+
+.btn-group-xs>.btn, .btn-xs {
+    font-size: 10px !important;
+}
+
