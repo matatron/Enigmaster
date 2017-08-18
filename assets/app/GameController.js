@@ -14,8 +14,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.getTime = function () {
-        ctrl.timeLeft = ctrl.js_end - (new Date());
-        ctrl.percent = Math.floor(((new Date()) - ctrl.js_start)/(ctrl.js_end - ctrl.js_start)*1000)/10;
+        var now = new Date();
+//        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
+        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime()));
+        ctrl.percent = 100 - Math.floor(ctrl.timeLeft/3600000*100);
         if (ctrl.timeLeft<0) {
 
         }
@@ -91,9 +93,11 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
             ctrl.data = response.data;
             ctrl.minutes = ctrl.data.room.minutes;
+            ctrl.minutesPerClue = parseInt(ctrl.data.room.minPerClue);
             ctrl.js_start = new Date(ctrl.data.start*1000);
             ctrl.js_end = new Date(ctrl.data.end*1000);
             ctrl.data.show_progress = (ctrl.data.show_progress == 1);
+            ctrl.data.total_clues = 0;
             ctrl.puzzles = JSON.parse(ctrl.data.puzzles);
             if (ctrl.data.language != 'en') ctrl.data.language = 'es';
             _.forEach(ctrl.puzzles, function(puzzle) {
@@ -105,7 +109,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             updateClues();
             ctrl.getTime();
         });
-        $interval(getGizmos, 5000);
+        $interval(getGizmos, 3000);
         getGizmos();
     },50);
 

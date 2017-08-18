@@ -10,6 +10,11 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
     function getBackend() {
         $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
             $scope.data = response.data;
+            $scope.pistas = [];
+            for(var i=parseInt($scope.data.total_clues); i>0; i--) {
+                console.log(i);
+                $scope.pistas.push(i);
+            }
             if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                 $scope.clue = $scope.data.clue.value;
                 ping.play();

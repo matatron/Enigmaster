@@ -7,10 +7,13 @@
 </div>
 <div ng-if="data.status == 1">
     <div class="lcd giant-text">
-        {{timeLeft | date : 'HH:mm:ss' : 'UTC'}}
+        {{timePass | date : 'HH:mm:ss' : 'UTC'}}
     </div>
     <div class="well">
         {{clue}}
+    </div>
+    <div>
+        <i class="fa fa-key" ng-repeat="n in pistas"></i>
     </div>
 </div>
 <div ng-if="data.status == 0">

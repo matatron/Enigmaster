@@ -10,7 +10,7 @@
         {{timeLeft | date : 'HH:mm:ss' : 'UTC'}}
     </div>
     <div class="well">
-        {{data.clue.value}}
+        {{clue}}
     </div>
 </div>
 <div ng-if="data.status == 0">

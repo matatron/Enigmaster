@@ -13,12 +13,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="fTime" class="col-sm-2 control-label">Minutos</label>
-                            <div class="col-sm-4">
+                            <label for="fTime" class="col-sm-2 control-label">Minutos de juego</label>
+                            <div class="col-sm-2">
                                 <input type="text" class="form-control" id="fTime" placeholder="Minutos" ng-model="ctrl.data.minutes">
                             </div>
+                            <label for="fTime" class="col-sm-2 control-label">Minutos por pista</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="fTime" placeholder="Minutos" ng-model="ctrl.data.minPerClue">
+                            </div>
                             <label for="fType" class="col-sm-2 control-label">Plantilla de visor</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <select class="form-control" id="fType" ng-model="ctrl.data.view">
                                     <?php foreach(Kohana::list_files('views/playerviews') as $viewfile) {
     $parts = explode('views\playerviews\\', $viewfile);
