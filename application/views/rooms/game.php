@@ -124,7 +124,8 @@
                                 <label for="progreso"><input type="checkbox" ng-model="ctrl.data.show_progress" ng-click="ctrl.updateBackend(['show_progress'])" id="progreso" name="progreso" /> Mostrar progreso</label>
                             </div>
                             <table class="table table-hover table-condensed "  ng-show="ctrl.data.start > 0 && ctrl.timeLeft >= 0">
-                                <tr ng-repeat="puzzle in ctrl.puzzles" ng-mouseover="ctrl.highlightGizmo(puzzle.gizmo)" ng-mouseleave="ctrl.highlightNone()">
+                                <tr ng-repeat="puzzle in ctrl.puzzles">
+                                    <td>{{$index+1}}</td>
                                     <td>{{puzzle.name}}</td>
                                     <td class="text-right">
                                         <button class="btn btn-primary btn-xs" ng-click="ctrl.togglePuz($index)" ng-if="!puzzle.complete" uib-tooltip="Marcar como completo" tooltip-placement="auto left"><i class="fa fa-check" aria-hidden="true"></i></button>

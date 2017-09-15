@@ -7,7 +7,7 @@
 </div>
 <div ng-if="data.status == 1">
     <div class="lcd giant-text">
-        {{timePass | date : 'HH:mm:ss' : 'UTC'}}
+        {{timePass}}
     </div>
     <div class="well">
         {{clue}}

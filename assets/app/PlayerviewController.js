@@ -1,6 +1,6 @@
 webApp = angular.module('Enigmaster', [
 ]);
-webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval) {
+webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
     $scope.data={};
     $scope.data.status = 0;
     $scope.data.end = 0;
@@ -28,6 +28,9 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
         $now = (new Date()).getTime();
         $scope.timeLeft = $scope.data.end - $now;
         $scope.timePass = 60*60*1000 - $scope.timeLeft;
+
+        $scope.timeLeft = $filter('date')($scope.timeLeft, 'HH:mm:ss', 'UTC');
+        $scope.timePass = ($scope.timePass < 0 ? "-"+$filter('date')(-$scope.timePass, 'HH:mm:ss', 'UTC') : $filter('date')($scope.timePass, 'HH:mm:ss', 'UTC') );
     },100);
     getBackend();
 

@@ -7,7 +7,7 @@
 </div>
 <div ng-if="data.status == 1">
     <div class="lcd giant-text">
-        {{timeLeft | date : 'HH:mm:ss' : 'UTC'}}
+        {{timeLeft}}
     </div>
     <div class="well">
         {{clue}}
@@ -15,7 +15,7 @@
 </div>
 <div ng-if="data.status == 0">
     <div class="lcd giant-text">
-        {{data.time | date : 'HH:mm:ss' : 'UTC'}}
+        {{data.time}}
     </div>
     <div class="well">
         GAME OVER!

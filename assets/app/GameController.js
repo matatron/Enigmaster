@@ -4,9 +4,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     ctrl.modifier = 0;
 
     ctrl.startTime = function() {
+        var now = new Date();
         ctrl.data.status = 1;
-        ctrl.js_start = (new Date());
-        ctrl.js_end = new Date(ctrl.js_start.getTime()+ctrl.minutes*60000);
+        ctrl.js_start = new Date(now.getTime() + 5000);
+        ctrl.js_end = new Date(now.getTime() + ctrl.minutes*60000 + 5000);
         ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);
         ctrl.data.end = Math.round(ctrl.js_end.getTime()/1000);
         ctrl.updateBackend(['start', 'end', 'status']);
@@ -50,17 +51,21 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         }
         updateClues();
         ctrl.data.puzzles = JSON.stringify(ctrl.puzzles);
-        ctrl.updateBackend(['puzzles']);
+        ctrl.updateBackend(['puzzles', 'progress']);
     }
 
     function updateClues() {
-        var clues = [];
+        var clues = [],
+            progress = 0;
         _.forEach(ctrl.puzzles, function (puzzle, pos){
             if (!puzzle.complete) {
                 clues = clues.concat(puzzle.clues);
+            } else {
+                progress = pos+1;
             }
         });
         ctrl.clues = clues;
+        ctrl.data.progress = progress;
     }
 
     ctrl.sendClue = function(clue, counts) {
@@ -77,15 +82,6 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.data.clues = JSON.stringify(ctrl.cluesSent);
             ctrl.data.total_clues = _.filter(ctrl.cluesSent, 'counts').length;
             ctrl.updateBackend(['clues', 'total_clues']);
-        }
-    }
-
-    ctrl.highlightNone = function (uid) {
-        $('.highlight').removeClass('highlight');
-    }
-    ctrl.highlightGizmo = function (uid) {
-        if (uid) {
-            $('.gizmouid-'+uid).addClass('highlight');
         }
     }
 

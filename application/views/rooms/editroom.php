@@ -47,8 +47,6 @@
                             <button class="btn btn-xs" ng-click="ctrl.swapPuzzle($index)" ng-hide="$first"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
                             Acertijo {{$index+1}}: <br />
                             <input ng-model="puzzle.name" class="form-control"/>
-                            Gizmo: <br />
-                            <input ng-model="puzzle.gizmo" class="form-control"/>
                             <br/>
                             <button class="btn btn-block btn-xs" ng-click="ctrl.selectPuzzle($index)" data-toggle="modal" data-target="#modalFinish">Eliminar Acertijo</button>
                             <br/>
