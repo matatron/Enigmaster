@@ -115,22 +115,50 @@ class Controller_Json_Info extends Controller_Json {
         }
     }
 
-    public function action_gizmos()
+    public function action_progress()
     {
         $now = time();
         $roomId = $this->request->param('id');
         $gizmos = ORM::factory('Gizmo')->where('room', '=', $roomId)->find_all()->as_array();
+        $group = ORM::factory('Group')
+            ->where('room_id', '=', $roomId)
+            ->limit(1)
+            ->order_by('id', 'DESC')
+            ->find();
+
         $json = array();
+        $json["gizmos"] = array();
+        $json["progress"] = $group->progress;
         foreach ($gizmos as $gizmo)
         {
-            $json[$gizmo->id] = array(
+            $json["gizmos"][$gizmo->id] = array(
                 'active'=> ($gizmo->lastActive > $now-10),
                 'data'=> json_decode($gizmo->data)
             );
 
         }
         $this->data = $json;
+    }
 
+    public function action_gizmo()
+    {
+        $uid = $this->request->param('id');
+        $gizmo = ORM::factory('Gizmo')
+            ->where('uid', '=', $uid)
+            ->find();
+        $this->data = $gizmo->as_array();
+    }
+
+    public function action_savegizmo()
+    {
+        $uid = $this->request->param('id');
+        $gizmo = ORM::factory('Gizmo')
+            ->where('uid', '=', $uid)
+            ->find();
+        $payload = json_decode($this->request->body(), true);
+        $gizmo->values($payload);
+        $gizmo->save();
+        $this->data = $gizmo->as_array();
     }
 
     public function action_savepostgroup()

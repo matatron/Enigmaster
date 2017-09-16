@@ -65,7 +65,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             }
         });
         ctrl.clues = clues;
-        ctrl.data.progress = progress;
+        ctrl.data.progress = Math.max(progress, ctrl.data.progress);
     }
 
     ctrl.sendClue = function(clue, counts) {
@@ -105,14 +105,15 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             updateClues();
             ctrl.getTime();
         });
-        $interval(getGizmos, 3000);
+        $interval(getProgress, 3000);
         getGizmos();
     },50);
 
     window.ctrl = this;
-    function getGizmos() {
-        $http.get('/json_info/gizmos/'+ctrl.roomId).then(function(response) {
-            ctrl.gizmos = response.data;
+    function getProgress() {
+        $http.get('/json_info/progress/'+ctrl.roomId).then(function(response) {
+            ctrl.data.progress = response.data.progress;
+            ctrl.gizmos = response.data.gizmos;
         });
     }
 

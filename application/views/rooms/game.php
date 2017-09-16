@@ -23,7 +23,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> Tiempo</div>
                         <div class="panel-body">
-                            <div class="row" ng-if="ctrl.data.start == 0">
+                            <div class="row" ng-if="ctrl.data.start == null">
                                 <div class="col-xs-6 form-inline">
                                     <strong>Tiempo:</strong> <input type="text" ng-model="ctrl.minutes" class="form-control" />minutos <br />
                                 </div>
@@ -119,12 +119,12 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-lock" aria-hidden="true"></i> Acertijos</div>
                         <div class="panel-body">
-
-                            <div class="checkbox">
+                            Progreso: {{ctrl.data.progress}}
+                            <!--div class="checkbox">
                                 <label for="progreso"><input type="checkbox" ng-model="ctrl.data.show_progress" ng-click="ctrl.updateBackend(['show_progress'])" id="progreso" name="progreso" /> Mostrar progreso</label>
-                            </div>
+                            </div -->
                             <table class="table table-hover table-condensed "  ng-show="ctrl.data.start > 0 && ctrl.timeLeft >= 0">
-                                <tr ng-repeat="puzzle in ctrl.puzzles">
+                                <tr ng-repeat="puzzle in ctrl.puzzles" ng-class="{success: ($index+1==ctrl.data.progress)}">
                                     <td>{{$index+1}}</td>
                                     <td>{{puzzle.name}}</td>
                                     <td class="text-right">
