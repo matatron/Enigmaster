@@ -42,9 +42,9 @@ class Controller_Gizmo extends Controller {
                         }
                     }
                 }
-                $this->response->body($group->progress."\r\n");
+                $this->response->body($group->progress);
             } else {
-                $this->response->body("off\r\n");
+                $this->response->body('off');
             }
         }
     }
