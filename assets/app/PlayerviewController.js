@@ -6,13 +6,32 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
     $scope.data.end = 0;
     $scope.clue = '';
     var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
+    var lastStatus = null;
+    var bgAudio = null;
+
 
     function getBackend() {
         $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
             $scope.data = response.data;
+            if ($scope.data.status != lastStatus) {
+                lastStatus = $scope.data.status;
+                switch($scope.data.status) {
+                    case "1":
+                        bgAudio = new Audio('/assets/audio/'+window.bgsound);
+                        bgAudio.play();
+                        break;
+                    case "0":
+                        bgAudio.stop();
+                        //play end game sound
+                        break;
+                    case "2":
+                        bgAudio.stop();
+                        break;
+
+                }
+            }
             $scope.pistas = [];
             for(var i=parseInt($scope.data.total_clues); i>0; i--) {
-                console.log(i);
                 $scope.pistas.push(i);
             }
             if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {

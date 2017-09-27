@@ -1,5 +1,8 @@
 <style>
 </style>
+<script>
+    window.bgsound = "cueva1.mp3";
+</script>
 <div ng-if="data.status == 2">
     <div class="well">
         ¿LISTOS PARA EMPEZAR?
