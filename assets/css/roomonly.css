@@ -18,6 +18,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Diogenes';
+    src: url('../webfonts/Diogenes.eot');
+    src: url('../webfonts/Diogenes.eot?#iefix') format('embedded-opentype'),
+        url('../webfonts/Diogenes.woff') format('woff'),
+        url('../webfonts/Diogenes.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
     text-align: center;
     background-color: black;
@@ -30,6 +41,14 @@ body {
 .lcd  {
     font-family: 'LCD-Bold';
 }
-.giant-text {
+.medium-text {
     font-size: 4em;
+}
+
+.giant-text {
+    font-size: 8em;
+}
+
+.font-diogenes {
+    font-family: 'Diogenes';
 }

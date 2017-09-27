@@ -4,15 +4,21 @@ class Controller_Gizmo extends Controller {
 
     public function action_report()
     {
+        $hasChanged = false;
         $query = $this->request->query();
         $gizmoId = $this->request->param('id');
         $data = json_encode($query);
         $gizmo = ORM::factory('Gizmo')->where('uid', '=', $gizmoId)->find();
         if ($gizmo->loaded()) {
             $gizmo->lastActive = time();
-            $gizmo->data = $data;
+            if ($data != $gizmo->data) {
+                $gizmo->prevdata = $gizmo-data;
+                $gizmo->data = $data;
+                $hasChanged = true;
+            }
             $gizmo->save();
         }else{
+            $hasChanged = true;
             $gizmo = ORM::factory('Gizmo');
             $gizmo->uid = $gizmoId;
             $gizmo->name = 'Gizmo '.$gizmoId;
@@ -30,15 +36,17 @@ class Controller_Gizmo extends Controller {
                 ->and_where('status', '>', 0)
                 ->find();
             if ($group->loaded()) {
-                foreach($rules as $rule) {
-                    if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
-                        switch ($rule->then) {
-                            case "progress":
-                                if ($group->progress < $rule->that) {
-                                    $group->progress = $rule->that;
-                                    $group->save();
-                                }
-                                break;
+                if ($hasChanged) {
+                    foreach($rules as $rule) {
+                        if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
+                            switch ($rule->then) {
+                                case "progress":
+                                    if ($group->progress < $rule->that) {
+                                        $group->progress = $rule->that;
+                                        $group->save();
+                                    }
+                                    break;
+                            }
                         }
                     }
                 }

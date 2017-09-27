@@ -105,7 +105,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             updateClues();
             ctrl.getTime();
         });
-        $interval(getProgress, 3000);
+        $interval(getProgress, 2000);
         getGizmos();
     },50);
 
