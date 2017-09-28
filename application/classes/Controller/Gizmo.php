@@ -12,7 +12,7 @@ class Controller_Gizmo extends Controller {
         if ($gizmo->loaded()) {
             $gizmo->lastActive = time();
             if ($data != $gizmo->data) {
-                $gizmo->prevdata = $gizmo-data;
+                $gizmo->prevdata = $gizmo->data;
                 $gizmo->data = $data;
                 $hasChanged = true;
             }
