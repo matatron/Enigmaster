@@ -3,7 +3,7 @@
     <div class="col-xs-3 btn-group-vertical">
         <?php foreach($gizmos as $gizmo) { ?>
         <button class="btn btn-default " ng-click="ctrl.loadGizmo('<?= $gizmo->uid; ?>')">
-            <?= $gizmo->name; ?>
+            <?= $gizmo->name; ?> (<?= $gizmo->lastActive; ?>)
         </button>
         <?php } ?>
     </div>
