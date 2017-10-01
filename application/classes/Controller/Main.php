@@ -53,6 +53,7 @@ class Controller_Main extends Controller_Website {
             ->find();
         $gizmos = ORM::factory('Gizmo')
             ->where('room', '=', $roomId)
+            ->order_by('name', 'asc')
             ->find_all();
         if (!$group->loaded()) {
             header('Location: /');
