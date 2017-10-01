@@ -6,8 +6,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     ctrl.startTime = function() {
         var now = new Date();
         ctrl.data.status = 1;
-        ctrl.js_start = new Date(now.getTime() + 5000);
-        ctrl.js_end = new Date(now.getTime() + ctrl.minutes*60000 + 5000);
+        ctrl.js_start = new Date(now.getTime());
+        ctrl.js_end = new Date(now.getTime() + ctrl.minutes*60000);
         ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);
         ctrl.data.end = Math.round(ctrl.js_end.getTime()/1000);
         ctrl.updateBackend(['start', 'end', 'status']);
@@ -105,8 +105,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             updateClues();
             ctrl.getTime();
         });
-        $interval(getProgress, 2000);
-        getGizmos();
+        $interval(getProgress, 1000);
+        getProgress();
     },50);
 
     window.ctrl = this;

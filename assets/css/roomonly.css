@@ -33,6 +33,7 @@ body {
     text-align: center;
     background-color: black;
     color: white;
+    font-size: 4em;
 }
 
 .moderne, h1 {
@@ -40,9 +41,6 @@ body {
 }
 .lcd  {
     font-family: 'LCD-Bold';
-}
-.medium-text {
-    font-size: 4em;
 }
 
 .giant-text {
