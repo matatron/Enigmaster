@@ -10,7 +10,7 @@
 </div>
 <div ng-if="data.status == 1">
     <div class="lcd giant-text">
-        {{timePass}}
+        {{timeLeft}}
     </div>
     <div class="">
         <i class="fa fa-key" ng-repeat="n in pistas"></i>
