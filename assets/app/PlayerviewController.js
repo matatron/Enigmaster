@@ -49,7 +49,7 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
         $scope.timePass = 60*60*1000 - $scope.timeLeft;
 
         $scope.timeLeft = $filter('date')($scope.timeLeft, 'HH:mm:ss', 'UTC');
-        $scope.timePass = ($scope.timePass < 0 ? "-"+$filter('date')(-$scope.timePass, 'HH:mm:ss', 'UTC') : $filter('date')($scope.timePass, 'HH:mm:ss', 'UTC') );
+        $scope.timePass = $filter('date')($scope.timePass, 'HH:mm:ss', 'UTC');
     },100);
     getBackend();
 
