@@ -13,7 +13,7 @@
         {{timeLeft}}
     </div>
     <div class="">
-        <i class="fa fa-key" ng-repeat="n in pistas"></i> <span ng-if="pistas.length>0" class="lcd">= {{pistas.length*3}}:00</span>
+        <i class="fa fa-key" ng-repeat="n in pistas"></i> <span ng-if="pistas.length>0" class="lcd">= {{pistas.length*5}}:00</span>
     </div>
     <div class="font-diogenes" style="width: 60%; margin: 0 auto;">
         {{clue}}

@@ -9,6 +9,7 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
     var lastStatus = null;
     var bgAudio = null;
 
+    bgAudio = new Audio('/assets/audio/'+window.bgsound);
 
     function getBackend() {
         $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
@@ -17,15 +18,16 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
                 lastStatus = $scope.data.status;
                 switch($scope.data.status) {
                     case "1":
-                        bgAudio = new Audio('/assets/audio/'+window.bgsound);
-                        bgAudio.play();
+                        if (bgAudio) bgAudio.play();
                         break;
                     case "0":
-                        bgAudio.stop();
+                        if (bgAudio) bgAudio.stop();
+                        $scope.clue = '';
                         //play end game sound
                         break;
                     case "2":
-                        bgAudio.stop();
+                        if (bgAudio) bgAudio.stop();
+                        $scope.clue = '';
                         break;
 
                 }
