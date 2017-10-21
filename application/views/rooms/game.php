@@ -13,7 +13,7 @@
                     <button class="btn btn-info btn-block" data-toggle="modal" data-target="#modalComments" uib-tooltip="Editar comentarios sobre este grupo">Comentarios</button>
                 </div>
             </div>
-            <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalFinish" ng-if="ctrl.data.start > 0" uib-tooltip="Finalizar juego antes de tiempo">Finalizar Juego</button>
+            <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalFinish" ng-if="ctrl.data.start > 0 && ctrl.timeLeft > 0" uib-tooltip="Finalizar juego antes de tiempo">Finalizar Juego</button>
         </div>
 
 
@@ -57,7 +57,12 @@
                                 </div>
                             </div>
                             <div class="row" ng-if="ctrl.data.start > 0 && ctrl.timeLeft < 0">
-                                Juego finalizado
+                                <div class="col-sm-4">
+                                    Juego finalizado
+                                </div>
+                                <div class="col-sm-4">
+                                    <a type="button" class="btn btn-primary btn-block" href="/main/finish/<?= $roomId; ?>">Finalizar y volver al inicio</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,8 +78,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Pista personalizada..." ng-model="customClue">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" ng-click="ctrl.sendClue(customClue, false);" uib-tooltip="Enviar como comentario" tooltip-placement="auto bottom-left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                                    <button class="btn btn-primary" type="button" ng-click="ctrl.sendClue(customClue, true);" uib-tooltip="Enviar como pista" tooltip-placement="auto bottom-left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                    <button class="btn btn-default" type="button" ng-dblclick="ctrl.sendClue(customClue, false);" uib-tooltip="Enviar como comentario" tooltip-placement="auto bottom-left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                    <button class="btn btn-primary" type="button" ng-dblclick="ctrl.sendClue(customClue, true);" uib-tooltip="Enviar como pista" tooltip-placement="auto bottom-left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                 </span>
                             </div>
                             <table class="table table-hover table-condensed ">
@@ -121,15 +126,15 @@
                         <div class="panel-body">
                             Progreso: {{ctrl.data.progress}}
                             <!--div class="checkbox">
-                                <label for="progreso"><input type="checkbox" ng-model="ctrl.data.show_progress" ng-click="ctrl.updateBackend(['show_progress'])" id="progreso" name="progreso" /> Mostrar progreso</label>
-                            </div -->
+<label for="progreso"><input type="checkbox" ng-model="ctrl.data.show_progress" ng-click="ctrl.updateBackend(['show_progress'])" id="progreso" name="progreso" /> Mostrar progreso</label>
+</div -->
                             <table class="table table-hover table-condensed "  ng-show="ctrl.data.start > 0 && ctrl.timeLeft >= 0">
                                 <tr ng-repeat="puzzle in ctrl.puzzles" ng-class="{success: ($index+1==ctrl.data.progress)}">
                                     <td>{{$index+1}}</td>
                                     <td>{{puzzle.name}}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-primary btn-xs" ng-click="ctrl.togglePuz($index)" ng-if="!puzzle.complete" uib-tooltip="Marcar como completo" tooltip-placement="auto left"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                        <button class="btn btn-default btn-xs" ng-click="ctrl.togglePuz($index)" ng-if="puzzle.complete" uib-tooltip="Desmarcar" tooltip-placement="auto left"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                                        <button class="btn btn-primary btn-xs" ng-dblclick="ctrl.togglePuz($index)" ng-if="!puzzle.complete" uib-tooltip="Marcar como completo" tooltip-placement="auto left"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button class="btn btn-default btn-xs" ng-dblclick="ctrl.togglePuz($index)" ng-if="puzzle.complete" uib-tooltip="Desmarcar" tooltip-placement="auto left"><i class="fa fa-undo" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
                             </table>

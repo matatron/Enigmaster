@@ -75,10 +75,7 @@ class Controller_Main extends Controller_Website {
             ->and_where('status', '>', 0)
             ->find();
         if ($group->loaded()) {
-            $group->status = 0;
-            $group->finished = time();
-            $group->time = $group->finished - $group->start;
-            $group->save();
+            $group->endgame();
             header('Location: /main/postgame/'.$group->id);
             exit();
         } else {

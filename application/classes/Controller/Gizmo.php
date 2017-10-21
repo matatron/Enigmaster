@@ -46,6 +46,13 @@ class Controller_Gizmo extends Controller {
                                         $group->save();
                                     }
                                     break;
+                                case "endgame":
+                                    $group->endgame(($rule->that == "lost"));
+                                    break;
+                                case "punish":
+                                    $group->punish += $rule->that;
+                                    break;
+
                             }
                         }
                     }
