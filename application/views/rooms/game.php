@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" ng-if="ctrl.data.start > 0 && ctrl.timeLeft < 0">
+                            <div class="row" ng-if="(ctrl.data.start > 0 && ctrl.timeLeft < 0) || ctrl.data.progress=='end'">
                                 <div class="col-sm-4">
                                     Juego finalizado
                                 </div>

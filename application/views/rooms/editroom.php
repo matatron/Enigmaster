@@ -28,7 +28,7 @@
                                     foreach(Kohana::list_files('views/playerviews') as $viewfile) {
                                         $viewfileName = $viewfile;
                                         $parts = explode('views\playerviews\\', $viewfile);
-                                        if(!isset($parts[1])) $parts = explode('views/playerviews/', $viewfile);
+                                        if(!isset($parts[1])) $parts = explode('views\/playerviews\/', $viewfile);
                                         $viewfileName = str_replace('.php','',$parts[1]);
                                     ?>
                                     <option value="<?=$viewfileName;?>"><?=$viewfile;?></option>

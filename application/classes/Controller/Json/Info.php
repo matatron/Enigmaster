@@ -129,6 +129,7 @@ class Controller_Json_Info extends Controller_Json {
         $json = array();
         $json["gizmos"] = array();
         $json["progress"] = $group->progress;
+        if ($group->status == 0) $group->progress = "end";
         foreach ($gizmos as $gizmo)
         {
             $json["gizmos"][$gizmo->id] = array(
