@@ -24,7 +24,9 @@
                             <label for="fType" class="col-sm-2 control-label">Plantilla de visor</label>
                             <div class="col-sm-2">
                                 <select class="form-control" id="fType" ng-model="ctrl.data.view">
-                                    <?php foreach(Kohana::list_files('views/playerviews') as $viewfile) {
+                                    <?php
+                                    $viewfileName = "";
+                                    foreach(Kohana::list_files('views/playerviews') as $viewfile) {
     if (strrpos($viewfile, '\\')) {
         $parts = explode('views\playerviews\\', $viewfile);
     }else{
