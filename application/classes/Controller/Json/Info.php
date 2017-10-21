@@ -122,14 +122,18 @@ class Controller_Json_Info extends Controller_Json {
         $gizmos = ORM::factory('Gizmo')->where('room', '=', $roomId)->find_all()->as_array();
         $group = ORM::factory('Group')
             ->where('room_id', '=', $roomId)
+            ->and_where('status' > 0)
             ->limit(1)
             ->order_by('id', 'DESC')
             ->find();
 
         $json = array();
         $json["gizmos"] = array();
-        $json["progress"] = $group->progress;
-        if ($group->status == 0) $group->progress = "end";
+        if ($group->loaded()) {
+            $json["progress"] = $group->progress;
+        } else {
+            $json["progress"] = "off";
+        }
         foreach ($gizmos as $gizmo)
         {
             $json["gizmos"][$gizmo->id] = array(
