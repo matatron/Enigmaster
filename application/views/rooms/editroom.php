@@ -30,9 +30,9 @@
     if (strrpos($viewfile, '\\')) {
         $parts = explode('views\playerviews\\', $viewfile);
     }else{
-        $parts = explode('views\playerviews\\', $viewfile);
+        $parts = explode('views/playerviews/', $viewfile);
     }
-//    $viewfileName = str_replace('.php','',$parts[1]);
+    $viewfileName = str_replace('.php','',$parts[1]);
                                     ?>
                                     <option value="<?=$viewfileName;?>"><?=$viewfile;?></option>
                                     <?php } ?>
