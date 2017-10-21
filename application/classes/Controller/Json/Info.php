@@ -122,7 +122,7 @@ class Controller_Json_Info extends Controller_Json {
         $gizmos = ORM::factory('Gizmo')->where('room', '=', $roomId)->find_all()->as_array();
         $group = ORM::factory('Group')
             ->where('room_id', '=', $roomId)
-            ->and_where('status' > 0)
+            ->and_where('status', '>', 0)
             ->limit(1)
             ->order_by('id', 'DESC')
             ->find();
