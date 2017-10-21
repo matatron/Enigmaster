@@ -25,14 +25,11 @@
                             <div class="col-sm-2">
                                 <select class="form-control" id="fType" ng-model="ctrl.data.view">
                                     <?php
-                                    $viewfileName = "";
                                     foreach(Kohana::list_files('views/playerviews') as $viewfile) {
-    if (strrpos($viewfile, '\\')) {
-        $parts = explode('views\playerviews\\', $viewfile);
-    }else{
-        $parts = explode('views/playerviews/', $viewfile);
-    }
-    $viewfileName = str_replace('.php','',$parts[1]);
+                                        $viewfileName = $viewfile;
+                                        $parts = explode('views\playerviews\\', $viewfile);
+                                        if(!isset($parts[1])) $parts = explode('views/playerviews/', $viewfile);
+                                        $viewfileName = str_replace('.php','',$parts[1]);
                                     ?>
                                     <option value="<?=$viewfileName;?>"><?=$viewfile;?></option>
                                     <?php } ?>
