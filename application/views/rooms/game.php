@@ -31,7 +31,7 @@
                                     <button class="btn btn-danger btn-block" ng-click="ctrl.startTime()">INICIAR TIEMPO</button>
                                 </div>
                             </div>
-                            <div class="row" ng-if="ctrl.data.start > 0 && ctrl.timeLeft >= 0">
+                            <div class="row" ng-if="ctrl.data.start > 0 && ctrl.timeLeft >= 0 && ctrl.data.progress!='off'">
                                 <div class="col-xs-6 col-sm-3">
                                     <strong>Hora de inicio:</strong> {{ctrl.js_start | date:'mediumTime'}}<br />
                                     <strong>Hora de salida:</strong> {{ctrl.js_end | date:'mediumTime'}}<br />

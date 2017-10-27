@@ -18,12 +18,13 @@ class Controller_Json_Info extends Controller_Json {
             ->order_by('id', 'DESC')
             ->find();
         $json = array(
-            'status'=> $group->status,
+            'status'=> intval($group->status),
             'end'=> $group->end*1000, //- $group->total_clues*$group->room->minPerClue*60000
             'time'=> $group->time*1000,
             'total_clues'=> $group->total_clues,
             'team_name'=> $group->team_name,
             'clue'=> json_decode($group->clues)[0],
+            'progress'=> intval($group->progress),
         );
         $this->data = $json;
     }

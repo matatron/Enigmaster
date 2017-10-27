@@ -7,9 +7,9 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
     $scope.clue = '';
     var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
     var lastStatus = null;
+    var lastMusic = '';
     var bgAudio = null;
 
-    bgAudio = new Audio('/assets/audio/'+window.bgsound);
 
     function getBackend() {
         $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
@@ -17,17 +17,13 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
             if ($scope.data.status != lastStatus) {
                 lastStatus = $scope.data.status;
                 switch($scope.data.status) {
-                    case "1":
+                    case 1:
                         if (bgAudio) bgAudio.play();
                         break;
-                    case "0":
-                        if (bgAudio) bgAudio.stop();
+                    default:
+                        if (bgAudio) bgAudio.pause();
                         $scope.clue = '';
                         //play end game sound
-                        break;
-                    case "2":
-                        if (bgAudio) bgAudio.stop();
-                        $scope.clue = '';
                         break;
 
                 }
@@ -39,6 +35,12 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
             if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
+            }
+            if ($scope.data.progress != undefined && $scope.data.status==1 && lastMusic != window.music[$scope.data.progress]) {
+                lastMusic = window.music[$scope.data.progress];
+                if (bgAudio) bgAudio.pause();
+                bgAudio = new Audio(lastMusic);
+                bgAudio.play();
             }
         });
     }

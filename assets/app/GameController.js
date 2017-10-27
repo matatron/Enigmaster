@@ -16,7 +16,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
 
     ctrl.getTime = function () {
         var now = new Date();
-//        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
+        //        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
         ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime()));
         ctrl.percent = 100 - Math.floor(ctrl.timeLeft/3600000*100);
         if (ctrl.timeLeft<0) {
@@ -104,9 +104,9 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
             updateClues();
             ctrl.getTime();
+            $interval(getProgress, 1000);
+            getProgress();
         });
-        $interval(getProgress, 1000);
-        getProgress();
     },50);
 
     window.ctrl = this;

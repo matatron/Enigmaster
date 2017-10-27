@@ -10,6 +10,7 @@ webApp.controller('RoomController', ['$scope', '$http', '$timeout', function($sc
         ctrl.puzzles.push({
             name: 'New Puzzle',
             description: '',
+            music: '',
             clues: [],
             gizmo: '',
             complete: false,

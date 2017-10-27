@@ -7,6 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/assets/font-awesome-4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="/assets/css/roomonly.css"/>
+        <script>
+window.music = [
+<?php foreach($music as $file) { ?>
+    "/assets/audio/<?=$file;?>.mp3",
+<?php } ?>
+    ""
+];
+        </script>
     </head>
     <body class="no-gutter">
         <div class="container" ng-controller="PlayerviewController" ng-init="roomId = <?=$roomId; ?>">
