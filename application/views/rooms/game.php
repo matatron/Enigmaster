@@ -61,7 +61,7 @@
                                     Juego finalizado
                                 </div>
                                 <div class="col-sm-4">
-                                    <a type="button" class="btn btn-primary btn-block" href="/main/postgame/<?= $roomId; ?>">Ir a pantalla de resultados</a>
+                                    <a type="button" class="btn btn-primary btn-block" href="/main/finish/<?= $roomId; ?>">Ir a pantalla de resultados</a>
                                     <a type="button" class="btn btn-primary btn-block" href="/main/archive/<?= $roomId; ?>">Archivar y volver al inicio</a>
                                 </div>
                             </div>

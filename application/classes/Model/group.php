@@ -9,12 +9,13 @@ class Model_Group extends ORM
     );
 
     public function endgame($death = false) {
-        $this->status = 1;
-        $this->finished = time();
-        if ($death) $this->finished += 3600;
+        if ($this->status != 1) {
+            $this->status = 1;
+            $this->finished = time();
+            if ($death) $this->finished += 3600;
+        }
         $this->time = $this->finished - $this->start + $this->total_clues*5000;
         $this->save();
-
     }
 
     public function archive() {

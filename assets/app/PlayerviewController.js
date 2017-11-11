@@ -18,9 +18,11 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
                 lastStatus = $scope.data.status;
                 switch($scope.data.status) {
                     case 2:
+                    case 1:
                         if (bgAudio) bgAudio.play();
                         break;
-                    default:
+                    case 3:
+                    case 0:
                         if (bgAudio) bgAudio.pause();
                         $scope.clue = '';
                         //play end game sound
