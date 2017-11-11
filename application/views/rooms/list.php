@@ -17,7 +17,7 @@
         <?php	if ($room->group->loaded()) {
 
     switch($room->group->status) {
-        case 2: //reseted
+        case 3: //reseted
         ?>
         <div class="panel panel-info">
             <div class="panel-heading"><strong>Status:</strong> Listo para empezar</div>
@@ -27,7 +27,7 @@
         </div>
         <?php
             break;
-        case 1: //onplay
+        case 2: //onplay
             $percent = ($room->group->start > 0) ? round((time() - $room->group->start)/($room->group->end-$room->group->start)*100)%100 : 0;
         ?>
         <div class="panel panel-primary">
@@ -45,6 +45,16 @@
                 <strong>Pistas:</strong> <?= $room->group->total_clues; ?><br />
                 <strong>Personas:</strong> <?= $room->group->people; ?><br />
 
+            </div>
+        </div>
+        <?php
+            break;
+        case 1: //reseted
+        ?>
+        <div class="panel panel-info">
+            <div class="panel-heading"><strong>Status:</strong> Finalizado</div>
+            <div class="panel-body">
+                <a class="btn btn-block btn-default" href="<?= URL::site('main/archive/'.$room->id); ?>">Archivar juego</a>
             </div>
         </div>
         <?php

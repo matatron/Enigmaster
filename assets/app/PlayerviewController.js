@@ -17,7 +17,7 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
             if ($scope.data.status != lastStatus) {
                 lastStatus = $scope.data.status;
                 switch($scope.data.status) {
-                    case 1:
+                    case 2:
                         if (bgAudio) bgAudio.play();
                         break;
                     default:
@@ -36,7 +36,7 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
             }
-            if ($scope.data.progress != undefined && $scope.data.status==1 && lastMusic != window.music[$scope.data.progress]) {
+            if ($scope.data.progress != undefined && $scope.data.status==2 && lastMusic != window.music[$scope.data.progress]) {
                 lastMusic = window.music[$scope.data.progress];
                 if (bgAudio) bgAudio.pause();
                 bgAudio = new Audio(lastMusic);

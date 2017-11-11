@@ -61,7 +61,7 @@
                                     Juego finalizado
                                 </div>
                                 <div class="col-sm-4">
-                                    <a type="button" class="btn btn-primary btn-block" href="/main/finish/<?= $roomId; ?>">Finalizar y volver al inicio</a>
+                                    <a type="button" class="btn btn-primary btn-block" href="/main/archive/<?= $roomId; ?>">Finalizar y volver al inicio</a>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +133,8 @@
                                     <td>{{$index+1}}</td>
                                     <td>{{puzzle.name}}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-primary btn-xs" ng-dblclick="ctrl.togglePuz($index)" ng-if="!puzzle.complete" uib-tooltip="Marcar como completo" tooltip-placement="auto left"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                        <button class="btn btn-default btn-xs" ng-dblclick="ctrl.togglePuz($index)" ng-if="puzzle.complete" uib-tooltip="Desmarcar" tooltip-placement="auto left"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                                        <button class="btn btn-primary btn-xs" ng-click="ctrl.togglePuz($index)" ng-if="!puzzle.complete" uib-tooltip="Marcar como completo" tooltip-placement="auto left"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button class="btn btn-default btn-xs" ng-click="ctrl.togglePuz($index)" ng-if="puzzle.complete" uib-tooltip="Desmarcar" tooltip-placement="auto left"><i class="fa fa-undo" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
                             </table>

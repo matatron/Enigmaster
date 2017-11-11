@@ -5,7 +5,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
 
     ctrl.startTime = function() {
         var now = new Date();
-        ctrl.data.status = 1;
+        ctrl.data.status = 2;
         ctrl.js_start = new Date(now.getTime());
         ctrl.js_end = new Date(now.getTime() + ctrl.minutes*60000);
         ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);

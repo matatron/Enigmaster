@@ -1,11 +1,11 @@
 <style>
 </style>
-<div ng-if="data.status == 2">
+<div ng-if="data.status == 3">
     <div class="well font-diogenes">
         ¿LISTOS PARA EMPEZAR?
     </div>
 </div>
-<div ng-if="data.status == 1">
+<div ng-if="data.status == 2">
     <div class="lcd giant-text">
         {{timeLeft}}
     </div>
@@ -16,7 +16,7 @@
         {{clue}}
     </div>
 </div>
-<div ng-if="data.status == 0">
+<div ng-if="data.status == 1">
     <div class="lcd giant-text">
         {{data.time | date : 'HH:mm:ss' : 'UTC'}}
     </div>

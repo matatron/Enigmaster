@@ -84,6 +84,24 @@ class Controller_Main extends Controller_Website {
         }
     }
 
+
+    public function action_archive()
+    {
+        $roomId = $this->request->param('id');
+        $group = ORM::factory('Group')
+            ->where('room_id', '=', $roomId)
+            ->and_where('status', '>', 0)
+            ->find();
+        if ($group->loaded()) {
+            $group->archive();
+            header('Location: /');
+            exit();
+        } else {
+            header('Location: /');
+            exit();
+        }
+    }
+
     public function action_gizmos() {
         $gizmos = ORM::factory("Gizmo")->find_all();
         $this->template->title = 'Gizmos';
