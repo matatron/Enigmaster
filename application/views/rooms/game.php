@@ -23,7 +23,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> Tiempo</div>
                         <div class="panel-body">
-                            <div class="row" ng-if="ctrl.data.start == null">
+                            <div class="row" ng-if="ctrl.data.status == 3">
                                 <div class="col-xs-6 form-inline">
                                     <strong>Tiempo:</strong> <input type="text" ng-model="ctrl.minutes" class="form-control" />minutos <br />
                                 </div>
@@ -31,7 +31,7 @@
                                     <button class="btn btn-danger btn-block" ng-click="ctrl.startTime()">INICIAR TIEMPO</button>
                                 </div>
                             </div>
-                            <div class="row" ng-if="ctrl.data.start > 0 && ctrl.timeLeft >= 0 && ctrl.data.progress!='off'">
+                            <div class="row" ng-if="ctrl.data.status == 2">
                                 <div class="col-xs-6 col-sm-3">
                                     <strong>Hora de inicio:</strong> {{ctrl.js_start | date:'mediumTime'}}<br />
                                     <strong>Hora de salida:</strong> {{ctrl.js_end | date:'mediumTime'}}<br />
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" ng-if="(ctrl.data.start > 0 && ctrl.timeLeft < 0) || ctrl.data.progress=='off'">
+                            <div class="row" ng-if="ctrl.data.status == 1">
                                 <div class="col-sm-4">
                                     Juego finalizado
                                 </div>
