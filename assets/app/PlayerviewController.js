@@ -38,7 +38,7 @@ webApp.controller('PlayerviewController', ['$scope', '$http', '$timeout', '$inte
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
             }
-            if ($scope.data.progress != undefined && $scope.data.status==2 && lastMusic != window.music[$scope.data.progress]) {
+            if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1) && lastMusic != window.music[$scope.data.progress]) {
                 lastMusic = window.music[$scope.data.progress];
                 if (bgAudio) bgAudio.pause();
                 bgAudio = new Audio(lastMusic);
