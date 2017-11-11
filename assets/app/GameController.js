@@ -113,6 +113,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     function getProgress() {
         $http.get('/json_info/progress/'+ctrl.roomId).then(function(response) {
             ctrl.data.progress = response.data.progress;
+            ctrl.data.status = parseInt(response.data.status);
             ctrl.gizmos = response.data.gizmos;
         });
     }

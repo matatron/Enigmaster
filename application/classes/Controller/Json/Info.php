@@ -130,6 +130,7 @@ class Controller_Json_Info extends Controller_Json {
 
         $json = array();
         $json["gizmos"] = array();
+        $json["status"] = $group->status;
         if ($group->loaded()) {
             $json["progress"] = $group->progress;
         } else {
