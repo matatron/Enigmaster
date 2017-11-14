@@ -36,28 +36,32 @@ class Controller_Gizmo extends Controller {
                 ->and_where('status', '>', 0)
                 ->find();
             if ($group->loaded()) {
-                if ($hasChanged) {
-                    foreach($rules as $rule) {
-                        if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
-                            switch ($rule->then) {
-                                case "progress":
-                                    if ($group->progress < $rule->that) {
-                                        $group->progress = $rule->that;
-                                        $group->save();
-                                    }
-                                    break;
-                                case "endgame":
-                                    $group->endgame(($rule->that == "lost"));
-                                    break;
-                                case "punish":
-                                    $group->punish += $rule->that;
-                                    break;
+                if ($group->status == 3) { // not started
+                    $this->response->body(0);
+                } else {
+                    if ($hasChanged) {
+                        foreach($rules as $rule) {
+                            if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
+                                switch ($rule->then) {
+                                    case "progress":
+                                        if ($group->progress < $rule->that) {
+                                            $group->progress = $rule->that;
+                                            $group->save();
+                                        }
+                                        break;
+                                    case "endgame":
+                                        $group->endgame(($rule->that == "lost"));
+                                        break;
+                                    case "punish":
+                                        $group->punish += $rule->that;
+                                        break;
 
+                                }
                             }
                         }
                     }
+                    $this->response->body($group->progress);
                 }
-                $this->response->body($group->progress);
             } else {
                 $this->response->body('off');
             }
