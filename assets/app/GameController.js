@@ -46,6 +46,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.togglePuz = function(n, force) {
+        n = n%ctrl.puzzles.length;
         if (force == undefined) {
             ctrl.puzzles[n].complete = 1-ctrl.puzzles[n].complete;
         } else {
