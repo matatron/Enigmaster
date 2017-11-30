@@ -18,8 +18,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     ctrl.getTime = function () {
         ctrl.now = new Date();
         //        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
-//        ctrl.timeLeft = (ctrl.js_end < ctrl.now) ? "-"+$filter('date')(ctrl.now-ctrl.js_end,'HH:mm:ss','UTC'):$filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
-//        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
+        //        ctrl.timeLeft = (ctrl.js_end < ctrl.now) ? "-"+$filter('date')(ctrl.now-ctrl.js_end,'HH:mm:ss','UTC'):$filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
+        //        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
         ctrl.timeLeft = $filter('clock')(ctrl.js_end - ctrl.now);
         ctrl.timePass = $filter('clock')(ctrl.now - ctrl.js_start);
         ctrl.percent = 100 - Math.floor((ctrl.js_end - ctrl.now)/36000);
@@ -45,8 +45,12 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
 
     }
 
-    ctrl.togglePuz = function(n) {
-        ctrl.puzzles[n].complete = 1-ctrl.puzzles[n].complete;
+    ctrl.togglePuz = function(n, force) {
+        if (force == undefined) {
+            ctrl.puzzles[n].complete = 1-ctrl.puzzles[n].complete;
+        } else {
+            ctrl.puzzles[n].complete = force;
+        }
         if (ctrl.puzzles[n].complete) {
             ctrl.puzzles[n].solvedAt = Math.round((new Date()).getTime()/1000);
         }
@@ -113,7 +117,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     window.ctrl = this;
     function getProgress() {
         $http.get('/json_info/progress/'+ctrl.roomId).then(function(response) {
-            ctrl.data.progress = response.data.progress;
+            response.data.progress = parseInt(response.data.progress);
+            if (ctrl.data.progress < response.data.progress) {
+                ctrl.togglePuz(response.data.progress, true);
+            }
             ctrl.data.status = parseInt(response.data.status);
             ctrl.gizmos = response.data.gizmos;
         });

@@ -1,9 +1,15 @@
 <style>
     .fixed-text {
         position: fixed;
-        top: 0;
+        top: 51px;
         z-index: 2017;
-        font-size: 3em;
+        font-size: 2em;
+        background: black;
+        border: solid 1px;
+        font-family: 'LCD-Bold';
+        right: 0;
+        color: greenyellow;
+        padding: 0 14px;
     }
 </style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
