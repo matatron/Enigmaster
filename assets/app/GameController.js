@@ -1,4 +1,4 @@
-webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval) {
+webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
     var ctrl = this;
 
     ctrl.modifier = 0;
