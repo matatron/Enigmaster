@@ -10,7 +10,7 @@ webApp = angular.module('Enigmaster', [
         
         var s = date.getTime()/1000;
         var h = Math.floor(s/3600);
-        var m = Math.floor(s/60);
+        var m = Math.floor(s/60)%60;
         var s = Math.floor(s%60);
         return h+":"+pad(m)+":"+pad(s);
     };

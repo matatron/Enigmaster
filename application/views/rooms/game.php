@@ -36,8 +36,8 @@
                                 <div class="col-xs-6 col-sm-3">
                                     <strong>Hora de inicio:</strong> {{ctrl.js_start | date:'mediumTime'}}<br />
                                     <strong>Hora de salida:</strong> {{ctrl.js_end | date:'mediumTime'}}<br />
-                                    <strong>Diferencia:</strong> {{ctrl.js_end-ctrl.js_start | date:'HH:mm:ss': 'UTC'}}<br />
-                                    <strong>Transcurrido:</strong> {{ctrl.timePass | date:'HH:mm:ss': 'UTC'}}<br />
+                                    <strong>Diferencia:</strong> {{ctrl.js_end-ctrl.js_start | clock}}<br />
+                                    <strong>Transcurrido:</strong> {{ctrl.timePass}}<br />
                                 </div>
                                 <div class="col-xs-6 col-sm-5 text-center lcd giant-text">
                                     {{ctrl.timeLeft}}

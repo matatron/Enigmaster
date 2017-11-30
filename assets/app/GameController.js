@@ -22,7 +22,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
 //        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
         ctrl.timeLeft = $filter('clock')(ctrl.js_end - ctrl.now);
         ctrl.timePass = $filter('clock')(ctrl.now - ctrl.js_start);
-        //ctrl.percent = 100 - Math.floor(ctrl.timeLeft/3600000*100);
+        ctrl.percent = 100 - Math.floor((ctrl.js_end - ctrl.now)/36000);
     }
 
     ctrl.addTime = function () {
