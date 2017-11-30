@@ -2,11 +2,12 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     var ctrl = this;
 
     ctrl.modifier = 0;
+    ctrl.now = 0;
 
     ctrl.startTime = function() {
         var now = new Date();
         ctrl.data.status = 2;
-        ctrl.js_start = new Date(now.getTime());
+        ctrl.js_start = now;
         ctrl.js_end = new Date(now.getTime() + ctrl.minutes*60000);
         ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);
         ctrl.data.end = Math.round(ctrl.js_end.getTime()/1000);
@@ -15,13 +16,13 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.getTime = function () {
-        var now = new Date();
+        ctrl.now = new Date();
         //        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
-        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime()));
-        ctrl.percent = 100 - Math.floor(ctrl.timeLeft/3600000*100);
-        if (ctrl.timeLeft<0) {
-
-        }
+//        ctrl.timeLeft = (ctrl.js_end < ctrl.now) ? "-"+$filter('date')(ctrl.now-ctrl.js_end,'HH:mm:ss','UTC'):$filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
+//        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
+        ctrl.timeLeft = $filter('clock')(ctrl.js_end - ctrl.now);
+        ctrl.timePass = $filter('clock')(ctrl.now - ctrl.js_start);
+        //ctrl.percent = 100 - Math.floor(ctrl.timeLeft/3600000*100);
     }
 
     ctrl.addTime = function () {

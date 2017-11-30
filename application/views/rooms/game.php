@@ -9,11 +9,12 @@
                         <dt>Cuarto:</dt><do>{{ctrl.data.room.name}}</do>
                         <dt>Equipo:</dt><do>{{ctrl.data.team_name}}</do>
                         <dt>Jugadores:</dt><do>{{ctrl.data.people}}</do>
+                        <dt>Estado:</dt><do>{{ctrl.data.status}}</do>
                     </dl>
                     <button class="btn btn-info btn-block" data-toggle="modal" data-target="#modalComments" uib-tooltip="Editar comentarios sobre este grupo">Comentarios</button>
                 </div>
             </div>
-            <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalFinish" ng-if="ctrl.data.start > 0 && ctrl.timeLeft > 0" uib-tooltip="Finalizar juego antes de tiempo">Finalizar Juego</button>
+            <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalFinish" ng-if="ctrl.data.status == 2" uib-tooltip="Finalizar juego antes de tiempo">Finalizar Juego</button>
         </div>
 
 
@@ -36,9 +37,10 @@
                                     <strong>Hora de inicio:</strong> {{ctrl.js_start | date:'mediumTime'}}<br />
                                     <strong>Hora de salida:</strong> {{ctrl.js_end | date:'mediumTime'}}<br />
                                     <strong>Diferencia:</strong> {{ctrl.js_end-ctrl.js_start | date:'HH:mm:ss': 'UTC'}}<br />
+                                    <strong>Transcurrido:</strong> {{ctrl.timePass | date:'HH:mm:ss': 'UTC'}}<br />
                                 </div>
                                 <div class="col-xs-6 col-sm-5 text-center lcd giant-text">
-                                    {{ctrl.timeLeft | date : 'HH:mm:ss' : 'UTC'}}
+                                    {{ctrl.timeLeft}}
                                 </div>
                                 <div class="col-xs-6 col-sm-3">
                                     <div class="input-group">

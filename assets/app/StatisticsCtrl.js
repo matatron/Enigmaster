@@ -6,7 +6,7 @@ webApp.controller('StatisticsController', ['$scope', '$http', '$timeout', functi
 			{ name: 'Fecha', field: 'start', type: 'date', cellFilter: 'date:"M/d/yy H:mm"' },
 			{ name: 'Equipo', field: 'team_name' },
 			{ name: 'Tipo', field: 'team_type' },
-			{ name: 'Tiempo', field: 'time', type: 'number', cellFilter: 'date:"H:mm:ss":"UTC"' },
+			{ name: 'Tiempo', field: 'time', type: 'number', cellFilter: 'clock' },
 			{ name: 'Pistas', field: 'total_clues', type: 'number' },
 			{ name: 'Personas', field: 'people', type: 'number' }
 		]
