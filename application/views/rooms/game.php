@@ -1,4 +1,15 @@
+<style>
+    .fixed-text {
+        position: fixed;
+        top: 0;
+        z-index: 2017;
+        font-size: 3em;
+    }
+</style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
+    <div class="fixed-text giant-text">
+        {{ctrl.timeLeft}}
+    </div>
     <h1>{{ctrl.name}}</h1>
     <div class="row">
         <div class="col-sm-2">
@@ -73,7 +84,7 @@
             </div>
 
 
-            <div class="row" ng-show="ctrl.data.start > 0 && ctrl.timeLeft >= 0">
+            <div class="row" ng-show="ctrl.data.status == 2">
                 <div class="col-sm-6">
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-key" aria-hidden="true"></i> Pistas disponibles</div>
@@ -131,7 +142,7 @@
                             <!--div class="checkbox">
 <label for="progreso"><input type="checkbox" ng-model="ctrl.data.show_progress" ng-click="ctrl.updateBackend(['show_progress'])" id="progreso" name="progreso" /> Mostrar progreso</label>
 </div -->
-                            <table class="table table-hover table-condensed "  ng-show="ctrl.data.start > 0 && ctrl.timeLeft >= 0">
+                            <table class="table table-hover table-condensed "  ng-show="ctrl.data.status == 2">
                                 <tr ng-repeat="puzzle in ctrl.puzzles" ng-class="{success: ($index+1==ctrl.data.progress)}">
                                     <td>{{$index+1}}</td>
                                     <td>{{puzzle.name}}</td>
