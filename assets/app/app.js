@@ -6,6 +6,7 @@ webApp = angular.module('Enigmaster', [
         function pad(n) {
             return (n<10)?"0"+n:n;
         }
+        date = new Date(date);
         
         var s = date.getTime()/1000;
         var h = Math.floor(s/3600);
