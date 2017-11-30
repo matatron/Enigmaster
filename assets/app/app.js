@@ -2,7 +2,7 @@ webApp = angular.module('Enigmaster', [
 	'ui.bootstrap',
 	'ui.grid'
 ]).filter('clock', function() {
-    return function(input) {
+    return function(date) {
         function pad(n) {
             return (n<10)?"0"+n:n;
         }
