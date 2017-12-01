@@ -1,4 +1,7 @@
 <style>
+    .flame {
+        height: 150px;
+    }
 </style>
 <div ng-if="data.status == 3">
     <div class="well font-diogenes">
@@ -10,7 +13,7 @@
         {{timeLeft-punishment*60000 | clock}}
     </div>
     <div>
-        <img src="/assets/images/flama.webp" ng-repeat="n in counters" height="20%;">
+        <img src="/assets/images/flama.webp" ng-repeat="n in counters" class="flame">
     </div>
     <div class="small-text">
         Pistas usadas: 
