@@ -24,7 +24,7 @@
     <div>
         <img src="/assets/images/flama.webp" ng-repeat="n in counters" class="flame">
     </div>
-    <div class="font-diogenes" style="width: 60%; margin: 0 auto;">
+    <div class="font-diogenes" style="margin: 0 auto;">
         {{clue}}
     </div>
 </div>
