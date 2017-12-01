@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="/assets/css/roomonly.css"/>
         <script>
 window.music = [
-<?php foreach($music as $file) { ?>
+    "/assets/audio/<?=$music[0];?>.mp3",
+    <?php foreach($music as $file) { ?>
     "/assets/audio/<?=$file;?>.mp3",
 <?php } ?>
     ""

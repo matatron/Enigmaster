@@ -32,7 +32,7 @@
             </div>
             <label for="fTeamName" class="col-sm-2 control-label">Minutos por pista</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="fMinutesperclue" value="3" ng-model="ctrl.data.minutexclue">
+                <input type="text" class="form-control" id="fMinutesperclue" value="3" ng-model="ctrl.data.minutesxclue">
             </div>
         </div>
         <div class="form-group">
