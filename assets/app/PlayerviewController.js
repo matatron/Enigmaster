@@ -71,6 +71,12 @@ webApp = angular.module('Enigmaster', [
         $now = (new Date()).getTime();
         $scope.timeLeft = $scope.data.end - $now;
         $scope.timePass = 60*60*1000 - $scope.timeLeft;
+        $scope.flamas = [];
+        for(var i =0; i<12; i++) {
+            if (i*5000 < $scope.timeLeft) {
+                $scope.flamas.push(i);
+            }
+        }
     },100);
     getBackend();
 

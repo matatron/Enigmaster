@@ -1,4 +1,11 @@
 <style>
+    .bottomBar {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 10%;
+        text-align: center;
+    }
 </style>
 <div ng-if="data.status == 3">
     <div class="well font-diogenes">
@@ -27,4 +34,7 @@
     <div class="well font-diogenes">
         GAME OVER!
     </div>
+</div>
+<div class="bottomBar">
+    <img src="/assets/images/flama.webp" ng-repeat="n in flamas" height="100%;">
 </div>
