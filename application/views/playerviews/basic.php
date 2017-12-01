@@ -1,11 +1,4 @@
 <style>
-    .bottomBar {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 15%;
-        text-align: center;
-    }
 </style>
 <div ng-if="data.status == 3">
     <div class="well font-diogenes">
@@ -16,6 +9,9 @@
     <div class="lcd giant-text">
         {{timeLeft-punishment*60000 | clock}}
     </div>
+    <div>
+        <img src="/assets/images/flama.webp" ng-repeat="n in counters" height="20%;">
+    </div>
     <div class="small-text">
         Pistas usadas: 
         <i class="fa fa-key" ng-repeat="n in pistas"></i> <span ng-if="pistas.length>0" class="lcd">= {{punishment}}:00</span>
@@ -25,9 +21,6 @@
     </div>
     <div class="font-diogenes" style="width: 60%; margin: 0 auto;">
         {{clue}}
-    </div>
-    <div class="bottomBar">
-        <img src="/assets/images/flama.webp" ng-repeat="n in counters" height="100%;">
     </div>
 </div>
 <div ng-if="data.status == 1">
