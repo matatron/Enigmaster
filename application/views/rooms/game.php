@@ -190,7 +190,7 @@
                                     </td>
                                 </tr>
                                 <?php } ?>
-                            </table>F
+                            </table>
                         </div>
                     </div>
                 </div>
