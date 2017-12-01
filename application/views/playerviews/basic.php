@@ -26,6 +26,9 @@
     <div class="font-diogenes" style="width: 60%; margin: 0 auto;">
         {{clue}}
     </div>
+    <div class="bottomBar">
+        <img src="/assets/images/flama.webp" ng-repeat="n in flamas" height="100%;">
+    </div>
 </div>
 <div ng-if="data.status == 1">
     <div class="lcd giant-text">
@@ -34,7 +37,4 @@
     <div class="well font-diogenes">
         GAME OVER!
     </div>
-</div>
-<div class="bottomBar">
-    <img src="/assets/images/flama.webp" ng-repeat="n in flamas" height="100%;">
 </div>
