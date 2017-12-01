@@ -1,6 +1,6 @@
 <style>
     .flame {
-        height: 100px;
+        height: 150px;
     }
 </style>
 <div ng-if="data.status == 3">
@@ -9,20 +9,17 @@
     </div>
 </div>
 <div ng-if="data.status == 2">
-    <div style="position: absolute; left:0; top:0">
-        <div class="small-text">
-            Pistas usadas: 
-            <i class="fa fa-key" ng-repeat="n in pistas"></i> <span ng-if="pistas.length>0" class="lcd">= {{punishment}}:00</span>
-        </div>
-        <div class="small-text">
-            Tiempo transcurrido: <span class="lcd ">{{timePass | clock}}</span>
-        </div>
-    </div>
     <div class="lcd giant-text">
+        <img src="/assets/images/flama.webp" class="flame">
         {{timeLeft-punishment*60000 | clock}}
+        <img src="/assets/images/flama.webp" class="flame">
     </div>
-    <div>
-        <img src="/assets/images/flama.webp" ng-repeat="n in counters" class="flame">
+    <div class="small-text">
+        Pistas usadas: 
+        <i class="fa fa-key" ng-repeat="n in pistas"></i> <span ng-if="pistas.length>0" class="lcd">= {{punishment}}:00</span>
+    </div>
+    <div class="small-text">
+        Tiempo transcurrido: <span class="lcd ">{{timePass | clock}}</span>
     </div>
     <div class="font-diogenes" style="margin: 0 auto;">
         {{clue}}
