@@ -27,10 +27,15 @@
     </div>
 </div>
 <div ng-if="data.status == 1">
+    <div class="font-diogenes">
+        Tiempo Final:
+    </div>
     <div class="lcd giant-text">
         {{data.time | clock}}
     </div>
-    <div class="well font-diogenes">
-        GAME OVER!
+</div>
+<div ng-if="data.status == 0">
+    <div class="font-diogenes">
+        ENIGMATA
     </div>
 </div>
