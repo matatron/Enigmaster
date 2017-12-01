@@ -71,10 +71,10 @@ webApp = angular.module('Enigmaster', [
         $now = (new Date()).getTime();
         $scope.timeLeft = $scope.data.end - $now;
         $scope.timePass = 60*60*1000 - $scope.timeLeft;
-        $scope.flamas = [];
+        $scope.counters = [];
         for(var i =0; i<12; i++) {
-            if (i*5000 < $scope.timeLeft) {
-                $scope.flamas.push(i);
+            if (i*300000 < $scope.timeLeft) {
+                $scope.counters.push(i);
             }
         }
     },100);

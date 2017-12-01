@@ -3,7 +3,7 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 10%;
+        height: 15%;
         text-align: center;
     }
 </style>
@@ -27,7 +27,7 @@
         {{clue}}
     </div>
     <div class="bottomBar">
-        <img src="/assets/images/flama.webp" ng-repeat="n in flamas" height="100%;">
+        <img src="/assets/images/flama.webp" ng-repeat="n in counters" height="100%;">
     </div>
 </div>
 <div ng-if="data.status == 1">
