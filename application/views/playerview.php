@@ -10,7 +10,7 @@
         <script>
 window.music = [
     "/assets/audio/<?=$music[0];?>.mp3",
-    <?php foreach($music as $file) { ?>
+<?php foreach($music as $file) { ?>
     "/assets/audio/<?=$file;?>.mp3",
 <?php } ?>
     ""
