@@ -28,7 +28,7 @@ class Controller_Playerview extends Controller_Template {
         $music = [];
         $lastMusic = '';
         foreach($puzzles as $puzzle) {
-            if (isset($puzzle->music) && $puzzle->music != $lastMusic) {
+            if (isset($puzzle->music) && $puzzle->music!="" && $puzzle->music != $lastMusic) {
                 $lastMusic = $puzzle->music;
             }
             $music[] = $lastMusic;
