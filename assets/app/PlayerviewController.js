@@ -30,6 +30,7 @@ webApp = angular.module('Enigmaster', [
 
     function getBackend() {
         $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
+            response.data.progress = parseInt(response.data.progress);
             $scope.data = response.data;
             if ($scope.data.status != lastStatus) {
                 lastStatus = $scope.data.status;
@@ -56,8 +57,8 @@ webApp = angular.module('Enigmaster', [
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
             }
-            if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1) && lastMusic != window.music[$scope.data.progress]) {
-                lastMusic = window.music[$scope.data.progress];
+            if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1) && lastMusic != window.music[$scope.data.progress+1]) {
+                lastMusic = window.music[$scope.data.progress+1];
                 if (bgAudio) bgAudio.pause();
                 bgAudio = new Audio(lastMusic);
                 bgAudio.play();
