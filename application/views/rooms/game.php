@@ -13,7 +13,7 @@
     }
 </style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
-    <div class="fixed-text giant-text">
+    <div class="fixed-text giant-text" ng-show="ctrl.data.status == 2">
         {{ctrl.timeLeft}}
     </div>
     <h1>{{ctrl.name}}</h1>
@@ -190,7 +190,7 @@
                                     </td>
                                 </tr>
                                 <?php } ?>
-                            </table>
+                            </table>F
                         </div>
                     </div>
                 </div>
@@ -202,6 +202,11 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-tachometer" aria-hidden="true"></i> Otros</div>
                         <div class="panel-body">
+                            <label for="fFreeClues">Pistas grátis:</label>
+                            <input type="number" id="fFreeClues" class="form-control" ng-model="ctrl.data.free_clues"  ng-change="ctrl.updateClueTimes()"/>
+                            <br/>
+                            <label for="fMinutesperclue">Pistas grátis:</label>
+                            <input type="number" id="fMinutesperclue" class="form-control" ng-model="ctrl.data.minutesxclue" ng-change="ctrl.updateClueTimes()" />
                         </div>
                     </div>
                 </div>
@@ -209,6 +214,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-video-camera" aria-hidden="true"></i> Cámaras</div>
                         <div class="panel-body">
+                            <a href="https://user.zmodo.com/device/list" target="_blank">ZMODO</a><br/>
                         </div>
                     </div>
                 </div>

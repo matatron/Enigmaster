@@ -90,6 +90,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.updateBackend(['clues', 'total_clues']);
         }
     }
+    
+    ctrl.updateClueTimes = function() {
+        console.log(ctrl.data);
+    }
 
     $timeout(function() {
         $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {

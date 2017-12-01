@@ -26,6 +26,16 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="fTeamName" class="col-sm-2 control-label">Pistas grátis</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="fFreeclues" value="0" ng-model="ctrl.data.free_clues">
+            </div>
+            <label for="fTeamName" class="col-sm-2 control-label">Minutos por pista</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="fMinutesperclue" value="3" ng-model="ctrl.data.minutexclue">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="fLanguage" class="col-sm-2 control-label">Idioma</label>
             <div class="col-sm-10">
                 <select class="form-control" id="fLanguage" ng-model="ctrl.data.language">

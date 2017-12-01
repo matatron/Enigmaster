@@ -65,7 +65,7 @@
             <div class="panel-heading"><strong>Status:</strong> Cuarto esperando reset</div>
             <div class="panel-body">
                 <a class="btn btn-block btn-default" href="<?= URL::site('cuarto/checklist/'.$room->id); ?>">Ver checklist</a>
-                <a class="btn btn-block btn-default" href="<?= URL::site('cuarto/ready/'.$room->id); ?>">Marcar como listo</a>
+                <a class="btn btn-block btn-default" href="<?= URL::site('cuarto/ready/'.$room->id); ?>">Iniciar nuevo juego</a>
             </div>
         </div>
         <?php } ?>

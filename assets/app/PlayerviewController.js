@@ -70,9 +70,6 @@ webApp = angular.module('Enigmaster', [
         $now = (new Date()).getTime();
         $scope.timeLeft = $scope.data.end - $now;
         $scope.timePass = 60*60*1000 - $scope.timeLeft;
-
-        $scope.timeLeft = $filter('clock')($scope.timeLeft);
-        $scope.timePass = $filter('clock')($scope.timePass);
     },100);
     getBackend();
 
