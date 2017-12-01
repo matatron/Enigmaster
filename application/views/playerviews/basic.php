@@ -1,6 +1,6 @@
 <style>
     .flame {
-        height: 150px;
+        height: 100px;
     }
 </style>
 <div ng-if="data.status == 3">

@@ -77,6 +77,7 @@ webApp = angular.module('Enigmaster', [
                 $scope.counters.push(i);
             }
         }
+        $scope.clue = window.screen.availHeight + "x" + window.screen.availWidth;
     },100);
     getBackend();
 

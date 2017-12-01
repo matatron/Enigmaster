@@ -34,6 +34,7 @@ body {
     background-color: black;
     color: white;
     font-size: 4em;
+    overflow: hidden;
 }
 
 .moderne, h1 {
@@ -47,7 +48,7 @@ body {
     font-size: 2em;
 }
 .small-text {
-    font-size: 0.2em;
+    font-size: 0.3em;
 }
 
 .font-diogenes {
