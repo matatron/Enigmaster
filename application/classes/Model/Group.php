@@ -4,8 +4,8 @@ class Model_Group extends ORM
 {
     protected $_belongs_to = array(
         'room' => array(
-        'foreign_key' => 'room_id',
-    ),
+            'foreign_key' => 'room_id',
+        ),
     );
 
     public function endgame($death = false) {
@@ -19,7 +19,11 @@ class Model_Group extends ORM
     }
 
     public function archive() {
-        $this->status = 0;
-        $this->save();
+        if ($this->people>1) {
+            $this->status = 0;
+            $this->save();
+        } else {
+            $this->delete();
+        }
     }
 }
