@@ -54,10 +54,10 @@
                                     <strong>Hora de inicio:</strong> {{ctrl.js_start | date:'mediumTime'}}<br />
                                     <strong>Hora de salida:</strong> {{ctrl.js_end | date:'mediumTime'}}<br />
                                     <strong>Diferencia:</strong> {{ctrl.js_end-ctrl.js_start | clock}}<br />
-                                    <strong>Transcurrido:</strong> {{ctrl.timePass}}<br />
+                                    <strong>Transcurrido:</strong> {{ctrl.timePass | clock}}<br />
                                 </div>
                                 <div class="col-xs-6 col-sm-5 text-center lcd giant-text">
-                                    {{ctrl.timeLeft}}
+                                    {{ctrl.timeLeft | clock}}
                                 </div>
                                 <div class="col-xs-6 col-sm-3">
                                     <div class="input-group">
@@ -205,7 +205,7 @@
                             <label for="fFreeClues">Pistas grátis:</label>
                             <input type="number" id="fFreeClues" class="form-control" ng-model="ctrl.data.free_clues"  ng-change="ctrl.updateClueTimes()"/>
                             <br/>
-                            <label for="fMinutesperclue">Pistas grátis:</label>
+                            <label for="fMinutesperclue">Minutos por pista:</label>
                             <input type="number" id="fMinutesperclue" class="form-control" ng-model="ctrl.data.minutesxclue" ng-change="ctrl.updateClueTimes()" />
                         </div>
                     </div>

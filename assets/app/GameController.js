@@ -20,8 +20,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         //        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
         //        ctrl.timeLeft = (ctrl.js_end < ctrl.now) ? "-"+$filter('date')(ctrl.now-ctrl.js_end,'HH:mm:ss','UTC'):$filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
         //        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
-        ctrl.timeLeft = $filter('clock')(ctrl.js_end - ctrl.now);
-        ctrl.timePass = $filter('clock')(ctrl.now - ctrl.js_start);
+        ctrl.timeLeft = ctrl.js_end - ctrl.now;
+        ctrl.timePass = ctrl.now - ctrl.js_start;
         ctrl.percent = 100 - Math.floor((ctrl.js_end - ctrl.now)/36000);
     }
 
@@ -92,18 +92,21 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
     
     ctrl.updateClueTimes = function() {
-        console.log(ctrl.data);
+        ctrl.updateBackend(['minutesxclue', 'free_clues']);
     }
 
     $timeout(function() {
         $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
+            response.data.free_clues = parseInt(response.data.free_clues);
+            response.data.minutesxclue = parseInt(response.data.minutesxclue);
+            response.data.status = parseInt(response.data.status);
+            response.data.total_clues = parseInt(response.data.total_clues);
+            
             ctrl.data = response.data;
             ctrl.minutes = ctrl.data.room.minutes;
-            ctrl.minutesPerClue = parseInt(ctrl.data.room.minPerClue);
             ctrl.js_start = new Date(ctrl.data.start*1000);
             ctrl.js_end = new Date(ctrl.data.end*1000);
             ctrl.data.show_progress = (ctrl.data.show_progress == 1);
-            ctrl.data.total_clues = 0;
             ctrl.puzzles = JSON.parse(ctrl.data.puzzles);
             if (ctrl.data.language != 'en') ctrl.data.language = 'es';
             _.forEach(ctrl.puzzles, function(puzzle) {
