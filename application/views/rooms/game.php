@@ -14,7 +14,7 @@
 </style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
     <div class="fixed-text giant-text" ng-show="ctrl.data.status == 2">
-        {{ctrl.timeLeft}}
+        {{ctrl.timeLeft | clock}}
     </div>
     <h1>{{ctrl.name}}</h1>
     <div class="row">

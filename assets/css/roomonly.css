@@ -46,6 +46,9 @@ body {
 .giant-text {
     font-size: 3em;
 }
+.small-text {
+    font-size: 0.5em;
+}
 
 .font-diogenes {
     font-family: 'Diogenes';
