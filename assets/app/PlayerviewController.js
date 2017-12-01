@@ -73,7 +73,7 @@ webApp = angular.module('Enigmaster', [
         $scope.timePass = 60*60*1000 - $scope.timeLeft;
         $scope.counters = [];
         for(var i =0; i<12; i++) {
-            if (i*300000 + 300000 < $scope.timeLeft) {
+            if (i*300000 < $scope.timeLeft ) {
                 $scope.counters.push(i);
             }
         }
