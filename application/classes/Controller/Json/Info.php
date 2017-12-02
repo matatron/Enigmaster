@@ -14,21 +14,37 @@ class Controller_Json_Info extends Controller_Json {
         $roomId = $this->request->param('id');
         $group = ORM::factory('Group')
             ->where('room_id', '=', $roomId)
+            ->and_where('status', '>', 0)
             ->limit(1)
             ->order_by('id', 'DESC')
             ->find();
-        $json = array(
-            'status'=> intval($group->status),
-            'end'=> $group->end*1000, //- $group->total_clues*$group->room->minPerClue*60000
-            'time'=> $group->time*1000,
-            'total_clues'=> intval($group->total_clues),
-            'free_clues'=> intval($group->free_clues),
-            'minutesxclue'=> intval($group->minutesxclue),
-            'punishment'=> intval($group->punishment),
-            'team_name'=> $group->team_name,
-            'clue'=> json_decode($group->clues)[0],
-            'progress'=> intval($group->progress),
-        );
+        if ($group->loaded()) {
+            $json = array(
+                'status'=> intval($group->status),
+                'end'=> $group->end*1000, //- $group->total_clues*$group->room->minPerClue*60000
+                'time'=> $group->time*1000,
+                'total_clues'=> intval($group->total_clues),
+                'free_clues'=> intval($group->free_clues),
+                'minutesxclue'=> intval($group->minutesxclue),
+                'punishment'=> intval($group->punishment),
+                'team_name'=> $group->team_name,
+                'clue'=> json_decode($group->clues)[0],
+                'progress'=> intval($group->progress),
+            );
+        } else {
+            $json = array(
+                'status'=> 0,
+                'end'=> 0,
+                'time'=> 0,
+                'total_clues'=> 0,
+                'free_clues'=> 0,
+                'minutesxclue'=> 0,
+                'punishment'=> 0,
+                'team_name'=> 0,
+                'clue'=> "",
+                'progress'=> 0
+            );
+        }
         $this->data = $json;
     }
 
