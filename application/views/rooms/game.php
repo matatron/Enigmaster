@@ -94,7 +94,7 @@
                 <div class="col-sm-6">
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-key" aria-hidden="true"></i> Pistas disponibles</div>
-                        <div class="panel-body scroll-height">
+                        <div class="panel-body noscroll-height">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Pista personalizada..." ng-model="customClue">
                                 <span class="input-group-btn">

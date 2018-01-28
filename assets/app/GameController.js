@@ -117,7 +117,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
             updateClues();
             ctrl.getTime();
-            $interval(getProgress, 1000);
+            $interval(getProgress, 500);
             getProgress();
         });
     },50);

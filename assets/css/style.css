@@ -95,6 +95,11 @@ body.mt {
     overflow-y: auto;
 }
 
+.noscroll-height {
+    max-height: 250px;
+    overflow-y: hidden;
+}
+
 .checklist-item {
     padding: 10px 0;
     border-bottom: dashed 1px grey;
