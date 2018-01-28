@@ -22,7 +22,7 @@
         <span ng-if="pistas.length==0">0</span>
     </div>
     <div class="small-text">
-        Tiempo total: <span class="lcd ">{{timePass-punishment*60000 | clock}}</span>
+        Tiempo total: <span class="lcd ">{{timePass+punishment*60000 | clock}}</span>
     </div>
     <div class="small-text">
         Tiempo restante: <span class="lcd ">{{timeLeft-punishment*60000 | clock}}</span>
