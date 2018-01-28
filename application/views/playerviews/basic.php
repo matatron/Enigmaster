@@ -12,15 +12,20 @@
 <div ng-if="data.status == 2">
     <div class="lcd giant-text">
         <img src="/assets/images/flama.webp" class="flame">
-        {{timeLeft-punishment*60000 | clock}}
+        {{timePass | clock}}
         <img src="/assets/images/flama.webp" class="flame">
     </div>
     <div class="small-text">
         Pistas usadas: 
-        <i class="fa fa-key" ng-repeat="n in pistas"></i> <span ng-if="pistas.length>0" class="lcd">= {{punishment}}:00</span>
+        <i class="fa fa-key" ng-repeat="n in pistas"></i> 
+        <span ng-if="pistas.length>0" class="lcd">= {{punishment}}:00</span>
+        <span ng-if="pistas.length==0">0</span>
     </div>
     <div class="small-text">
-        Tiempo transcurrido: <span class="lcd ">{{timePass | clock}}</span>
+        Tiempo total: <span class="lcd ">{{timePass-punishment*60000 | clock}}</span>
+    </div>
+    <div class="small-text">
+        Tiempo restante: <span class="lcd ">{{timeLeft-punishment*60000 | clock}}</span>
     </div>
     <div class="font-diogenes" style="margin: 0 auto;">
         {{clue}}

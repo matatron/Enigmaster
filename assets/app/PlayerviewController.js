@@ -53,6 +53,7 @@ webApp = angular.module('Enigmaster', [
                 $scope.pistas.push(i);
             }
             $scope.punishment = Math.max(0, $scope.data.total_clues-$scope.data.free_clues)*$scope.data.minutesxclue;
+            $scope.punishment += $scope.data.punishment;
             if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
