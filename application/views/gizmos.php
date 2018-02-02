@@ -25,7 +25,7 @@
                         <textarea ng-model="ctrl.gizmo.description" class="form-control"></textarea>
                     </div>
                     <div class="col-xs-12">
-                        <?php echo $gizmo->data; ?>
+                        {{ctrl.gizmo.data}} 
                     </div>
                     <div class="col-xs-12">
                         <div class="clearfix">
