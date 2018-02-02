@@ -25,6 +25,9 @@
                         <textarea ng-model="ctrl.gizmo.description" class="form-control"></textarea>
                     </div>
                     <div class="col-xs-12">
+                        <?php echo $gizmo->data; ?>
+                    </div>
+                    <div class="col-xs-12">
                         <div class="clearfix">
                             <button class="btn btn-xs pull-right" ng-click="ctrl.addRule();"><i class="fa fa-plus" aria-hidden="true"></i></button>
                             <strong>Reglas:</strong> <br/>
