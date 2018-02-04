@@ -11,9 +11,7 @@
 </div>
 <div ng-if="data.status == 2">
     <div class="lcd giant-text">
-        <img src="/assets/images/flama.webp" class="flame">
         {{timePass | clock}}
-        <img src="/assets/images/flama.webp" class="flame">
     </div>
     <div class="small-text">
         Pistas usadas: 
