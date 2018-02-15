@@ -37,7 +37,8 @@ class Controller_Gizmo extends Controller {
                 ->find();
             if ($group->loaded()) {
                 if ($group->status == 3) { // not started
-                    $this->response->body("0\r");
+                    //$this->response->body("0\r");
+                    echo "0\r";
                 } else {
                     if ($hasChanged) {
                         foreach($rules as $rule) {
@@ -60,12 +61,15 @@ class Controller_Gizmo extends Controller {
                             }
                         }
                     }
-                    $this->response->body($group->progress."\r");
+                    //$this->response->body($group->progress."\r");
+                    echo $group->progress."\r";
                 }
             } else {
-                $this->response->body("off\r");
+                //$this->response->body("off\r");
+                echo "off\r";
             }
         }
+        die();
     }
 
 }
