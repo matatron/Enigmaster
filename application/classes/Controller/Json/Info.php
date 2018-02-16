@@ -158,7 +158,7 @@ class Controller_Json_Info extends Controller_Json {
         foreach ($gizmos as $gizmo)
         {
             $json["gizmos"][$gizmo->id] = array(
-                'active'=> ($gizmo->lastActive > $now-20),
+                'active'=> ($gizmo->lastActive > $now-10),
                 'data'=> json_decode($gizmo->data)
             );
 

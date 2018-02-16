@@ -14,7 +14,8 @@
 </style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
     <div class="fixed-text giant-text" ng-show="ctrl.data.status == 2">
-        {{ctrl.timeLeft | clock}}
+        <div class="giant-text">{{ctrl.timeLeft | clock}}</div>
+        <a href="/room/1" target="visor">Vista de jugadores</a>
     </div>
     <h1>{{ctrl.name}}</h1>
     <div class="row">
