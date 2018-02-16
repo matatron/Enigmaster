@@ -14,8 +14,7 @@
 </style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
     <div class="fixed-text giant-text" ng-show="ctrl.data.status == 2">
-        <div class="giant-text">{{ctrl.timeLeft | clock}}</div>
-        <a href="/room/1" target="visor">Vista de jugadores</a>
+        {{ctrl.timeLeft | clock}}
     </div>
     <h1>{{ctrl.name}}</h1>
     <div class="row">
@@ -216,6 +215,7 @@
                         <div class="panel-heading"><i class="fa fa-video-camera" aria-hidden="true"></i> Cámaras</div>
                         <div class="panel-body">
                             <a href="https://user.zmodo.com/device/list" target="_blank">ZMODO</a><br/>
+                            <a href="/room/1" target="visor">Vista de jugadores</a>
                         </div>
                     </div>
                 </div>
