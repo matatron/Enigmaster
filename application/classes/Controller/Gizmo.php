@@ -72,4 +72,22 @@ class Controller_Gizmo extends Controller {
         die();
     }
 
+    public function action_config()
+    {
+        $gizmoId = $this->request->param('id');
+        $gizmo = ORM::factory('Gizmo')->where('uid', '=', $gizmoId)->find();
+        if (!$gizmo->loaded()) {
+            $gizmo = ORM::factory('Gizmo');
+            $gizmo->uid = $gizmoId;
+            $gizmo->name = 'Gizmo '.$gizmoId;
+            $gizmo->description = '';
+            $gizmo->config = '';
+            $gizmo->data = '[]';
+            $gizmo->lastActive = time();
+            $gizmo->save();
+        }
+
+        echo $gizmo->config."\r";
+    }
+
 }

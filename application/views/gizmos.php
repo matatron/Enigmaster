@@ -25,7 +25,11 @@
                         <textarea ng-model="ctrl.gizmo.description" class="form-control"></textarea>
                     </div>
                     <div class="col-xs-12">
-                        {{ctrl.gizmo.data}} 
+                        Configuración: <br />
+                        <textarea ng-model="ctrl.gizmo.config" class="form-control"></textarea>
+                    </div>
+                    <div class="col-xs-12">
+                        {{ctrl.gizmo.data}}
                     </div>
                     <div class="col-xs-12">
                         <div class="clearfix">

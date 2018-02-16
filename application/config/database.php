@@ -20,8 +20,8 @@ return array
              */
         'hostname'   => 'localhost',
         'database'   => 'enigmaster',
-        'username'   => 'phpmyadmin2',
-        'password'   => 'some_pass',
+        'username'   => 'root',
+        'password'   => '',
         'persistent' => FALSE,
     ),
         'table_prefix' => '',
