@@ -2,11 +2,11 @@
 
 return array
     (
-        'default' => array
-        (
+    'default' => array
+    (
         'type'       => 'MySQLi',
         'connection' => array(
-        /**
+            /**
              * The following options are available for MySQL:
              *
              * string   hostname     server hostname, or socket
@@ -18,15 +18,15 @@ return array
              *
              * Ports and sockets may be appended to the hostname.
              */
-        'hostname'   => 'localhost',
-        'database'   => 'enigmaster',
-        'username'   => 'root',
-        'password'   => '',
-        'persistent' => FALSE,
-    ),
+            'hostname'   => 'localhost',
+            'database'   => 'enigmaster',
+            'username'   => 'phpmyadmin2',
+            'password'   => 'some_pass',
+            'persistent' => FALSE,
+        ),
         'table_prefix' => '',
         'charset'      => 'utf8',
         'caching'      => FALSE,
     )
 
-    );
+);
