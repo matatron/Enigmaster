@@ -44,7 +44,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">Acertijos</div>
                 <div class="panel-body">
-                    <div class="row puzzle-container" ng-repeat="puzzle in ctrl.puzzles">
+                    <div class="row puzzle-container" ng-repeat="puzzle in ctrl.puzzles track by $index">
                         <div class="col-xs-3">
                             <button class="btn btn-xs" ng-click="ctrl.swapPuzzle($index)" ng-hide="$first"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
                             Acertijo {{$index+1}}: <br />
