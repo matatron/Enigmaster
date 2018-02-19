@@ -132,7 +132,7 @@ class Controller_Gizmo extends Controller {
                         }
                     }
                     $puzzles = json_decode($group->puzzles);
-                    $s = "-";
+                    $s = "";
                     foreach($puzzles as $p) {
                         $s .= 0+$p->complete;
                     }
