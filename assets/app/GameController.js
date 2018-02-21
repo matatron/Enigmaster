@@ -46,18 +46,23 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.togglePuz = function(n, force) {
-        n = n%ctrl.puzzles.length;
+        n %= ctrl.puzzles.length;
         if (force == undefined) {
             ctrl.puzzles[n].complete = 1-ctrl.puzzles[n].complete;
+            if (ctrl.puzzles[n].complete) {
+                ctrl.puzzles[n].solvedAt = Math.round((new Date()).getTime()/1000);
+            }
+            updateClues();
+            ctrl.data.puzzles = JSON.stringify(ctrl.puzzles);
+            ctrl.updateBackend(['puzzles', 'progress']);
         } else {
-            ctrl.puzzles[n].complete = force;
+            if (ctrl.puzzles[n].complete != force) {
+                ctrl.puzzles[n].complete = force;
+                updateClues();
+                ctrl.data.puzzles = JSON.stringify(ctrl.puzzles);
+                ctrl.updateBackend(['puzzles', 'progress']);
+            }
         }
-        if (ctrl.puzzles[n].complete) {
-            ctrl.puzzles[n].solvedAt = Math.round((new Date()).getTime()/1000);
-        }
-        updateClues();
-        ctrl.data.puzzles = JSON.stringify(ctrl.puzzles);
-        ctrl.updateBackend(['puzzles', 'progress']);
     }
 
     function updateClues() {
@@ -90,7 +95,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.updateBackend(['clues', 'total_clues']);
         }
     }
-    
+
     ctrl.updateClueTimes = function() {
         ctrl.updateBackend(['minutesxclue', 'free_clues']);
     }
@@ -101,7 +106,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             response.data.minutesxclue = parseInt(response.data.minutesxclue);
             response.data.status = parseInt(response.data.status);
             response.data.total_clues = parseInt(response.data.total_clues);
-            
+
             ctrl.data = response.data;
             ctrl.minutes = ctrl.data.room.minutes;
             ctrl.js_start = new Date(ctrl.data.start*1000);
@@ -128,8 +133,13 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             response.data.progress = parseInt(response.data.progress);
             if (ctrl.data.progress < response.data.progress) {
                 ctrl.data.progress = response.data.progress;
-                ctrl.togglePuz(response.data.progress - 1, true);
             }
+            if (response.data.puzzles.length) {
+                _.forEach(response.data.puzzles, function(p, i) {
+                    ctrl.togglePuz(i, p)
+                });
+            }
+
             ctrl.data.status = parseInt(response.data.status);
             ctrl.gizmos = response.data.gizmos;
         });

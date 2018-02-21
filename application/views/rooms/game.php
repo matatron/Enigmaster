@@ -1,7 +1,7 @@
 <style>
     .fixed-text {
         position: fixed;
-        top: 51px;
+        bottom: 0;
         z-index: 2017;
         font-size: 2em;
         background: black;

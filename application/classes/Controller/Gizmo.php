@@ -45,10 +45,13 @@ class Controller_Gizmo extends Controller {
                             if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
                                 switch ($rule->then) {
                                     case "progress":
+                                        $puzzles = json_decode($group->puzzles);
+                                        $puzzles[$rule->that-1]->complete = true;
+                                        $group->puzzles = json_encode($puzzles);
                                         if ($group->progress < $rule->that) {
                                             $group->progress = $rule->that;
-                                            $group->save();
                                         }
+                                        $group->save();
                                         break;
                                     case "endgame":
                                         $group->endgame(($rule->that == "lost"));
@@ -62,7 +65,7 @@ class Controller_Gizmo extends Controller {
                         }
                     }
                     //$this->response->body($group->progress."\r");
-                    echo $group->progress."\r";
+                    echo $group->progress." \r";
                 }
             } else {
                 //$this->response->body("off\r");
@@ -115,8 +118,13 @@ class Controller_Gizmo extends Controller {
                             if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
                                 switch ($rule->then) {
                                     case "progress":
+                                    case "progreso":
                                         if ($group->progress < $rule->that) {
                                             $group->progress = $rule->that;
+                                            $puzzles = json_decode($group->puzzles);
+                                            $puzzles[$group->progress-1]->complete = true;
+                                            $group->puzzles = json_encode($puzzles);
+
                                             $group->save();
                                         }
                                         break;
