@@ -1,5 +1,6 @@
 webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
     var ctrl = this;
+    var flux;
 
     ctrl.modifier = 0;
     ctrl.now = 0;
@@ -122,7 +123,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
             updateClues();
             ctrl.getTime();
-            $interval(getProgress, 500);
+            flux = $interval(getProgress, 500);
             getProgress();
         });
     },50);
@@ -142,6 +143,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
 
             ctrl.data.status = parseInt(response.data.status);
             ctrl.gizmos = response.data.gizmos;
+
+            if (ctrl.data.status == 1) $interval.cancel(flux);
         });
     }
 
