@@ -82,4 +82,56 @@ webApp = angular.module('Enigmaster', [
     },100);
     getBackend();
 
+}]).controller('PlayerviewControllerTV', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
+    $scope.data={};
+    $scope.data.status = 0;
+    $scope.data.end = 0;
+    var lastStatus = null;
+
+    var currentPuzzles = null;
+
+    var videos = {
+        2: "/assets/video/VHS static noise.mp4"
+    }
+
+    function getBackend() {
+        $http.get('/json_info/roompuzzles/'+$scope.roomId).then(function(response) {
+            response.data.progress = parseInt(response.data.progress);
+            $scope.data = response.data;
+            if ($scope.data.status != lastStatus) {
+                lastStatus = $scope.data.status;
+                switch($scope.data.status) {
+                    case 2:
+                    case 1:
+                        if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
+                        break;
+                    case 3:
+                        currentPuzzles = response.data.puzzles;
+                        break;
+                    case 0:
+                        //play end game sound
+                        break;
+
+                }
+            }
+            if ($scope.data.progress != undefined && $scope.data.status==2) {
+                var player = document.getElementById('tvvideo');
+                $.each($scope.data.puzzles, function(i,e) {
+                    if (currentPuzzles[i] != e) {
+                        //cambio detectado
+                        currentPuzzles[i] = e;
+                        if (currentPuzzles[i] && videos.hasOwnProperty(i)) {
+                            player.src = videos[i];
+                            player.play();
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+
+    $interval(getBackend,2000);
+    getBackend();
+
 }]);

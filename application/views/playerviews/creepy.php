@@ -1,18 +1,12 @@
 <div ng-controller="PlayerviewController" ng-init="roomId = <?=$roomId; ?>" >
-    <style>
-        .flame {
-            height: 150px;
-            margin: -20px -19px;
-        }
-    </style>
     <div ng-if="data.status == 3">
-        <div class="well font-diogenes">
+        <div class="well ">
             ¿LISTOS PARA EMPEZAR?
         </div>
     </div>
     <div ng-if="data.status == 2">
         <div class="lcd giant-text">
-            {{timePass | clock}}
+            {{timePass+39600000 | clock}}
         </div>
         <div class="small-text">
             Pistas usadas:
@@ -26,12 +20,12 @@
         <div class="small-text">
             Tiempo restante: <span class="lcd ">{{timeLeft-punishment*60000 | clock}}</span>
         </div>
-        <div class="font-diogenes" style="margin: 0 auto;">
+        <div class="" style="margin: 0 auto;">
             {{clue}}
         </div>
     </div>
     <div ng-if="data.status == 1">
-        <div class="font-diogenes">
+        <div class="">
             Tiempo Final:
         </div>
         <div class="lcd giant-text">
@@ -39,7 +33,7 @@
         </div>
     </div>
     <div ng-if="data.status == 0">
-        <div class="font-diogenes">
+        <div class="">
             ENIGMATA
         </div>
     </div>

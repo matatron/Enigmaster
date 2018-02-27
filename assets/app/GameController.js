@@ -1,6 +1,7 @@
 webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
     var ctrl = this;
     var flux;
+    var updatingBackend = false;
 
     ctrl.modifier = 0;
     ctrl.now = 0;
@@ -35,7 +36,9 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.updateBackend = function(fields) {
+        updatingBackend = true;
         $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, fields)).then(function(response) {
+            updatingBackend = false;
             switch(response.data.status) {
                 case 'success':
                     break;
@@ -135,7 +138,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             if (ctrl.data.progress < response.data.progress) {
                 ctrl.data.progress = response.data.progress;
             }
-            if (response.data.puzzles.length) {
+            if (response.data.puzzles.length && !updatingBackend) {
                 _.forEach(response.data.puzzles, function(p, i) {
                     ctrl.togglePuz(i, p)
                 });

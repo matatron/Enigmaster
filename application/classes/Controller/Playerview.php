@@ -39,7 +39,7 @@ class Controller_Playerview extends Controller_Template {
         if ($view == '') $view = 'basic';
 
         $this->template->bind('music', $music);
-        $this->template->content = View::factory('playerviews/'.$view)->bind('group', $group);
+        $this->template->content = View::factory('playerviews/'.$view)->bind('group', $group)->bind('roomId', $roomId);
     }
 
 

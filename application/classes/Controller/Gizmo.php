@@ -45,6 +45,7 @@ class Controller_Gizmo extends Controller {
                             if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
                                 switch ($rule->then) {
                                     case "progress":
+                                    case "progreso":
                                         $puzzles = json_decode($group->puzzles);
                                         $puzzles[$rule->that-1]->complete = true;
                                         $group->puzzles = json_encode($puzzles);
@@ -119,14 +120,13 @@ class Controller_Gizmo extends Controller {
                                 switch ($rule->then) {
                                     case "progress":
                                     case "progreso":
+                                        $puzzles = json_decode($group->puzzles);
+                                        $puzzles[$rule->that-1]->complete = true;
+                                        $group->puzzles = json_encode($puzzles);
                                         if ($group->progress < $rule->that) {
                                             $group->progress = $rule->that;
-                                            $puzzles = json_decode($group->puzzles);
-                                            $puzzles[$group->progress-1]->complete = true;
-                                            $group->puzzles = json_encode($puzzles);
-
-                                            $group->save();
                                         }
+                                        $group->save();
                                         break;
                                     case "endgame":
                                         $group->endgame(($rule->that == "lost"));

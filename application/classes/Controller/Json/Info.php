@@ -48,6 +48,38 @@ class Controller_Json_Info extends Controller_Json {
         $this->data = $json;
     }
 
+    public function action_roompuzzles()
+    {
+        $roomId = $this->request->param('id');
+        $group = ORM::factory('Group')
+            ->where('room_id', '=', $roomId)
+            ->and_where('status', '>', 0)
+            ->limit(1)
+            ->order_by('id', 'DESC')
+            ->find();
+        $json = null;
+        if ($group->loaded()) {
+            $json = array(
+                'status'=> intval($group->status),
+                'team_name'=> $group->team_name,
+                'progress'=> intval($group->progress),
+                'puzzles'=> []
+            );
+            $puzzles = json_decode($group->puzzles);
+            foreach($puzzles as $p) {
+                $json["puzzles"][] = $p->complete;
+            }
+        } else {
+            $json = array(
+                'status'=> 0,
+                'team_name'=> 0,
+                'progress'=> 0,
+                'puzzles'=> []
+            );
+        }
+        $this->data = $json;
+    }
+
     public function action_statistics()
     {
         $roomId = $this->request->param('id');

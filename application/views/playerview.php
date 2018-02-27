@@ -18,7 +18,7 @@ window.music = [
         </script>
     </head>
     <body class="no-gutter">
-        <div class="container" ng-controller="PlayerviewController" ng-init="roomId = <?=$roomId; ?>">
+        <div class="container">
 <?php echo $content; ?>
         </div> <!-- /container -->
 
