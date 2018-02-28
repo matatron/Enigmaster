@@ -91,7 +91,8 @@ webApp = angular.module('Enigmaster', [
     var currentPuzzles = null;
 
     var videos = {
-        2: "/assets/video/VHS static noise.mp4"
+        15: "/assets/video/Olivia1.mp4",
+        20: "/assets/video/static.mp4"
     }
 
     function getBackend() {
