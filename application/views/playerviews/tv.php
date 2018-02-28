@@ -10,11 +10,8 @@
         <video style="width: 100%; height: 100%;" id="tvvideo" autoplay></video>
     </div>
     <div ng-if="data.status == 1">
-        <div class="">
-            Tiempo Final:
-        </div>
-        <div class="lcd giant-text">
-            {{data.time | clock}}
+        <div class="giant-text">
+            FIN.
         </div>
     </div>
     <div ng-if="data.status == 0">

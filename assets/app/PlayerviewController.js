@@ -91,6 +91,7 @@ webApp = angular.module('Enigmaster', [
     var currentPuzzles = null;
 
     var videos = {
+        9: "/assets/video/Olivia2.mp4",
         15: "/assets/video/Olivia1.mp4",
         20: "/assets/video/static.mp4"
     }
