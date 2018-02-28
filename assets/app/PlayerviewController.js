@@ -117,15 +117,13 @@ webApp = angular.module('Enigmaster', [
             }
             if ($scope.data.progress != undefined && $scope.data.status==2) {
                 var player = document.getElementById('tvvideo');
-                console.log(currentPuzzles);
                 $.each($scope.data.puzzles, function(i,e) {
                     if (currentPuzzles[i] != e) {
                         //cambio detectado
-                        console.log("Cambio en "+i);
                         currentPuzzles[i] = e;
-                        if (currentPuzzles[i] && videos.hasOwnProperty(i)) {
-                            console.log("Video "+videos[i]);
-                            player.src = videos[i];
+                        if (currentPuzzles[i] && videos.hasOwnProperty(i+1)) {
+                            console.log("Video "+videos[i+1]);
+                            player.src = videos[i+1];
                             player.play();
                         }
                     }
