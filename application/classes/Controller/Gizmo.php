@@ -38,7 +38,7 @@ class Controller_Gizmo extends Controller {
             if ($group->loaded()) {
                 if ($group->status == 3) { // not started
                     //$this->response->body("0\r");
-                    echo "on\r";
+                    echo "onn\r";
                 } else {
                     if ($hasChanged) {
                         foreach($rules as $rule) {
