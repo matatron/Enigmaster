@@ -7,7 +7,7 @@
     <div ng-if="data.status == 3">
     </div>
     <div ng-if="data.status == 2">
-        <video style="width: 100%; height: 100%;" id="tvvideo" autoplay></video>
+        <video style="width: 100%; height: 0.75vw;" id="tvvideo" autoplay></video>
     </div>
     <div ng-if="data.status == 1">
         <div class="giant-text">
