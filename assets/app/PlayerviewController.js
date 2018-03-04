@@ -68,7 +68,7 @@ webApp = angular.module('Enigmaster', [
     }
 
 
-    $interval(getBackend,2000);
+    $interval(getBackend,1000);
     $interval(function() {
         $now = (new Date()).getTime();
         $scope.timeLeft = $scope.data.end - $now;
@@ -91,9 +91,14 @@ webApp = angular.module('Enigmaster', [
     var currentPuzzles = null;
 
     var videos = {
+        1: "/assets/video/ruido2.mp4",
+        4: "/assets/video/risa1.mp4",
         9: "/assets/video/Olivia2.mp4",
         15: "/assets/video/Olivia1.mp4",
-        20: "/assets/video/static.mp4"
+        18: "/assets/video/ruido1.mp4",
+        19: "/assets/video/grito2.mp4",
+        20: "/assets/video/static.mp4",
+        21: "/assets/video/grito1.mp4",
     }
 
     function getBackend() {
@@ -134,7 +139,7 @@ webApp = angular.module('Enigmaster', [
     }
 
 
-    $interval(getBackend,2000);
+    $interval(getBackend,500);
     getBackend();
 
 }]);
