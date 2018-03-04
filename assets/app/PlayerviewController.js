@@ -41,7 +41,10 @@ webApp = angular.module('Enigmaster', [
                         break;
                     case 3:
                     case 0:
-                        if (bgAudio) bgAudio.pause();
+                        if (bgAudio) {
+                            bgAudio.pause();
+                            bgAudio.currentTime = 0;
+                        }
                         $scope.clue = '';
                         //play end game sound
                         break;
@@ -59,6 +62,7 @@ webApp = angular.module('Enigmaster', [
                 ping.play();
             }
             if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1) && lastMusic != window.music[$scope.data.progress]) {
+            console.log($scope.data.progress, lastMusic[$scope.data.progress], lastMusic);
                 lastMusic = window.music[$scope.data.progress];
                 if (bgAudio) bgAudio.pause();
                 bgAudio = new Audio(lastMusic);
