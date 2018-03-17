@@ -94,6 +94,7 @@ webApp = angular.module('Enigmaster', [
 
     var currentPuzzles = null;
 
+    var player;
     var videos = {
         1: "/assets/video/ruido2.mp4",
         2: "/assets/video/retratos1.mp4",
@@ -134,7 +135,12 @@ webApp = angular.module('Enigmaster', [
                 }
             }
             if ($scope.data.progress != undefined && $scope.data.status==2) {
-                var player = document.getElementById('tvvideo');
+                player = document.getElementById('tvvideo');
+                if (player != null) {
+                    player.addEventListener('ended',function() {
+                        $(player).hide();
+                    },false);
+                }
                 $.each($scope.data.puzzles, function(i,e) {
                     if (currentPuzzles[i] != e) {
                         //cambio detectado
@@ -142,6 +148,7 @@ webApp = angular.module('Enigmaster', [
                         if (currentPuzzles[i] && videos.hasOwnProperty(i+1)) {
                             console.log("Video "+videos[i+1]);
                             player.src = videos[i+1];
+                            $(player).show();
                             player.play();
                         }
                     }
