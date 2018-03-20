@@ -104,6 +104,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         ctrl.updateBackend(['minutesxclue', 'free_clues']);
     }
 
+    ctrl.changeLang = function() {
+        ctrl.updateBackend(['language']);
+    }
+
     $timeout(function() {
         $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
             response.data.free_clues = parseInt(response.data.free_clues);

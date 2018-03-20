@@ -209,7 +209,7 @@
                             <input type="number" id="fMinutesperclue" class="form-control" ng-model="ctrl.data.minutesxclue" ng-change="ctrl.updateClueTimes()" />
                             <br/>
                             <label for="fMinutesperclue">Idioma:</label>
-                            <select class="form-control" id="fLanguage" ng-model="ctrl.data.language">
+                            <select class="form-control" id="fLanguage" ng-model="ctrl.data.language"  ng-change="ctrl.changeLang()">
                                 <option value="es">Español</option>
                                 <option value="en">Inglés</option>
                             </select>
