@@ -134,7 +134,8 @@ webApp = angular.module('Enigmaster', [
 
                 }
             }
-            if ($scope.data.progress != undefined && $scope.data.status==2) {
+
+            if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1)) {
                 player = document.getElementById('tvvideo');
                 if (player != null) {
                     player.addEventListener('ended',function() {
