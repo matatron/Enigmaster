@@ -27,7 +27,8 @@ class Controller_Json_Info extends Controller_Json {
                 'free_clues'=> intval($group->free_clues),
                 'minutesxclue'=> intval($group->minutesxclue),
                 'punishment'=> intval($group->punishment),
-                'team_name'=> $group->team_name,
+                'team_name'=> $group->language,
+                'lang'=> $group->team_name,
                 'clue'=> json_decode($group->clues)[0],
                 'progress'=> intval($group->progress),
             );
@@ -41,6 +42,7 @@ class Controller_Json_Info extends Controller_Json {
                 'minutesxclue'=> 0,
                 'punishment'=> 0,
                 'team_name'=> 0,
+                'lang'=> 'es',
                 'clue'=> "",
                 'progress'=> 0
             );

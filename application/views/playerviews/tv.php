@@ -11,7 +11,7 @@
     </div>
     <div ng-if="data.status == 1">
         <div class="giant-text">
-            FIN.
+            THE END
         </div>
     </div>
     <div ng-if="data.status == 0">
