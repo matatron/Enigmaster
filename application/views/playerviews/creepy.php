@@ -1,7 +1,8 @@
 <div ng-controller="PlayerviewController" ng-init="roomId = <?=$roomId; ?>" >
     <div ng-if="data.status == 3">
-        <div class="well ">
-            ¿LISTOS PARA EMPEZAR?
+        <div class="well font-bloodcrow">
+            <span ng-if="data.lang == 'es'">¿LISTOS PARA EMPEZAR?</span>
+            <span ng-if="data.lang == 'en'">¿READY TO START?</span>
         </div>
     </div>
     <div ng-if="data.status == 2">
@@ -9,32 +10,41 @@
             {{timePass+39600000 | clock}}
         </div>
         <div class="small-text">
-            Pistas usadas:
+            <span ng-if="data.lang == 'es'">Pistas usadas:</span>
+            <span ng-if="data.lang == 'en'">Clues used:</span>
+
             <i class="fa fa-key" ng-repeat="n in pistas"></i>
             <span ng-if="pistas.length>0" class="lcd">= {{punishment}}:00</span>
             <span ng-if="pistas.length==0">0</span>
         </div>
         <div class="small-text">
-            Tiempo total: <span class="lcd ">{{timePass+punishment*60000 | clock}}</span>
+            <span ng-if="data.lang == 'es'">Tiempo total:</span>
+            <span ng-if="data.lang == 'en'">Total time:</span>
+            <span class="lcd ">{{timePass+punishment*60000 | clock}}</span>
         </div>
         <div class="small-text">
-            Tiempo restante: <span class="lcd ">{{timeLeft-punishment*60000 | clock}}</span>
+            <span ng-if="data.lang == 'es'">Tiempo restante:</span>
+            <span ng-if="data.lang == 'en'">Time left:</span>
+            <span class="lcd ">{{timeLeft-punishment*60000 | clock}}</span>
         </div>
-        <div class="" style="margin: 0 auto;">
+        <div class="font-bloodcrow" style="margin: 0 auto;">
             {{clue}}
         </div>
     </div>
     <div ng-if="data.status == 1">
-        <div class="">
-            Tiempo Final:
+        <div class="font-bloodcrow">
+            <span ng-if="data.lang == 'es'">Tiempo Final:</span>
+            <span ng-if="data.lang == 'en'">Final time:</span>
+
         </div>
         <div class="lcd giant-text">
             {{data.time | clock}}
         </div>
     </div>
     <div ng-if="data.status == 0">
-        <div class="">
+        <div class="font-bloodcrow">
             ENIGMATA
         </div>
     </div>
 </div>
+
