@@ -110,8 +110,8 @@ webApp = angular.module('Enigmaster', [
         21: "/assets/video/Olivia2.mp4",
         22: "/assets/video/grito2.mp4",
         23: "/assets/video/static.mp4",
-        25: "/assets/video/grito1.mp4",
-        24: "/assets/video/Olivia.mp4"
+        24: "/assets/video/grito1.mp4",
+        25: "/assets/video/Olivia.mp4"
     }
 
     function getBackend() {
