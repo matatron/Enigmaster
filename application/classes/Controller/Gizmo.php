@@ -42,8 +42,8 @@ class Controller_Gizmo extends Controller {
                 } else {
                     if ($hasChanged) {
                         foreach($rules as $rule) {
-                            if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
-                                switch ($rule->then) {
+                            if (isset($query[$rule->if]) &&  strtolower($query[$rule->if]) == strtolower($rule->this)) {
+                                switch (strtolower($rule->then)) {
                                     case "progress":
                                     case "progreso":
                                         $puzzles = json_decode($group->puzzles);
