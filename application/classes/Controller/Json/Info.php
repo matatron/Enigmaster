@@ -188,7 +188,7 @@ class Controller_Json_Info extends Controller_Json {
         if ($group->loaded()) {
             $json["progress"] = $group->progress;
             foreach(json_decode($group->puzzles) as $pid => $puzzle) {
-                $json["puzzles"][$pid] = (bool) $puzzle->complete;
+                $json["puzzles"][$pid] = intval($puzzle->complete);
             }
         } else {
             $json["progress"] = "off";

@@ -13,7 +13,7 @@ webApp.controller('RoomController', ['$scope', '$http', '$timeout', function($sc
             music: '',
             clues: [],
             gizmo: '',
-            complete: false,
+            complete: 0,
             solvedAt: 0,
             reset: ''
         });

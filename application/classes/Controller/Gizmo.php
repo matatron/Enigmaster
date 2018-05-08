@@ -47,7 +47,7 @@ class Controller_Gizmo extends Controller {
                                     case "progress":
                                     case "progreso":
                                         $puzzles = json_decode($group->puzzles);
-                                        $puzzles[$rule->that-1]->complete = true;
+                                        $puzzles[$rule->that-1]->complete = 1;
                                         $group->puzzles = json_encode($puzzles);
                                         if ($group->progress < $rule->that) {
                                             $group->progress = $rule->that;
@@ -121,7 +121,7 @@ class Controller_Gizmo extends Controller {
                                     case "progress":
                                     case "progreso":
                                         $puzzles = json_decode($group->puzzles);
-                                        $puzzles[$rule->that-1]->complete = true;
+                                        $puzzles[$rule->that-1]->complete = 1;
                                         $group->puzzles = json_encode($puzzles);
                                         if ($group->progress < $rule->that) {
                                             $group->progress = $rule->that;
