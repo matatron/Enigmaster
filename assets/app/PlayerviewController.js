@@ -97,12 +97,12 @@ webApp = angular.module('Enigmaster', [
     var player;
     var videos = {
         1: "/assets/video/ruido2.mp4",
-        2: "/assets/video/ojo.mp4",
+        2: "/assets/video/Video1.mp4",
         3: "/assets/video/ruido1.mp4",
         4: "/assets/video/risa1.mp4",
         6: "/assets/video/Olivia1.mp4",
         7: "/assets/video/ruidoCreepy.mp4",
-        8: "/assets/video/Video1.mp4",
+        8: "/assets/video/ojo.mp4",
         9: "/assets/video/Video2.mp4",
         10: "/assets/video/Video3.mp4",
         11: "/assets/video/Video4.mp4",
