@@ -30,10 +30,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="/">Cuartos</a>
-                        </li>
-                        <li>
-                            <a href="/main/schedule">Agenda</a>
+                            <a href="/main/upload">Subir video</a>
                         </li>
                         <li>
                             <a href="/main/gizmos">Gizmos</a>
