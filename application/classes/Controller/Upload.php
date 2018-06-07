@@ -11,7 +11,7 @@ class Controller_Upload extends Controller_Website {
             $message = "Datos recibidos: ".$_FILES['video']["name"];
             if (isset($_FILES['video']))
             {
-                move_uploaded_file($_FILES['video']["tmp_name"], 'assets/video/videoGrupo.mp4');
+                move_uploaded_file($_FILES['video']["tmp_name"], DOCROOT.'assets/video/videoGrupo.mp4');
                 $message = "Video subido";
             }
         }
