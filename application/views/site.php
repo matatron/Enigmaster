@@ -30,7 +30,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="/main/upload">Subir video</a>
+                            <a href="/upload/index">Subir video</a>
                         </li>
                         <li>
                             <a href="/main/gizmos">Gizmos</a>
