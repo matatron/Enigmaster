@@ -7,10 +7,9 @@ class Controller_Upload extends Controller_Website {
 
         if ($this->request->method() == Request::POST)
         {
-            var_dump($_FILES);
             if (isset($_FILES['video']))
             {
-                rename($_FILES['video']["tmp_name"], DOCROOT.'assets/video/videoGrupo.mp4');
+                move_uploaded_file($_FILES['video']["tmp_name"], DOCROOT.'assets/video/videoGrupo.mp4');
             }
         }
 
