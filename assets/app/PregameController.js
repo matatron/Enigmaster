@@ -8,7 +8,7 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
 
     ctrl.save = function(admin) {
         ctrl.data.people_info = JSON.stringify(ctrl.people_info);
-        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ['team_name', 'comments', 'people', 'people_info', 'team_type', 'language'])).then(function(response) {
+        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ['team_name', 'comments', 'people', 'people_info', 'team_type', 'language', 'free_clues', 'minutesxclue'])).then(function(response) {
             switch(response.data.status) {
                 case 'success':
                     ctrl.alerts.push({msg: 'Datos guardados'});
