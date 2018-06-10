@@ -26,22 +26,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="fTeamName" class="col-sm-2 control-label">Pistas grátis</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="fFreeclues" value="0" ng-model="ctrl.data.free_clues">
+            <label for="fTeamName" class="col-xs-2 control-label">Estilo de Pistas</label>
+            <div class="col-xs-5">
+                <button class="btn btn-block" ng-class="{'btn-info': ctrl.optpistas == 0}" ng-click="ctrl.updatePistas(0)">3 min 0 gratis</button>
             </div>
-            <label for="fTeamName" class="col-sm-2 control-label">Minutos por pista</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="fMinutesperclue" value="3" ng-model="ctrl.data.minutesxclue">
+            <div class="col-xs-5">
+                <button class="btn btn-block" ng-class="{'btn-info': ctrl.optpistas == 1}" ng-click="ctrl.updatePistas(1)">5 min 1 gratis</button>
             </div>
         </div>
         <div class="form-group">
-            <label for="fLanguage" class="col-sm-2 control-label">Idioma</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="fLanguage" ng-model="ctrl.data.language">
-                    <option value="es" selected>Español</option>
-                    <option value="en">Inglés</option>
-                </select>
+            <label for="fTeamName" class="col-xs-2 control-label">Idioma</label>
+            <div class="col-xs-5">
+                <button class="btn btn-block" ng-class="{'btn-info': ctrl.data.language == 'es'}" ng-click="ctrl.data.language = 'es'">Español</button>
+            </div>
+            <div class="col-xs-5">
+                <button class="btn btn-block" ng-class="{'btn-info': ctrl.data.language == 'en'}" ng-click="ctrl.data.language = 'en'">Inglés</button>
             </div>
         </div>
         <div class="form-group">

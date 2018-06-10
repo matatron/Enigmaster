@@ -5,6 +5,7 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
     ctrl.closeAlert = function(index) {
         ctrl.alerts.splice(index, 1);
     };
+    ctrl.optpistas =0;
 
     ctrl.save = function(admin) {
         ctrl.data.people_info = JSON.stringify(ctrl.people_info);
@@ -18,6 +19,20 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
         }, function() {
 
         });
+    }
+
+    ctrl.updatePistas = function (n) {
+        ctrl.optpistas = n;
+        switch(ctrl.optpistas) {
+            case 0:
+                ctrl.data.minutesxclue = 3;
+                ctrl.data.free_clues = 0;
+                break;
+            case 1:
+                ctrl.data.minutesxclue = 5
+                ctrl.data.free_clues =1
+                break;
+        }
     }
 
     ctrl.updatePeople = function () {
@@ -50,6 +65,7 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
             } else {
                 ctrl.people_info = JSON.parse(ctrl.data.people_info);
             }
+            ctrl.optpistas = (ctrl.data.minutesxclue == 3) ? 0 : 1;
         });
     },50);
 }]);
