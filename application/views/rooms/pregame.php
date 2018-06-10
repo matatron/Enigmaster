@@ -49,10 +49,10 @@
                 {{ctrl.data.people}}
             </div>
 
-            <div class="col-xs-4 col-sm-1">
+            <div class="col-xs-5 col-sm-1">
                 <button class="btn btn-default btn-block" ng-click="ctrl.addPerson(-1)"><i class="glyphicon glyphicon-minus"></i></button>
             </div>
-            <div class="col-xs-4 col-sm-1">
+            <div class="col-xs-5 col-sm-1">
                 <button class="btn btn-default btn-block" ng-click="ctrl.addPerson(1)"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
             <div class="col-xs-12 col-sm-8 people-icons">
