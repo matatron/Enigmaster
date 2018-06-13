@@ -88,11 +88,31 @@ class Controller_Json_Info extends Controller_Json {
         $groups = ORM::factory('Group')
             ->where('room_id', '=', $roomId)
             ->and_where('status', '=', 0)
+            ->order_by('start', 'DESC')
             ->find_all();
         $json = array();
+        $json["groups"] = [];
+        $json["stats"] = [];
+        $min = 3600;
+        $max = 0;
+        $count = 0;
+        $clueSum = 0;
+        $timeSum = 0;
+        $peopleSum = 0;
+        $winSum =0;
+
         foreach ($groups as $group)
         {
-            $json[] = array(
+            $group->time = intval($group->time);
+            $count++;
+            $min = min($min, $group->time);
+            $max = max($max, $group->time);
+            $clueSum += $group->total_clues;
+            $timeSum += $group->time;
+            $peopleSum += $group->people;
+            if ($group->time<3600) $winSum++;
+            $json["groups"][] = array(
+                'id' => $group->id,
                 'start'=> $group->start*1000,
                 'time'=> $group->time*1000,
                 'people'=> $group->people,
@@ -102,7 +122,22 @@ class Controller_Json_Info extends Controller_Json {
             );
 
         }
+        $json["stats"]["min"] = $min;
+        $json["stats"]["max"] = $max;
+        $json["stats"]["count"] = $count;
+        $json["stats"]["wins"] = $winSum;
+        $json["stats"]["clueMean"] = $clueSum/$count;
+        $json["stats"]["timeMean"] = $timeSum/$count;
+        $json["stats"]["peopleMean"] = $peopleSum/$count;
         $this->data = $json;
+    }
+    public function action_deletegroup()
+    {
+        $groupId = $this->request->param('id');
+        $group = ORM::factory('Group', $groupId);
+        $roomId =$group->room_id;
+        $group->delete();
+        $this->data = [1];
     }
 
     public function action_group()

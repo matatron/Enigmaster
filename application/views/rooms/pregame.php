@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="fTeamName" class="col-xs-2 control-label">Estilo de Pistas</label>
+            <label for="fTeamName" class="col-xs-2 control-label">Estilo de Pistas: {{ctrl.optpistas}}</label>
             <div class="col-xs-5">
                 <button class="btn btn-block" ng-class="{'btn-info': ctrl.optpistas == 0}" ng-click="ctrl.updatePistas(0)">3 min 0 gratis</button>
             </div>

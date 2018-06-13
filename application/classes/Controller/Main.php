@@ -110,4 +110,16 @@ class Controller_Main extends Controller_Website {
 
     }
 
+    public function action_statistics() {
+
+        $groups = ORM::factory('Group')
+            ->where('status', '=', 0)
+            ->order_by('start', 'DESC')
+            ->find_all();
+
+        $this->template->title = 'Estadísticas';
+        $this->template->content = View::factory('statistics')->bind('groups', $groups);
+
+    }
+
 } // End
