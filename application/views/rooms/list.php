@@ -23,6 +23,7 @@
             <div class="panel-heading"><strong>Status:</strong> Listo para empezar</div>
             <div class="panel-body">
                 <a class="btn btn-block btn-default" href="<?= URL::site('main/pregame/'.$room->id); ?>">Info preliminar</a>
+                <a class="btn btn-block btn-danger" href="<?= URL::site('main/archive/'.$room->id); ?>">Eliminar</a>
             </div>
         </div>
         <?php

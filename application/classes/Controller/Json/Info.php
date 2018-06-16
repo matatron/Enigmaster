@@ -125,6 +125,7 @@ class Controller_Json_Info extends Controller_Json {
         $json["stats"]["min"] = $min;
         $json["stats"]["max"] = $max;
         $json["stats"]["count"] = $count;
+        $json["stats"]["countPeople"] = $peopleSum;
         $json["stats"]["wins"] = $winSum;
         $json["stats"]["clueMean"] = $clueSum/$count;
         $json["stats"]["timeMean"] = $timeSum/$count;

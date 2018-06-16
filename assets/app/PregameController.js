@@ -5,7 +5,7 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
     ctrl.closeAlert = function(index) {
         ctrl.alerts.splice(index, 1);
     };
-    ctrl.optpistas =0;
+    ctrl.optpistas = 0;
 
     ctrl.save = function(admin) {
         ctrl.data.people_info = JSON.stringify(ctrl.people_info);

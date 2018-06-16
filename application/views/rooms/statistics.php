@@ -13,6 +13,10 @@
             <td>{{stats.count}}</td>
         </tr>
         <tr>
+            <th>Total de jugadores</th>
+            <td>{{stats.countPeople}}</td>
+        </tr>
+        <tr>
             <th>Porcentaje de éxito</th>
             <td>{{(stats.wins/stats.count*100).toFixed(1)}}%</td>
         </tr>
