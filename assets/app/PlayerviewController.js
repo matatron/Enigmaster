@@ -72,6 +72,9 @@ webApp = angular.module('Enigmaster', [
                 bgAudio.play();
             }
             if (lastProgress != $scope.data.progress) {
+                lastProgress = $scope.data.progress;
+                console.log("Progress: ", $scope.data.progress);
+                console.log("Sound: ", window.sound[$scope.data.progress]);
                 if (window.sound[$scope.data.progress]) {
                     fxAudio = new Audio(window.sound[$scope.data.progress]);
                     fxAudio.play();

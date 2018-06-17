@@ -16,12 +16,12 @@ window.music = [
     ""
 ];
 window.sounds = [
-    "/assets/audio/<?=$sound[0];?>.mp3",
+    null,
 <?php foreach($sound as $file) {
     if ($file != '') { ?>
     "/assets/audio/<?=$file;?>.mp3",
 <?php
-     } else echo 'null,
+     } else echo '  null,
 ';
 
     } ?>
