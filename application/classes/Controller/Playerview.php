@@ -33,7 +33,7 @@ class Controller_Playerview extends Controller_Template {
                 $lastMusic = $puzzle->music;
             }
             $music[] = $lastMusic;
-            $sound[] = $puzzle->sound || '';
+            $sound[] = (isset($puzzle->music))? $puzzle->sound : '';
         }
 
         $this->template->roomId = $roomId;
