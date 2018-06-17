@@ -21,7 +21,8 @@ window.sounds = [
     if ($file != '') { ?>
     "/assets/audio/<?=$file;?>.mp3",
 <?php
-     } else echo '""';
+     } else echo 'null,
+';
 
     } ?>
     ""
