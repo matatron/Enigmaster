@@ -17,9 +17,13 @@ window.music = [
 ];
 window.sounds = [
     "/assets/audio/<?=$sound[0];?>.mp3",
-<?php foreach($sound as $file) { ?>
+<?php foreach($sound as $file) {
+    if ($file != '') { ?>
     "/assets/audio/<?=$file;?>.mp3",
-<?php } ?>
+<?php
+     } else echo '""';
+
+    } ?>
     ""
 ];
         </script>
