@@ -15,6 +15,13 @@ window.music = [
 <?php } ?>
     ""
 ];
+window.sounds = [
+    "/assets/audio/<?=$sound[0];?>.mp3",
+<?php foreach($sound as $file) { ?>
+    "/assets/audio/<?=$file;?>.mp3",
+<?php } ?>
+    ""
+];
         </script>
     </head>
     <body class="no-gutter">

@@ -11,6 +11,7 @@ webApp.controller('RoomController', ['$scope', '$http', '$timeout', function($sc
             name: 'New Puzzle',
             description: '',
             music: '',
+            sound: '',
             clues: [],
             gizmo: '',
             complete: 0,

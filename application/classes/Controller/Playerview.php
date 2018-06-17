@@ -26,12 +26,14 @@ class Controller_Playerview extends Controller_Template {
 
         $puzzles =  json_decode($room->puzzles);
         $music = [];
+        $sound = [];
         $lastMusic = '';
         foreach($puzzles as $puzzle) {
             if (isset($puzzle->music) && $puzzle->music!="" && $puzzle->music != $lastMusic) {
                 $lastMusic = $puzzle->music;
             }
             $music[] = $lastMusic;
+            $sound[] = $puzzle->sound || '';
         }
 
         $this->template->roomId = $roomId;
@@ -39,6 +41,7 @@ class Controller_Playerview extends Controller_Template {
         if ($view == '') $view = 'basic';
 
         $this->template->bind('music', $music);
+        $this->template->bind('sound', $sound);
         $this->template->content = View::factory('playerviews/'.$view)->bind('group', $group)->bind('roomId', $roomId);
     }
 

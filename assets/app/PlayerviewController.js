@@ -24,8 +24,10 @@ webApp = angular.module('Enigmaster', [
     $scope.clue = '';
     var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
     var lastStatus = null;
+    var lastProgress = 0;
     var lastMusic = '';
     var bgAudio = null;
+    var fxAudio = null;
 
 
     function getBackend() {
@@ -38,6 +40,7 @@ webApp = angular.module('Enigmaster', [
                     case 2:
                     case 1:
                         if (bgAudio) bgAudio.play();
+
                         break;
                     case 3:
                     case 0:
@@ -67,6 +70,12 @@ webApp = angular.module('Enigmaster', [
                 if (bgAudio) bgAudio.pause();
                 bgAudio = new Audio(lastMusic);
                 bgAudio.play();
+            }
+            if (lastProgress != $scope.data.progress) {
+                if (window.sound[$scope.data.progress]) {
+                    fxAudio = new Audio(window.sound[$scope.data.progress]);
+                    fxAudio.play();
+                }
             }
         });
     }

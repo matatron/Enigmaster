@@ -53,6 +53,9 @@
                             Música: <br />
                             <input ng-model="puzzle.music" class="form-control"/>
                             <br/>
+                            Sonido: <br />
+                            <input ng-model="puzzle.sound" class="form-control"/>
+                            <br/>
                             <button class="btn btn-block btn-xs" ng-click="ctrl.selectPuzzle($index)" data-toggle="modal" data-target="#modalFinish">Eliminar Acertijo</button>
                             <br/>
                             <button class="btn btn-xs" ng-click="ctrl.swapPuzzle($index+1)" ng-hide="$last"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
