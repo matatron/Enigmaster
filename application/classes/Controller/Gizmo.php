@@ -58,7 +58,7 @@ class Controller_Gizmo extends Controller {
                                         $group->endgame(($rule->that == "lost"));
                                         break;
                                     case "punish":
-                                        $group->punishment += $rule->that;
+                                        $group->punishment = intval($group->punishment) + intval($rule->that);
                                         break;
 
                                 }
@@ -132,7 +132,7 @@ class Controller_Gizmo extends Controller {
                                         $group->endgame(($rule->that == "lost"));
                                         break;
                                     case "punish":
-                                        $group->punishment += $rule->that;
+                                        $group->punishment = intval($group->punishment) + intval($rule->that);
                                         break;
 
                                 }
