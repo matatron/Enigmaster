@@ -2,19 +2,22 @@
     .fixed-text {
         position: fixed;
         bottom: 0;
+        width: 100%;
         z-index: 2017;
         font-size: 2em;
         background: black;
-        border: solid 1px;
-        font-family: 'LCD-Bold';
+        text-align: center;
         right: 0;
         color: greenyellow;
         padding: 0 14px;
     }
+    .lcd {
+        font-family: 'LCD-Bold';
+    }
 </style>
 <div ng-controller="GameController as ctrl" ng-init="ctrl.roomId = <?=$roomId; ?>">
     <div class="fixed-text giant-text" ng-show="ctrl.data.status == 2">
-        {{ctrl.timeLeft | clock}}
+        <span class="lcd">{{ctrl.timePass | clock}}</span> + <span class="lcd">{{ctrl.tiempoPistas}}</span> + <span class="lcd">{{ctrl.data.punishment}}</span> => <span class="lcd">{{ctrl.timeLeft | clock}}</span>
     </div>
     <h1>{{ctrl.name}}</h1>
     <div class="row">
@@ -41,9 +44,11 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> Tiempo</div>
                         <div class="panel-body">
-                            <div class="row" ng-if="ctrl.data.status == 3">
+                            <div class="row" ng-if="ctrl.data.status != 2">
                                 <div class="col-xs-6 form-inline">
-                                    <strong>Tiempo:</strong> <input type="text" ng-model="ctrl.minutes" class="form-control" />minutos <br />
+                                    <strong>Castigo:</strong>
+                                    <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/> minutos
+
                                 </div>
                                 <div class="col-xs-6">
                                     <button class="btn btn-danger btn-block" ng-click="ctrl.startTime()">INICIAR TIEMPO</button>
@@ -53,7 +58,6 @@
                                 <div class="col-xs-6 col-sm-3">
                                     <strong>Hora de inicio:</strong> {{ctrl.js_start | date:'mediumTime'}}<br />
                                     <strong>Hora de salida:</strong> {{ctrl.js_end | date:'mediumTime'}}<br />
-                                    <strong>Diferencia:</strong> {{ctrl.js_end-ctrl.js_start | clock}}<br />
                                     <strong>Transcurrido:</strong> {{ctrl.timePass | clock}}<br />
                                 </div>
                                 <div class="col-xs-6 col-sm-5 text-center lcd giant-text">
@@ -61,10 +65,8 @@
                                 </div>
                                 <div class="col-xs-6 col-sm-3">
                                     <div class="input-group">
-                                        <input type="number" class="form-control" ng-model="ctrl.modifier" />
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-danger" uib-tooltip="Agregar/Quitar Minutos" ng-click="ctrl.addTime()"><i class="fa fa-plus" aria-hidden="true"></i> <i class="fa fa-clock-o" aria-hidden="true"></i></button>
-                                        </div>
+                                        <strong>Castigo:</strong>
+                                        <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
@@ -199,7 +201,7 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="panel panel-info">
+                    <div class="panel panel-info" ng-if="ctrl.data.status != null">
                         <div class="panel-heading"><i class="fa fa-tachometer" aria-hidden="true"></i> Otros</div>
                         <div class="panel-body">
                             <label for="fFreeClues">Pistas grátis:</label>

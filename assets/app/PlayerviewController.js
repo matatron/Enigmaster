@@ -20,7 +20,7 @@ webApp = angular.module('Enigmaster', [
 }).controller('PlayerviewController', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
     $scope.data={};
     $scope.data.status = 0;
-    $scope.data.end = 0;
+    $scope.data.start = 0;
     $scope.clue = '';
     var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
     var lastStatus = null;
@@ -59,7 +59,6 @@ webApp = angular.module('Enigmaster', [
                 $scope.pistas.push(i);
             }
             $scope.punishment = Math.max(0, $scope.data.total_clues-$scope.data.free_clues)*$scope.data.minutesxclue;
-            $scope.punishment += $scope.data.punishment;
             if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
@@ -73,8 +72,6 @@ webApp = angular.module('Enigmaster', [
             }
             if (lastProgress != $scope.data.progress) {
                 lastProgress = $scope.data.progress;
-                console.log("Progress: ", $scope.data.progress);
-                console.log("Sound: ", window.sounds[$scope.data.progress]);
                 if (window.sounds[$scope.data.progress]) {
                     fxAudio = new Audio(window.sounds[$scope.data.progress]);
                     fxAudio.play();
@@ -87,8 +84,8 @@ webApp = angular.module('Enigmaster', [
     $interval(getBackend,1000);
     $interval(function() {
         $now = (new Date()).getTime();
-        $scope.timeLeft = $scope.data.end - $now;
-        $scope.timePass = 60*60*1000 - $scope.timeLeft;
+        $scope.timePass = $now - $scope.data.start + $scope.data.punishment*60000;
+        $scope.timeLeft = 3600000 - $scope.timePass;
         $scope.counters = [];
         for(var i =0; i<12; i++) {
             if (i*300000 < $scope.timeLeft ) {
@@ -101,7 +98,7 @@ webApp = angular.module('Enigmaster', [
 }]).controller('PlayerviewControllerTV', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
     $scope.data={};
     $scope.data.status = 0;
-    $scope.data.end = 0;
+    $scope.data.start = 0;
     var lastStatus = null;
 
     var currentPuzzles = null;

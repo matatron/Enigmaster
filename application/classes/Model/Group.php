@@ -14,6 +14,7 @@ class Model_Group extends ORM
             $this->finished = time();
             if ($death) $this->finished += 3600;
         }
+//        $this->time = $this->finished - $this->start + max($this->total_clues-$this->free_clues, 0)*$this->minutesxclue*60 + $this->punishment*60;
         $this->time = $this->finished - $this->start + max($this->total_clues-$this->free_clues, 0)*$this->minutesxclue*60 + $this->punishment*60;
         $this->save();
     }

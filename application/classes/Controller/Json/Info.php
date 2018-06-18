@@ -21,7 +21,7 @@ class Controller_Json_Info extends Controller_Json {
         if ($group->loaded()) {
             $json = array(
                 'status'=> intval($group->status),
-                'end'=> $group->end*1000, //- $group->total_clues*$group->room->minPerClue*60000
+                'start'=> $group->start*1000, //- $group->total_clues*$group->room->minPerClue*60000
                 'time'=> $group->time*1000,
                 'total_clues'=> intval($group->total_clues),
                 'free_clues'=> intval($group->free_clues),
@@ -35,7 +35,7 @@ class Controller_Json_Info extends Controller_Json {
         } else {
             $json = array(
                 'status'=> 0,
-                'end'=> 0,
+                'start'=> 0,
                 'time'=> 0,
                 'total_clues'=> 0,
                 'free_clues'=> 0,

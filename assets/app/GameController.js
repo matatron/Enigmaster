@@ -2,18 +2,19 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     var ctrl = this;
     var flux;
     var updatingBackend = false;
+    var loadTimer = null;
 
     ctrl.modifier = 0;
     ctrl.now = 0;
+    ctrl.tiempoPistas = 0;
 
     ctrl.startTime = function() {
         var now = new Date();
         ctrl.data.status = 2;
         ctrl.js_start = now;
-        ctrl.js_end = new Date(now.getTime() + ctrl.minutes*60000);
+        ctrl.js_end = now;
         ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);
-        ctrl.data.end = Math.round(ctrl.js_end.getTime()/1000);
-        ctrl.updateBackend(['start', 'end', 'status']);
+        ctrl.updateBackend(['start', 'status']);
         ctrl.getTime();
     }
 
@@ -22,9 +23,12 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         //        ctrl.timeLeft = ctrl.js_end - (new Date(now.getTime() + ctrl.data.total_clues*ctrl.minutesPerClue*60000)) ;
         //        ctrl.timeLeft = (ctrl.js_end < ctrl.now) ? "-"+$filter('date')(ctrl.now-ctrl.js_end,'HH:mm:ss','UTC'):$filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
         //        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
-        ctrl.timeLeft = ctrl.js_end - ctrl.now;
         ctrl.timePass = ctrl.now - ctrl.js_start;
-        ctrl.percent = 100 - Math.floor((ctrl.js_end - ctrl.now)/36000);
+        console.log(ctrl.data.total_clues, ctrl.data.free_clues, ctrl.data.minutesxclue);
+        ctrl.tiempoPistas = Math.max(0, ctrl.data.total_clues-ctrl.data.free_clues)*ctrl.data.minutesxclue;
+        ctrl.timeLeft = 3600000 - ctrl.timePass - (ctrl.data.punishment + ctrl.tiempoPistas)*60000;
+        //        ctrl.timeLeft = ;
+        //        ctrl.percent = 100 - Math.floor((ctrl.js_end - ctrl.now)/36000);
     }
 
     ctrl.addTime = function () {
@@ -104,38 +108,50 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         ctrl.updateBackend(['minutesxclue', 'free_clues']);
     }
 
+    ctrl.updatePunishment = function() {
+        ctrl.updateBackend(['punishment']);
+    }
+
     ctrl.changeLang = function() {
+        _.forEach(ctrl.puzzles, function(puzzle) {
+            _.forEach(puzzle.clues, function(clue) {
+                clue.value = clue[ctrl.data.language];
+            })
+        });
         ctrl.updateBackend(['language']);
     }
 
-    $timeout(function() {
-        $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
-            response.data.free_clues = parseInt(response.data.free_clues);
-            response.data.minutesxclue = parseInt(response.data.minutesxclue);
-            response.data.status = parseInt(response.data.status);
-            response.data.total_clues = parseInt(response.data.total_clues);
-
-            ctrl.data = response.data;
-            ctrl.minutes = ctrl.data.room.minutes;
-            ctrl.js_start = new Date(ctrl.data.start*1000);
-            ctrl.js_end = new Date(ctrl.data.end*1000);
-            ctrl.data.show_progress = (ctrl.data.show_progress == 1);
-            ctrl.puzzles = JSON.parse(ctrl.data.puzzles);
-            if (ctrl.data.language != 'en') ctrl.data.language = 'es';
-            _.forEach(ctrl.puzzles, function(puzzle) {
-                _.forEach(puzzle.clues, function(clue) {
-                    clue.value = clue[ctrl.data.language];
-                })
-            });
-            ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
-            updateClues();
-            ctrl.getTime();
-            flux = $interval(getProgress, 500);
-            getProgress();
-        });
-    },50);
 
     window.ctrl = this;
+    function getFirstData() {
+        $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
+                response.data.free_clues = parseInt(response.data.free_clues);
+                response.data.minutesxclue = parseInt(response.data.minutesxclue);
+                response.data.status = parseInt(response.data.status);
+                response.data.total_clues = parseInt(response.data.total_clues);
+                response.data.punishment = parseInt(response.data.punishment);
+
+                ctrl.data = response.data;
+                ctrl.js_start = new Date(ctrl.data.start*1000);
+                ctrl.data.show_progress = (ctrl.data.show_progress == 1);
+                ctrl.puzzles = JSON.parse(ctrl.data.puzzles);
+                if (ctrl.data.language != 'en') ctrl.data.language = 'es';
+                _.forEach(ctrl.puzzles, function(puzzle) {
+                    _.forEach(puzzle.clues, function(clue) {
+                        clue.value = clue[ctrl.data.language];
+                    })
+                });
+                ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
+                updateClues();
+                ctrl.getTime();
+            if (response.data.status == 2) {
+                $interval.cancel(loadTimer);
+                flux = $interval(getProgress, 500);
+                getProgress();
+                $interval(ctrl.getTime,100);
+            }
+        });
+    }
     function getProgress() {
         $http.get('/json_info/progress/'+ctrl.roomId).then(function(response) {
             response.data.progress = parseInt(response.data.progress);
@@ -155,6 +171,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         });
     }
 
-    $interval(ctrl.getTime,100);
-
+    loadTimer = $interval(getFirstData,3000);
+    $timeout(function() {
+        getFirstData();
+    }, 50);
 }]);

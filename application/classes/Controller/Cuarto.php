@@ -17,6 +17,8 @@ class Controller_Cuarto extends Controller_Website {
             $newGroup->room_id = $roomId;
             $newGroup->status = 3; //currently, ready room is 3, playing is 2, done is 1, archived is 0
             $newGroup->people = 1;
+            $newGroup->punishment = 0;
+            $newGroup->total_clues = 0;
             $newGroup->puzzles = $room->puzzles;
             $newGroup->team_name = 'Cuarto '.$roomId;
             $newGroup->team_type = 'Normal';
