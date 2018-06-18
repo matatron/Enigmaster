@@ -59,6 +59,7 @@ class Controller_Gizmo extends Controller {
                                         break;
                                     case "punish":
                                         $group->punishment = intval($group->punishment) + intval($rule->that);
+                                        $group->save();
                                         break;
 
                                 }
