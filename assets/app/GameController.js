@@ -24,11 +24,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         //        ctrl.timeLeft = (ctrl.js_end < ctrl.now) ? "-"+$filter('date')(ctrl.now-ctrl.js_end,'HH:mm:ss','UTC'):$filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
         //        ctrl.timeLeft = $filter('date')(ctrl.js_end - ctrl.now,'HH:mm:ss','UTC');
         ctrl.timePass = ctrl.now - ctrl.js_start;
-        console.log(ctrl.data.total_clues, ctrl.data.free_clues, ctrl.data.minutesxclue);
         ctrl.tiempoPistas = Math.max(0, ctrl.data.total_clues-ctrl.data.free_clues)*ctrl.data.minutesxclue;
         ctrl.timeLeft = 3600000 - ctrl.timePass - (ctrl.data.punishment + ctrl.tiempoPistas)*60000;
         //        ctrl.timeLeft = ;
-        //        ctrl.percent = 100 - Math.floor((ctrl.js_end - ctrl.now)/36000);
+        ctrl.percent = Math.floor(ctrl.timePass/36000);
     }
 
     ctrl.addTime = function () {
