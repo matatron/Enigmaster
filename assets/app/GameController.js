@@ -164,6 +164,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             }
 
             ctrl.data.status = parseInt(response.data.status);
+            ctrl.data.punishment = parseInt(response.data.punishment);
             ctrl.gizmos = response.data.gizmos;
 
             if (ctrl.data.status == 1) $interval.cancel(flux);

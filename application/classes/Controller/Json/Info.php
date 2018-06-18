@@ -221,6 +221,7 @@ class Controller_Json_Info extends Controller_Json {
         $json["gizmos"] = array();
         $json["puzzles"] = array();
         $json["status"] = $group->status;
+        $json["punishment"] = $group->punishment;
         if ($group->loaded()) {
             $json["progress"] = $group->progress;
             foreach(json_decode($group->puzzles) as $pid => $puzzle) {
