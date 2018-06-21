@@ -145,7 +145,6 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
                 ctrl.getTime();
             if (response.data.status == 2) {
                 $interval.cancel(loadTimer);
-                flux = $interval(getProgress, 500);
                 getProgress();
                 $interval(ctrl.getTime,100);
             }
@@ -167,11 +166,12 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.data.punishment = parseInt(response.data.punishment);
             ctrl.gizmos = response.data.gizmos;
 
-            if (ctrl.data.status == 1) $interval.cancel(flux);
+//            if (ctrl.data.status == 1) $interval.cancel(flux);
         });
     }
 
     loadTimer = $interval(getFirstData,3000);
+    flux = $interval(getProgress, 500);
     $timeout(function() {
         getFirstData();
     }, 50);
