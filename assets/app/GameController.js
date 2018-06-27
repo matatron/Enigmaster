@@ -86,7 +86,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         ctrl.data.progress = Math.max(progress, ctrl.data.progress);
     }
 
-    ctrl.sendClue = function(clue, counts) {
+    ctrl.copyClue = function(clue, counts) {
         $scope.customClue = clue.value;
     }
 
