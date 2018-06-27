@@ -73,7 +73,9 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     function updateClues() {
-        var clues = [],
+        var clues = [
+            {es: '¿Pista?', en: 'Clue?', value: '¿Pista?'}
+        ],
             progress = 0;
         _.forEach(ctrl.puzzles, function (puzzle, pos){
             if (!puzzle.complete) {
