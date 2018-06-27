@@ -87,6 +87,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.sendClue = function(clue, counts) {
+        $scope.customClue = clue.value;
+    }
+
+    ctrl.sendClue = function(clue, counts) {
         if (angular.isObject(clue)) {
             if (counts) clue.sent = true;
             ctrl.cluesSent.unshift({date: (new Date()).getTime(), value: clue.value, counts: counts});
