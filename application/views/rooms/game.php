@@ -107,11 +107,11 @@
                             <table class="table table-hover table-condensed ">
                                 <tr ng-repeat="clue in ctrl.clues" ng-class="{'success': clue.sent}">
                                     <td>
-                                        <button class="btn btn-default btn-xs" type="button" ng-dblclick="ctrl.copyClue(clue, false);" uib-tooltip="Editar antes de enviar" tooltip-placement="auto right"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+                                        <button class="btn btn-default btn-xs" type="button" ng-click="ctrl.copyClue(clue, false);" uib-tooltip="Editar antes de enviar" tooltip-placement="auto right"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
                                     </td>
                                     <td>{{clue.value}}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-default btn-xs" type="button" ng-click="ctrl.sendClue(clue, false);" uib-tooltip="Enviar como comentario" tooltip-placement="auto left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                        <button class="btn btn-default btn-xs" type="button" ng-dblclick="ctrl.sendClue(clue, false);" uib-tooltip="Enviar como comentario" tooltip-placement="auto left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                         <button ng-hide="clue.sent" class="btn btn-primary btn-xs" type="button" ng-dblclick="ctrl.sendClue(clue, true);" ng-disabled="clue.sent"  uib-tooltip="Enviar como pista" tooltip-placement="auto left"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
