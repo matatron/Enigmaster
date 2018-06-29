@@ -44,7 +44,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> Tiempo</div>
                         <div class="panel-body">
-                            <div class="row" ng-if="ctrl.data.status != 2">
+                            <div class="row" ng-if="ctrl.data.status == 3">
                                 <div class="col-xs-6 form-inline">
                                     <strong>Castigo:</strong>
                                     <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/> minutos

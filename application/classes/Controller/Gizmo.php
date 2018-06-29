@@ -79,6 +79,7 @@ class Controller_Gizmo extends Controller {
 
     public function action_reportbin()
     {
+        $message = '';
         $hasChanged = false;
         $query = $this->request->query();
         $gizmoId = $this->request->param('id');
@@ -116,6 +117,7 @@ class Controller_Gizmo extends Controller {
                     echo "on\r";
                 } else {
                     if ($hasChanged) {
+                        $message = ' changed ';
                         foreach($rules as $rule) {
                             if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
                                 switch ($rule->then) {
@@ -134,6 +136,7 @@ class Controller_Gizmo extends Controller {
                                         break;
                                     case "punish":
                                         $group->punishment = intval($group->punishment) + intval($rule->that);
+                                        $message .= " punish ".$group->punishment;
                                         break;
 
                                 }
@@ -145,7 +148,7 @@ class Controller_Gizmo extends Controller {
                     foreach($puzzles as $p) {
                         $s .= 0+$p->complete;
                     }
-                    echo $s."\r";
+                    echo $s.$message."\r";
                 }
             } else {
                 //$this->response->body("off\r");
