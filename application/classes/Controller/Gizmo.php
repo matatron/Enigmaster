@@ -117,7 +117,7 @@ class Controller_Gizmo extends Controller {
                     echo "on\r";
                 } else {
                     if ($hasChanged) {
-                        $message = ' changed ';
+//                        $message .= ' changed ';
                         foreach($rules as $rule) {
                             if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
                                 switch ($rule->then) {
@@ -136,7 +136,7 @@ class Controller_Gizmo extends Controller {
                                         break;
                                     case "punish":
                                         $group->punishment = intval($group->punishment) + intval($rule->that);
-                                        $message .= " punish ".$group->punishment;
+                                        $group->save();
                                         break;
 
                                 }
