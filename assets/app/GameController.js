@@ -130,25 +130,26 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     window.ctrl = this;
     function getFirstData() {
         $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
-                response.data.free_clues = parseInt(response.data.free_clues);
-                response.data.minutesxclue = parseInt(response.data.minutesxclue);
-                response.data.status = parseInt(response.data.status);
-                response.data.total_clues = parseInt(response.data.total_clues);
-                response.data.punishment = parseInt(response.data.punishment);
+            response.data.free_clues = parseInt(response.data.free_clues);
+            response.data.minutesxclue = parseInt(response.data.minutesxclue);
+            response.data.status = parseInt(response.data.status);
+            response.data.total_clues = parseInt(response.data.total_clues);
+            response.data.punishment = parseInt(response.data.punishment);
+            response.data.id = parseInt(response.data.id);
 
-                ctrl.data = response.data;
-                ctrl.js_start = new Date(ctrl.data.start*1000);
-                ctrl.data.show_progress = (ctrl.data.show_progress == 1);
-                ctrl.puzzles = JSON.parse(ctrl.data.puzzles);
-                if (ctrl.data.language != 'en') ctrl.data.language = 'es';
-                _.forEach(ctrl.puzzles, function(puzzle) {
-                    _.forEach(puzzle.clues, function(clue) {
-                        clue.value = clue[ctrl.data.language];
-                    })
-                });
-                ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
-                updateClues();
-                ctrl.getTime();
+            ctrl.data = response.data;
+            ctrl.js_start = new Date(ctrl.data.start*1000);
+            ctrl.data.show_progress = (ctrl.data.show_progress == 1);
+            ctrl.puzzles = JSON.parse(ctrl.data.puzzles);
+            if (ctrl.data.language != 'en') ctrl.data.language = 'es';
+            _.forEach(ctrl.puzzles, function(puzzle) {
+                _.forEach(puzzle.clues, function(clue) {
+                    clue.value = clue[ctrl.data.language];
+                })
+            });
+            ctrl.cluesSent = JSON.parse(ctrl.data.clues) || [];
+            updateClues();
+            ctrl.getTime();
             if (response.data.status == 2) {
                 $interval.cancel(loadTimer);
                 getProgress();
@@ -158,21 +159,27 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
     function getProgress() {
         $http.get('/json_info/progress/'+ctrl.roomId).then(function(response) {
+            response.data.id = parseInt(response.data.id);
             response.data.progress = parseInt(response.data.progress);
-            if (ctrl.data.progress < response.data.progress) {
-                ctrl.data.progress = response.data.progress;
-            }
-            if (response.data.puzzles.length && !updatingBackend) {
-                _.forEach(response.data.puzzles, function(p, i) {
-                    ctrl.togglePuz(i, p)
-                });
+            if (ctrl.data.id == response.data.id) {
+
+                if (ctrl.data.progress < response.data.progress) {
+                    ctrl.data.progress = response.data.progress;
+                }
+                if (response.data.puzzles.length && !updatingBackend) {
+                    _.forEach(response.data.puzzles, function(p, i) {
+                        ctrl.togglePuz(i, p)
+                    });
+                }
+
+                ctrl.data.status = parseInt(response.data.status);
+                ctrl.data.punishment = parseInt(response.data.punishment);
+                ctrl.gizmos = response.data.gizmos;
+            }else {
+                window.location.reload();
             }
 
-            ctrl.data.status = parseInt(response.data.status);
-            ctrl.data.punishment = parseInt(response.data.punishment);
-            ctrl.gizmos = response.data.gizmos;
-
-//            if (ctrl.data.status == 1) $interval.cancel(flux);
+            //            if (ctrl.data.status == 1) $interval.cancel(flux);
         });
     }
 

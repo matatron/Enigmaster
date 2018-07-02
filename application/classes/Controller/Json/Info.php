@@ -220,6 +220,7 @@ class Controller_Json_Info extends Controller_Json {
         $json = array();
         $json["gizmos"] = array();
         $json["puzzles"] = array();
+        $json["id"] = $group->id;
         $json["status"] = $group->status;
         $json["punishment"] = $group->punishment;
         if ($group->loaded()) {
