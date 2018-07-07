@@ -28,6 +28,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         ctrl.timeLeft = 3600000 - ctrl.timePass - (ctrl.data.punishment + ctrl.tiempoPistas)*60000;
         //        ctrl.timeLeft = ;
         ctrl.percent = Math.floor(ctrl.timePass/36000);
+        ctrl.percent2 = Math.floor(((ctrl.data.punishment + ctrl.tiempoPistas)*60000)/36000);
     }
 
     ctrl.addTime = function () {
@@ -163,18 +164,18 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             response.data.progress = parseInt(response.data.progress);
             if (ctrl.data.id == response.data.id) {
 
-                if (ctrl.data.progress < response.data.progress) {
-                    ctrl.data.progress = response.data.progress;
-                }
                 if (response.data.puzzles.length && !updatingBackend) {
+                    if (ctrl.data.progress < response.data.progress) {
+                        ctrl.data.progress = response.data.progress;
+                    }
                     _.forEach(response.data.puzzles, function(p, i) {
                         ctrl.togglePuz(i, p)
                     });
+                    ctrl.data.status = parseInt(response.data.status);
+                    ctrl.data.punishment = parseInt(response.data.punishment);
+                    ctrl.gizmos = response.data.gizmos;
                 }
 
-                ctrl.data.status = parseInt(response.data.status);
-                ctrl.data.punishment = parseInt(response.data.punishment);
-                ctrl.gizmos = response.data.gizmos;
             }else {
                 window.location.reload();
             }

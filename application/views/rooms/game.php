@@ -72,7 +72,9 @@
                                 <div class="col-xs-12">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success progress-bar-striped active" ng-class="{'progress-bar-warning': ctrl.percent > 50, 'progress-bar-danger': ctrl.percent > 75}" role="progressbar" aria-valuenow="{{ctrl.percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ctrl.percent}}%;">
-                                            {{ctrl.percent}}%
+                                            {{ctrl.percent+ctrl.percent2}}%
+                                        </div>
+                                        <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{ctrl.percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ctrl.percent2}}%;">
                                         </div>
                                     </div>
                                 </div>

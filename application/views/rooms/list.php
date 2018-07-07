@@ -29,7 +29,8 @@
         <?php
             break;
         case 2: //onplay
-            $percent = ($room->group->start > 0) ? round((time() - $room->group->start)/($room->group->end-$room->group->start)*100)%100 : 0;
+            $punish = max(0, $room->group->total_clues-$room->group->free_clues)*$room->group->minutesxclue + $room->group->punishment;
+            $percent = ($room->group->start > 0) ? round((time() - $room->group->start + $punish*60 )/(3600)*100)%100 : 0;
         ?>
         <div class="panel panel-primary">
             <div class="panel-heading"><strong>Status:</strong> Juego en marcha<br /></div>
