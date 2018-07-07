@@ -135,7 +135,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             response.data.minutesxclue = parseInt(response.data.minutesxclue);
             response.data.status = parseInt(response.data.status);
             response.data.total_clues = parseInt(response.data.total_clues);
-            response.data.punishment = parseInt(response.data.punishment);
+            response.data.punishment = parseInt(response.data.punishment || 0);
             response.data.id = parseInt(response.data.id);
 
             ctrl.data = response.data;
@@ -163,23 +163,25 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             response.data.id = parseInt(response.data.id);
             response.data.progress = parseInt(response.data.progress);
             if (ctrl.data.id == response.data.id) {
-
-                if (response.data.puzzles.length && !updatingBackend) {
+                if (!updatingBackend) {
                     if (ctrl.data.progress < response.data.progress) {
                         ctrl.data.progress = response.data.progress;
                     }
-                    _.forEach(response.data.puzzles, function(p, i) {
-                        ctrl.togglePuz(i, p)
-                    });
-                    ctrl.data.status = parseInt(response.data.status);
-                    ctrl.data.punishment = parseInt(response.data.punishment);
-                    ctrl.gizmos = response.data.gizmos;
-                }
 
+                    if (response.data.puzzles.length) {
+                        _.forEach(response.data.puzzles, function(p, i) {
+                            ctrl.togglePuz(i, p)
+                        });
+                        ctrl.data.status = parseInt(response.data.status);
+                        ctrl.data.punishment = parseInt(response.data.punishment || 0);
+                        ctrl.gizmos = response.data.gizmos;
+
+                    }
+
+                }
             }else {
                 window.location.reload();
             }
-
             //            if (ctrl.data.status == 1) $interval.cancel(flux);
         });
     }

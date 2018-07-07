@@ -84,6 +84,7 @@ webApp = angular.module('Enigmaster', [
     $interval(getBackend,1000);
     $interval(function() {
         $now = (new Date()).getTime();
+        $scope.data.punishment = $scope.data.punishment || 0;
         $scope.timePass = $now - $scope.data.start + $scope.data.punishment*60000;
         $scope.timeLeft = 3600000 - $scope.timePass;
         $scope.counters = [];
