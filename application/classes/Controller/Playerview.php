@@ -48,12 +48,21 @@ class Controller_Playerview extends Controller_Template {
     public function action_lasttime()
     {
         $roomId = $this->request->param('id');
-        $group = ORM::factory('Group')
-            ->where('room_id', '=', $roomId)
-            ->limit(1)
-            ->order_by('finished', 'DESC')
-            ->and_where('status', '<', 2)
-            ->find();
+
+        if ($roomId) {
+            $group = ORM::factory('Group')
+                ->where('room_id', '=', $roomId)
+                ->limit(1)
+                ->order_by('finished', 'DESC')
+                ->and_where('status', '<', 2    )
+                ->find();
+        } else{
+            $group = ORM::factory('Group')
+                ->limit(1)
+                ->order_by('finished', 'DESC')
+                ->and_where('status', '<', 2    )
+                ->find();
+        }
 
         $this->template->title = 'Ultimo tiempo';
         $this->template->content = View::factory('rooms/lasttime')->bind('group', $group);

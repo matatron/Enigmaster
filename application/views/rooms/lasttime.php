@@ -1,3 +1,5 @@
+<br/>
+<br/>
 <div><?= $group->team_name; ?></div>
 <div style="font-size: 2em;">
 <div class="lcd giant-text"><?php
@@ -7,3 +9,8 @@
 ?></div>
 </div>
 
+<script>
+    setTimeout(function(){
+        window.location.reload(1);
+    }, 60000);
+</script>
