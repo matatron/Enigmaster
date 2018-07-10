@@ -24,6 +24,7 @@
             <div class="panel-body">
                 <a class="btn btn-block btn-info" href="<?= URL::site('main/pregame/'.$room->id); ?>">Info preliminar</a>
                 <a class="btn btn-block btn-warning" href="<?= URL::site('main/archive/'.$room->id); ?>">Eliminar</a>
+                <a class="btn btn-block btn-default" href="<?= URL::site('playerview/lasttime/'.$room->id); ?>">Ver Ultimo Tiempo</a>
             </div>
         </div>
         <?php
@@ -57,7 +58,8 @@
             <div class="panel-heading"><strong>Status:</strong> Finalizado</div>
             <div class="panel-body">
                 <a class="btn btn-block btn-default" href="<?= URL::site('main/archive/'.$room->id); ?>">Archivar juego</a>
-            </div>
+                <a class="btn btn-block btn-default" href="<?= URL::site('playerview/lasttime/'.$room->id); ?>">Ver Ultimo Tiempo</a>
+            s</div>
         </div>
         <?php
             break;
@@ -68,6 +70,7 @@
             <div class="panel-body">
                 <a class="btn btn-block btn-info" href="<?= URL::site('cuarto/ready/'.$room->id); ?>">Iniciar nuevo juego</a>
                 <a class="btn btn-block btn-default" href="<?= URL::site('cuarto/checklist/'.$room->id); ?>">Ver checklist</a>
+                <a class="btn btn-block btn-default" href="<?= URL::site('playerview/lasttime/'.$room->id); ?>">Ver Ultimo Tiempo</a>
             </div>
         </div>
         <?php } ?>

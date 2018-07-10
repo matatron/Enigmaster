@@ -45,5 +45,19 @@ class Controller_Playerview extends Controller_Template {
         $this->template->content = View::factory('playerviews/'.$view)->bind('group', $group)->bind('roomId', $roomId);
     }
 
+    public function action_lasttime()
+    {
+        $roomId = $this->request->param('id');
+        $group = ORM::factory('Group')
+            ->where('room_id', '=', $roomId)
+            ->limit(1)
+            ->order_by('finished', 'DESC')
+            ->and_where('status', '<', 2)
+            ->find();
+
+        $this->template->title = 'Ultimo tiempo';
+        $this->template->content = View::factory('rooms/lasttime')->bind('group', $group);
+
+    }
 
 }

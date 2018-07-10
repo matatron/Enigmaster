@@ -16,7 +16,7 @@ webApp = angular.module('Enigmaster', [
         var s = date/1000;
         var h = Math.floor(s/3600);
         var m = Math.floor(s/60)%60;
-        var s = Math.round(s%60);
+        var s = Math.floor(s%60);
         return prefix+h+":"+pad(m)+":"+pad(s);
     };
 });

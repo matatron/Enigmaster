@@ -7,6 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/assets/font-awesome-4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="/assets/css/roomonly.css"/>
+<?php
+            if (isset($music)) {
+?>
         <script>
 window.music = [
     "/assets/audio/<?=$music[0];?>.mp3",
@@ -28,6 +31,10 @@ window.sounds = [
     ""
 ];
         </script>
+<?php
+    }
+?>
+
     </head>
     <body class="no-gutter">
         <div class="container">
