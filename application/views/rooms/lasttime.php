@@ -8,6 +8,8 @@
     echo $minutos.":".$segundos;
 ?></div>
 </div>
+<br/>
+<br/>
 
 <script>
     setTimeout(function(){
