@@ -16,7 +16,8 @@ webApp.controller('RoomController', ['$scope', '$http', '$timeout', function($sc
             gizmo: '',
             complete: 0,
             solvedAt: 0,
-            reset: ''
+            reset: '',
+            type: 'xs'
         });
     }
 

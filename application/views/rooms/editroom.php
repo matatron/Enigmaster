@@ -65,6 +65,13 @@
                             <textarea ng-model="puzzle.description" class="form-control"></textarea>
                             Reset: <br />
                             <textarea ng-model="puzzle.reset" class="form-control"></textarea>
+                            Tipo: <br />
+                            <select ng-model="puzzle.type" class="form-control">
+                                <option value="xs">Normal</option>
+                                <option value="xs btn-danger">Crítico</option>
+                                <option value="sm">Grande</option>
+                            </select>
+
                         </div>
                         <div class="col-xs-6">
                             <div class="clearfix">
