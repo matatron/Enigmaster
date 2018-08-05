@@ -103,7 +103,7 @@ class Controller_Main extends Controller_Website {
     }
 
     public function action_gizmos() {
-        $gizmos = ORM::factory("Gizmo")->find_all();
+        $gizmos = ORM::factory("Gizmo")->order_by("name","ASC")->find_all();
         $this->template->title = 'Gizmos';
         $this->template->content = View::factory('gizmos')
             ->bind('gizmos', $gizmos);
