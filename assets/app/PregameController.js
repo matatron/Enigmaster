@@ -1,4 +1,4 @@
-webApp.controller('PregameController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+webApp.controller('PregameController', ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval) {
     var ctrl = this;
     ctrl.name = this.roomId;
     ctrl.alerts = [];
@@ -55,6 +55,27 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
         ctrl.updatePeople();
     }
 
+    function getProgress() {
+        $http.get('/json_info/preprogress/'+ctrl.roomId).then(function(response) {
+            response.data.id = parseInt(response.data.id);
+            response.data.progress = parseInt(response.data.progress);
+            ctrl.gizmos = response.data.gizmos;
+            if (parseInt(ctrl.data.id) != response.data.id) {
+                window.location.href = "/";
+            }
+        });
+    }
+
+    ctrl.startTime = function() {
+        var now = new Date();
+        ctrl.data.status = 2;
+        ctrl.js_start = now;
+        ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);
+        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ["status", "start"])).then(function(response) {
+            window.location.href = "/";
+        });
+    }
+
     $timeout(function() {
         $http.get('/json_info/group/'+ctrl.roomId).then(function(response) {
             ctrl.data = response.data;
@@ -66,6 +87,10 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', function(
                 ctrl.people_info = JSON.parse(ctrl.data.people_info);
             }
             ctrl.optpistas = (ctrl.data.minutesxclue == 3) ? 0 : 1;
+            getProgress();
+            flux = $interval(getProgress, 1000, );
         });
     },50);
+
+
 }]);

@@ -109,6 +109,7 @@ webApp = angular.module('Enigmaster', [
         1: "/assets/video/ruido2.mp4",
         2: "/assets/video/Video1.mp4",
         3: "/assets/video/ruido1.mp4",
+        4: "/assets/video/risa1.mp4",
         6: "/assets/video/Olivia1.mp4",
         7: "/assets/video/ruidoCreepy.mp4",
         8: "/assets/video/ojo.mp4",

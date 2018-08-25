@@ -205,6 +205,48 @@ class Controller_Json_Info extends Controller_Json {
         }
     }
 
+    public function action_preprogress()
+    {
+        $now = time();
+        $roomId = $this->request->param('id');
+        $gizmos = ORM::factory('Gizmo')->where('room', '=', $roomId)->find_all()->as_array();
+        $group = ORM::factory('Group')
+            ->where('room_id', '=', $roomId)
+            ->and_where('status', '>', 0)
+            ->limit(1)
+            ->order_by('id', 'DESC')
+            ->find();
+
+        $json = array();
+        $json["gizmos"] = array();
+        $json["id"] = $group->id;
+        $json["status"] = $group->status;
+
+        if ($group->loaded()) {
+            $json["progress"] = $group->progress;
+            /*
+            $json['team_name'] = $group->team_name;
+            $json['comments'] = $group->comments;
+            $json['people'] = $group->people;
+            $json['people_info'] = $group->people_info;
+            $json['team_type'] = $group->team_type;
+            $json['language'] = $group->language;
+            $json['free_clues'] = $group->free_clues;
+            $json['minutesxclue'] = $group->minutesxclue; */
+        } else {
+            $json["progress"] = "off";
+        }
+        foreach ($gizmos as $gizmo)
+        {
+            $json["gizmos"][$gizmo->id] = array(
+                'active'=> ($gizmo->lastActive > $now-10),
+                'data'=> json_decode($gizmo->data)
+            );
+
+        }
+        $this->data = $json;
+    }
+
     public function action_progress()
     {
         $now = time();

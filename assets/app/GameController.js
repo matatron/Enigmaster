@@ -49,7 +49,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             }
         }, function() {
 
-        })
+        });
 
     }
 

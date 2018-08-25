@@ -29,8 +29,15 @@ class Controller_Main extends Controller_Website {
             ->where('room_id', '=', $roomId)
             ->and_where('status', '>', 0)
             ->find();
+        $gizmos = ORM::factory('Gizmo')
+            ->where('room', '=', $roomId)
+            ->order_by('name', 'asc')
+            ->find_all();
         $this->template->title = 'Room '.$roomId;
-        $this->template->content = View::factory('rooms/pregame')->bind('group', $group)->bind('roomId', $roomId);
+        $this->template->content = View::factory('rooms/pregame')
+            ->bind('group', $group)
+            ->bind('gizmos', $gizmos)
+            ->bind('roomId', $roomId);
 
     }
 
