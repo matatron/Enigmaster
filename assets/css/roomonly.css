@@ -69,3 +69,13 @@ body {
 .font-bloodcrow {
     font-family: 'BloodCrow';
 }
+
+.flash {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: red;
+    top: 0;
+    left: 0;
+    display: none;
+}

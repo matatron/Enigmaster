@@ -9,7 +9,7 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', '$interva
 
     ctrl.save = function(admin) {
         ctrl.data.people_info = JSON.stringify(ctrl.people_info);
-        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ['team_name', 'comments', 'people', 'people_info', 'team_type', 'language', 'free_clues', 'minutesxclue'])).then(function(response) {
+        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ['team_name', 'comments', 'people', 'people_info', 'team_type', 'language', 'visualflash', 'free_clues', 'minutesxclue'])).then(function(response) {
             switch(response.data.status) {
                 case 'success':
                     ctrl.alerts.push({msg: 'Datos guardados'});
@@ -71,7 +71,7 @@ webApp.controller('PregameController', ['$scope', '$http', '$timeout', '$interva
         ctrl.data.status = 2;
         ctrl.js_start = now;
         ctrl.data.start = Math.round(ctrl.js_start.getTime()/1000);
-        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ['team_name', 'comments', 'people', 'people_info', 'team_type', 'language', 'free_clues', 'minutesxclue', 'status', 'start'])).then(function(response) {
+        $http.post('/json_info/savegroup/'+ctrl.roomId, _.pick(ctrl.data, ['team_name', 'comments', 'people', 'people_info', 'team_type', 'language', 'visualflash', 'free_clues', 'minutesxclue', 'status', 'start'])).then(function(response) {
             window.location.href = "/";
         });
     }

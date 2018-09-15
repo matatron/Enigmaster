@@ -31,6 +31,7 @@ class Controller_Json_Info extends Controller_Json {
                 'lang'=> $group->language,
                 'clue'=> json_decode($group->clues)[0],
                 'progress'=> intval($group->progress),
+                'visualflash'=> intval($group->visualflash)
             );
         } else {
             $json = array(
@@ -44,7 +45,8 @@ class Controller_Json_Info extends Controller_Json {
                 'team_name'=> 0,
                 'lang'=> 'es',
                 'clue'=> "",
-                'progress'=> 0
+                'progress'=> 0,
+                'visualflash'=> 0
             );
         }
         $this->data = $json;

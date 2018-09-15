@@ -39,8 +39,8 @@
     </div>
     <div ng-if="data.status == 1">
         <div class="font-diogenes">
-            <span ng-if="data.lang == 'es'">Tiempo Final:</span>
-            <span ng-if="data.lang == 'en'">Final time:</span>
+            <span ng-if="data.lang == 'es'">Tiempo Final (con pistas):</span>
+            <span ng-if="data.lang == 'en'">Final time (clues added):</span>
 
         </div>
         <div class="lcd giant-text">
@@ -52,4 +52,5 @@
             ENIGMATA
         </div>
     </div>
+    <div class="flash"></div>
 </div>

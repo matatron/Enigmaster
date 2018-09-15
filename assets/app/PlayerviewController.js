@@ -28,7 +28,7 @@ webApp = angular.module('Enigmaster', [
     var lastMusic = '';
     var bgAudio = null;
     var fxAudio = null;
-
+    var flashDiv = $(".flash");
 
     function getBackend() {
         $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
@@ -62,6 +62,18 @@ webApp = angular.module('Enigmaster', [
             if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                 $scope.clue = $scope.data.clue.value;
                 ping.play();
+                if ($scope.data.visualflash) {
+                    flashDiv.show();
+                    setTimeout(function() {
+                        flashDiv.hide();
+                        setTimeout(function() {
+                            flashDiv.show();
+                            setTimeout(function() {
+                                flashDiv.hide();
+                            }, 250);
+                        }, 250);
+                    }, 250);
+                }
             }
             if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1) && lastMusic != window.music[$scope.data.progress]) {
                 console.log($scope.data.progress, window.music[$scope.data.progress], lastMusic);

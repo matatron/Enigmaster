@@ -48,6 +48,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="fTeamName" class="col-xs-2 control-label">Ayudas Visuales</label>
+                    <div class="col-xs-5">
+                        <button class="btn btn-block" ng-class="{'btn-info': ctrl.data.visualflash == 0}" ng-click="ctrl.data.visualflash = 0">Desactivadas</button>
+                    </div>
+                    <div class="col-xs-5">
+                        <button class="btn btn-block" ng-class="{'btn-info': ctrl.data.visualflash == 1}" ng-click="ctrl.data.visualflash = 1">Activadas</button>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-xs-2 text-right">
                         <label class="control-label">Personas:</label>
                         {{ctrl.data.people}}
@@ -71,15 +80,15 @@
                     <div class="col-xs-12 col-sm-10 col-sm-offset-2">
                         <div uib-alert ng-repeat="alert in ctrl.alerts" ng-class="'alert-' + (alert.type || 'success')" close="ctrl.closeAlert($index)" dismiss-on-timeout="3000">{{alert.msg}}</div>
                     </div>
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-4">
                         <button type="button" class="btn btn-danger btn-block" ng-click="ctrl.startTime()">Iniciar tiempo</button>
                         <br class="hidden-md" />
                     </div>
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-4">
                         <button type="button" class="btn btn-default btn-block" ng-click="ctrl.save(false)">Guardar</button>
                         <br class="hidden-md" />
                     </div>
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-4">
                         <button type="button" class="btn btn-primary btn-block" ng-click="ctrl.save(true)">Controlar juego</button>
                         <br class="hidden-md" />
                     </div>
