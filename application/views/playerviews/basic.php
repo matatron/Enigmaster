@@ -4,6 +4,14 @@
             height: 150px;
             margin: -20px -19px;
         }
+        .animacion {
+            position: absolute;
+            bottom: -61px;
+            left: 40%;
+        }
+        .animacion img{
+            height: 450px;
+        }
     </style>
     <div ng-if="data.status == 3">
         <div class="well font-diogenes">
@@ -53,4 +61,5 @@
         </div>
     </div>
     <div class="flash"></div>
+    <div class="animacion"><img src="/assets/images/luzmorada.gif"/></div>
 </div>
