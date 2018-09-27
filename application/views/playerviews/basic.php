@@ -15,11 +15,11 @@
         .cuadroblanco {
             position: absolute;
             bottom: 8px;
-            left: 44%;
-            height: 110px;
-            width: 162px;
+            left: 43.6%;
+            height: 106px;
+            width: 172px;
             background-color: white;
-            border-radius: 50px;
+            border-radius: 8px;
         }
     </style>
     <div ng-if="data.status == 3">
