@@ -12,6 +12,15 @@
         .animacion img{
             height: 450px;
         }
+        .cuadroblanco {
+            position: absolute;
+            bottom: 8px;
+            left: 44%;
+            height: 110px;
+            width: 162px;
+            background-color: white;
+            border-radius: 50px;
+        }
     </style>
     <div ng-if="data.status == 3">
         <div class="well font-diogenes">
@@ -61,5 +70,5 @@
         </div>
     </div>
     <div class="flash"></div>
-    <div class="animacion"><img src="/assets/images/luzmorada.gif"/></div>
+    <div class="cuadroblanco"></div>
 </div>
