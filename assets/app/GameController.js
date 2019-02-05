@@ -114,7 +114,11 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
         ctrl.updateBackend(['minutesxclue', 'free_clues']);
     }
 
-    ctrl.updatePunishment = function() {
+    ctrl.updatePunishment = function(n) {
+      console.log(n);
+      if (parseInt(n)) {
+        ctrl.data.punishment+= parseInt(n);
+      }
         ctrl.updateBackend(['punishment']);
     }
 

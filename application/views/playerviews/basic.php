@@ -23,12 +23,14 @@
         }
     </style>
     <div ng-if="data.status == 3">
-        <div class="well font-diogenes">
+      <div class="well font-diogenes">
+        <div>{{data.team_name}}</div>
             <span ng-if="data.lang == 'es'">¿LISTOS PARA EMPEZAR?</span>
             <span ng-if="data.lang == 'en'">¿READY TO START?</span>
         </div>
     </div>
     <div ng-if="data.status == 2">
+      <div class="well font-diogenes">{{data.team_name}}</div>
         <div class="lcd giant-text">
             {{timePass | clock}}
         </div>

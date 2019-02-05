@@ -2,7 +2,8 @@
 </style>
 <div ng-if="data.status == 2">
     <div class="well">
-        ¿LISTOS PARA EMPEZAR?
+      <div>{{data.team_name}}</div>
+      ¿LISTOS PARA EMPEZAR?
     </div>
 </div>
 <div ng-if="data.status == 1">

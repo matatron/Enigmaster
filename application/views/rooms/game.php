@@ -46,10 +46,19 @@
                         <div class="panel-body">
                             <div class="row" ng-if="ctrl.data.status == 3">
                                 <div class="col-xs-6 form-inline">
-                                    <strong>Castigo:</strong>
-                                    <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/> minutos
-
-                                </div>
+                                  <strong>Castigo:</strong>
+                                  <div class="row">
+                                    <div class="col-xs-2">
+                                      <button class="btn" ng-click="ctrl.updatePunishment(-1)">-</button>
+                                    </div>
+                                    <div class="col-xs-8">
+                                      <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/>
+                                    </div>
+                                    <div class="col-xs-2">
+                                      <button class="btn" ng-click="ctrl.updatePunishment(+1)">+</button>
+                                    </div>
+                                  </div>
+                              </div>
                                 <div class="col-xs-6">
                                     <button class="btn btn-danger btn-block" ng-click="ctrl.startTime()">INICIAR TIEMPO</button>
                                 </div>
@@ -64,11 +73,19 @@
                                     {{ctrl.timeLeft | clock}}
                                 </div>
                                 <div class="col-xs-6 col-sm-3">
-                                    <div class="input-group">
-                                        <strong>Castigo:</strong>
-                                        <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/>
+                                  <strong>Castigo:</strong>
+                                  <div class="row">
+                                    <div class="col-xs-2">
+                                      <button class="btn" ng-click="ctrl.updatePunishment(-1)">-</button>
                                     </div>
-                                </div>
+                                    <div class="col-xs-8">
+                                      <input type="number" class="form-control" ng-model="ctrl.data.punishment" ng-change="ctrl.updatePunishment()"/>
+                                    </div>
+                                    <div class="col-xs-2">
+                                      <button class="btn" ng-click="ctrl.updatePunishment(+1)">+</button>
+                                    </div>
+                                  </div>
+                              </div>
                                 <div class="col-xs-12">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success progress-bar-striped active" ng-class="{'progress-bar-warning': ctrl.percent > 50, 'progress-bar-danger': ctrl.percent > 75}" role="progressbar" aria-valuenow="{{ctrl.percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ctrl.percent}}%;">
