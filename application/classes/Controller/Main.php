@@ -12,7 +12,7 @@ class Controller_Main extends Controller_Website {
                     ->where('room_id', '=', $room->id)
                     ->and_where('status', '>', 0)
                     ->limit(1)
-                    ->order_by('id', 'DESC')
+                    ->order_by('id', 'ASC')
                     ->find();
             $room->group = $group;
         }
