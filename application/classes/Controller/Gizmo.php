@@ -227,7 +227,7 @@ class Controller_Gizmo extends Controller {
                     foreach($puzzles as $p) {
                         $s .= 0+$p->complete;
                     }
-                    $json["puzzles"] = s;
+                    $json["puzzles"] = $s;
                 }
             }
             echo json_encode($json);
