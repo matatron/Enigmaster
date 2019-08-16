@@ -59,7 +59,7 @@
             <div class="panel-body">
                 <a class="btn btn-block btn-default" href="<?= URL::site('main/archive/'.$room->id); ?>">Archivar juego</a>
                 <a class="btn btn-block btn-default" href="<?= URL::site('playerview/lasttime/'.$room->id); ?>">Ver Ultimo Tiempo</a>
-            s</div>
+            </div>
         </div>
         <?php
             break;

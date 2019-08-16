@@ -9,7 +9,7 @@
     <div ng-if="data.status == 2">
       <div class="well font-bloodcrow">{{data.team_name}}</div>
         <div class="lcd giant-text">
-            {{timePass+39600000 | clock}}
+            {{timePass+39600000 | clock}} pm
         </div>
         <div class="small-text">
             <span ng-if="data.lang == 'es'">Pistas usadas:</span>
