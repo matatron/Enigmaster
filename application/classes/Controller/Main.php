@@ -5,14 +5,17 @@ class Controller_Main extends Controller_Website {
     public function action_index()
     {
 
-        $rooms = ORM::factory('Room')->find_all()->as_array();
+        $rooms = ORM::factory('Room')
+            ->order_by('id', 'DESC')
+            ->find_all()
+            ->as_array();
 
         foreach($rooms as &$room) {
             $group = ORM::factory('Group')
                     ->where('room_id', '=', $room->id)
                     ->and_where('status', '>', 0)
                     ->limit(1)
-                    ->order_by('id', 'ASC')
+                    ->order_by('id', 'DESC')
                     ->find();
             $room->group = $group;
         }
