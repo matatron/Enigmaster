@@ -160,7 +160,10 @@ class Controller_Gizmo extends Controller {
 
     public function action_reportjson()
     {
-        $json = [];
+        $json = [
+            "status" => 0,
+            "puzzles" => ""
+        ];
         $hasChanged = false;
         $query = $this->request->query();
         $gizmoId = $this->request->param('id');
@@ -228,8 +231,6 @@ class Controller_Gizmo extends Controller {
                         $s .= 0+$p->complete;
                     }
                     $json["puzzles"] = $s;
-                } else {
-                    $json["status"] = 0;
                 }
             }
             echo json_encode($json);
