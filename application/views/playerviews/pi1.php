@@ -12,6 +12,9 @@
 <style>
     body {
         margin: 0 !important;
+        background-image: url('/assets/images/fondo_pi1_1.jpg');
+        background-position: center;
+        background-size: cover;
     }
 </style>
 <div ng-controller="PlayerviewControllerTV" ng-init="roomId = <?=$roomId; ?>" >
