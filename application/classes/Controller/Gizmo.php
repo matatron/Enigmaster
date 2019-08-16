@@ -234,6 +234,7 @@ class Controller_Gizmo extends Controller {
                 }
             }
             echo json_encode($json);
+            echo "\r";
         }
         die();
     }
