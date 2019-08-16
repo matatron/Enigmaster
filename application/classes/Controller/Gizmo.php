@@ -158,6 +158,84 @@ class Controller_Gizmo extends Controller {
         die();
     }
 
+    public function action_reportjson()
+    {
+        $json = [];
+        $hasChanged = false;
+        $query = $this->request->query();
+        $gizmoId = $this->request->param('id');
+        $data = json_encode($query);
+        $gizmo = ORM::factory('Gizmo')->where('uid', '=', $gizmoId)->find();
+        if ($gizmo->loaded()) {
+            $gizmo->lastActive = time();
+            if ($data != $gizmo->data) {
+                $gizmo->prevdata = $gizmo->data;
+                $gizmo->data = $data;
+                $hasChanged = true;
+            }
+            $gizmo->save();
+        }else{
+            $hasChanged = true;
+            $gizmo = ORM::factory('Gizmo');
+            $gizmo->uid = $gizmoId;
+            $gizmo->name = 'Gizmo '.$gizmoId;
+            $gizmo->description = '';
+            $gizmo->data = $data;
+            $gizmo->lastActive = time();
+            $gizmo->save();
+        }
+
+        $rules = json_decode($gizmo->ifttt);
+
+        if($gizmo->room) {
+            $group = ORM::factory('Group')
+                ->where('room_id', '=', $gizmo->room)
+                ->and_where('status', '>', 0)
+                ->find();
+            if ($group->loaded()) {
+                $json["status"] = $group->status;
+                if ($group->status == 2) { // not started
+                    if ($hasChanged) {
+//                        $message .= ' changed ';
+                        foreach($rules as $rule) {
+                            if (isset($query[$rule->if]) &&  $query[$rule->if] == $rule->this) {
+                                switch ($rule->then) {
+                                    case "progress":
+                                    case "progreso":
+                                        $puzzles = json_decode($group->puzzles);
+                                        $puzzles[$rule->that-1]->complete = 1;
+                                        $group->puzzles = json_encode($puzzles);
+                                        if ($group->progress < $rule->that) {
+                                            $group->progress = $rule->that;
+                                        }
+                                        $group->save();
+                                        break;
+                                    case "endgame":
+                                        $group->endgame(($rule->that == "lost"));
+                                        break;
+                                    case "punish":
+                                        $group->punishment = intval($group->punishment) + intval($rule->that);
+                                        $group->save();
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                    $puzzles = json_decode($group->puzzles);
+                    $s = "";
+                    foreach($puzzles as $p) {
+                        $s .= 0+$p->complete;
+                    }
+                    $json["puzzles"] = s;
+                }
+            }
+            echo json_encode($json);
+        }
+        die();
+    }
+
+
     public function action_config()
     {
         $gizmoId = $this->request->param('id');
