@@ -228,6 +228,8 @@ class Controller_Gizmo extends Controller {
                         $s .= 0+$p->complete;
                     }
                     $json["puzzles"] = $s;
+                } else {
+                    $json["status"] = 0;
                 }
             }
             echo json_encode($json);
