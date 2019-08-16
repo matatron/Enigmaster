@@ -28,4 +28,5 @@
 </div>
 <script type="text/javascript">
     document.write('<p>' + myWidth + 'x' + myHeight + '</p>');
+    document.write('<p>' + window.screen.availHeight + 'x' + window.screen.availWidth + '</p>');
 </script>
