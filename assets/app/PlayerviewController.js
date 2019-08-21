@@ -184,4 +184,142 @@ webApp = angular.module('Enigmaster', [
     $interval(getBackend,500);
     getBackend();
 
+}]).controller('PlayerviewControllerPi1', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
+    $scope.data={};
+    $scope.data.status = 0;
+    $scope.data.start = 0;
+    var lastStatus = null;
+
+    var currentPuzzles = null;
+
+    var player;
+    var videos = {
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        6: "",
+        7: "",
+        8: "",
+        9: "",
+        10: "",
+        11: "",
+        13: "",
+        21: "",
+        22: "",
+        23: "",
+        24: "",
+        25: ""
+    }
+    window.music = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+];
+window.sounds = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+];
+
+    function getBackend() {
+        $http.get('/json_info/roompuzzles/'+$scope.roomId).then(function(response) {
+            response.data.progress = parseInt(response.data.progress);
+            $scope.data = response.data;
+            if ($scope.data.status != lastStatus) {
+                lastStatus = $scope.data.status;
+                switch($scope.data.status) {
+                    case 2:
+                    case 1:
+                        if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
+                        break;
+                    case 3:
+                        currentPuzzles = response.data.puzzles;
+                        break;
+                    case 0:
+                        //play end game sound
+                        break;
+
+                }
+            }
+
+            if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1)) {
+                player = document.getElementById('tvvideo');
+                if (player != null) {
+                    player.addEventListener('ended',function() {
+                        $(player).hide();
+                    },false);
+                }
+                $.each($scope.data.puzzles, function(i,e) {
+                    if (currentPuzzles[i] != e) {
+                        //cambio detectado
+                        currentPuzzles[i] = e;
+                        if (currentPuzzles[i] && videos.hasOwnProperty(i+1)) {
+                            console.log("Video "+videos[i+1]);
+                            player.src = videos[i+1];
+                            $(player).show();
+                            player.play();
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+
+    $interval(getBackend,500);
+    getBackend();
+
 }]);
