@@ -29,6 +29,10 @@
                         <input type="text" class="form-control" id="fConfig" placeholder="" ng-model="ctrl.gizmo.config">
                     </div>
                     <div class="col-xs-12">
+                        Parámetros (separados por coma): <br />
+                        <input type="text" class="form-control" id="fConfig" placeholder="" ng-model="ctrl.gizmo.params">
+                    </div>
+                    <div class="col-xs-12">
                         {{ctrl.gizmo.data}}
                     </div>
                     <div class="col-xs-12">
