@@ -3,8 +3,6 @@
 class Controller_Gizmo extends Controller {
 
     private function getGizmo($gizmoId) {
-        $query = $this->request->query();
-        $newData = json_encode($query);
         $gizmo = ORM::factory('Gizmo')->where('uid', '=', $gizmoId)->find();
         if ($gizmo->loaded()) {
             $gizmo->lastActive = time();
@@ -42,7 +40,6 @@ class Controller_Gizmo extends Controller {
                 echo "off\r";
             }
         }
-        $gizmo->save();
         die();
     }
 
@@ -74,7 +71,6 @@ class Controller_Gizmo extends Controller {
                 echo "off\r";
             }
         }
-        $gizmo->save();
         die();
     }
 
@@ -114,7 +110,6 @@ class Controller_Gizmo extends Controller {
                 }
             }
             echo json_encode($json);
-            $gizmo->save();
 
             echo "\r";
         }
@@ -129,6 +124,7 @@ class Controller_Gizmo extends Controller {
         if ($gizmo->data !== $newData) {
             $gizmo->prevdata = $gizmo->data;
             $gizmo->data = $newData;
+            $gizmo->save();
 
 
             $params = $group->params ? json_decode($group->params) : new stdClass();
