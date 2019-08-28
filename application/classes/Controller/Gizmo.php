@@ -173,7 +173,7 @@ class Controller_Gizmo extends Controller {
     {
         $gizmoId = $this->request->param('id');
         
-        $gizmo = getGizmo($gizmoId);
+        $gizmo = $this->getGizmo($gizmoId);
 
         echo $gizmo->config."\r";
     }
