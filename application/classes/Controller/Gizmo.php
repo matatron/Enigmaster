@@ -3,19 +3,19 @@
 class Controller_Gizmo extends Controller {
 
     private function getGizmo($gizmoId) {
+        $query = $this->request->query();
+        $newData = json_encode($query);
         $gizmo = ORM::factory('Gizmo')->where('uid', '=', $gizmoId)->find();
         if ($gizmo->loaded()) {
             $gizmo->lastActive = time();
-            $gizmo->save();
         }else{
             $gizmo = ORM::factory('Gizmo');
             $gizmo->uid = $gizmoId;
             $gizmo->name = 'Gizmo '.$gizmoId;
             $gizmo->description = '';
             $gizmo->prevdata = '';
-            $gizmo->data = $data;
+            $gizmo->data = '';
             $gizmo->lastActive = time();
-            $gizmo->save();
         }
         return $gizmo;
     }
@@ -42,6 +42,7 @@ class Controller_Gizmo extends Controller {
                 echo "off\r";
             }
         }
+        $gizmo->save();
         die();
     }
 
@@ -73,6 +74,7 @@ class Controller_Gizmo extends Controller {
                 echo "off\r";
             }
         }
+        $gizmo->save();
         die();
     }
 
@@ -92,6 +94,7 @@ class Controller_Gizmo extends Controller {
                 ->find();
             if ($group->loaded()) {
                 $json["status"] = $group->status;
+                $json["players"] = $group->people;
                 $json["params"] = new stdClass();
                 if ($group->status == 2) { // not started
                     $this->checkRules($gizmo, $group);
@@ -111,6 +114,7 @@ class Controller_Gizmo extends Controller {
                 }
             }
             echo json_encode($json);
+            $gizmo->save();
 
             echo "\r";
         }
@@ -172,17 +176,8 @@ class Controller_Gizmo extends Controller {
     public function action_config()
     {
         $gizmoId = $this->request->param('id');
-        $gizmo = ORM::factory('Gizmo')->where('uid', '=', $gizmoId)->find();
-        if (!$gizmo->loaded()) {
-            $gizmo = ORM::factory('Gizmo');
-            $gizmo->uid = $gizmoId;
-            $gizmo->name = 'Gizmo '.$gizmoId;
-            $gizmo->description = '';
-            $gizmo->config = '';
-            $gizmo->data = '[]';
-            $gizmo->lastActive = time();
-            $gizmo->save();
-        }
+        
+        $gizmo = getGizmo($gizmoId);
 
         echo $gizmo->config."\r";
     }
