@@ -11,6 +11,7 @@ class Controller_Gizmo extends Controller {
             $gizmo->description = '';
             $gizmo->prevdata = '';
             $gizmo->data = '';
+            $gizmo->save();
         }
         return $gizmo;
     }
@@ -79,7 +80,6 @@ class Controller_Gizmo extends Controller {
         ];
         $gizmoId = $this->request->param('id');
         $gizmo = $this->getGizmo($gizmoId);
-
         if($gizmo->room) {
             $group = ORM::factory('Group')
                 ->where('room_id', '=', $gizmo->room)
