@@ -145,11 +145,11 @@ class Controller_Gizmo extends Controller {
                             break;
                         case "on":
                             $puzzles = json_decode($group->puzzles);
-                            $puzzles[$rule->that-1]->complete = 1;
+                            $puzzles[$rule->that-1]->complete = 0;
                             $group->puzzles = json_encode($puzzles);
                         case "off":
                             $puzzles = json_decode($group->puzzles);
-                            $puzzles[$rule->that-1]->complete = 0;
+                            $puzzles[$rule->that-1]->complete = 1;
                             $group->puzzles = json_encode($puzzles);
                             break;
                         case "endgame":
