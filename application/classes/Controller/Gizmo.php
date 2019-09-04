@@ -88,13 +88,15 @@ class Controller_Gizmo extends Controller {
             if ($group->loaded()) {
                 $json["status"] = $group->status;
                 $json["players"] = $group->people;
-                $json["params"] = new stdClass();
                 if ($group->status == 2) { // not started
                     $this->checkRules($gizmo, $group);
-                    $requestedParams = preg_split('/[\,\ ]+/', $gizmo->params);
-                    $groupParams = json_decode($group->params);
-                    foreach($requestedParams as $p) {
-                        $json["params"]->$p = (isset($groupParams->$p)) ? $groupParams->$p : 0;
+                    if ($gizmo->params) {
+                        $json["params"] = new stdClass();
+                        $requestedParams = preg_split('/[\,\ ]+/', $gizmo->params);
+                        $groupParams = json_decode($group->params);
+                        foreach($requestedParams as $p) {
+                            $json["params"]->$p = (isset($groupParams->$p)) ? $groupParams->$p : 0;
+                        }
                     }
                     $puzzles = json_decode($group->puzzles);
                     $s = "";
@@ -168,7 +170,7 @@ class Controller_Gizmo extends Controller {
     public function action_config()
     {
         $gizmoId = $this->request->param('id');
-        
+
         $gizmo = $this->getGizmo($gizmoId);
 
         echo $gizmo->config."\r";
