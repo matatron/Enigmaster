@@ -94,9 +94,7 @@ class Controller_Gizmo extends Controller {
                     $requestedParams = preg_split('/[\,\ ]+/', $gizmo->params);
                     $groupParams = json_decode($group->params);
                     foreach($requestedParams as $p) {
-                        if (isset($groupParams->$p)) {
-                            $json["params"]->$p = $groupParams->$p;
-                        }
+                        $json["params"]->$p = (isset($groupParams->$p)) ? $groupParams->$p : 0;
                     }
                     $puzzles = json_decode($group->puzzles);
                     $s = "";
