@@ -13,6 +13,8 @@ class Controller_Gizmo extends Controller {
             $gizmo->data = '';
             $gizmo->save();
         }
+        $gizmo->lastActive = time();
+        $gizmo->save();
         return $gizmo;
     }
 
@@ -118,7 +120,6 @@ class Controller_Gizmo extends Controller {
 
         $query = $this->request->query();
         $newData = json_encode($query);
-        $gizmo->lastActive = time();
         if ($gizmo->data !== $newData) {
             $gizmo->prevdata = $gizmo->data;
             $gizmo->data = $newData;
@@ -163,8 +164,8 @@ class Controller_Gizmo extends Controller {
                 }
             }
             $group->save();
+            $gizmo->save();
         }
-        $gizmo->save();
     }
 
     public function action_config()

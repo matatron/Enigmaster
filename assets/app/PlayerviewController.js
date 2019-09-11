@@ -189,10 +189,10 @@ webApp = angular.module('Enigmaster', [
     $scope.data.status = 0;
     $scope.data.start = 0;
     var lastStatus = null;
-
     var currentPuzzles = null;
-
+    var currentParams = null;
     var player;
+
     var videos = {
         1: "",
         2: "",
@@ -211,71 +211,78 @@ webApp = angular.module('Enigmaster', [
         24: "",
         25: ""
     }
-    window.music = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-];
-window.sounds = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-];
+    var music = [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ];
+    var sounds = [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ];
 
     function getBackend() {
-        $http.get('/json_info/roompuzzles/'+$scope.roomId).then(function(response) {
+        if (player == null && document.getElementById('tvvideo') != null) {
+            player = document.getElementById('tvvideo');
+            player.addEventListener('ended',function() {
+                $(player).hide();
+            },false);
+        }
+
+        $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
             response.data.progress = parseInt(response.data.progress);
             $scope.data = response.data;
             if ($scope.data.status != lastStatus) {
@@ -284,6 +291,7 @@ window.sounds = [
                     case 2:
                     case 1:
                         if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
+                        if (currentParams == null) currentParams = response.data.params;
                         break;
                     case 3:
                         currentPuzzles = response.data.puzzles;
@@ -296,12 +304,6 @@ window.sounds = [
             }
 
             if ($scope.data.progress != undefined && ($scope.data.status==2 || $scope.data.status==1)) {
-                player = document.getElementById('tvvideo');
-                if (player != null) {
-                    player.addEventListener('ended',function() {
-                        $(player).hide();
-                    },false);
-                }
                 $.each($scope.data.puzzles, function(i,e) {
                     if (currentPuzzles[i] != e) {
                         //cambio detectado
@@ -313,7 +315,34 @@ window.sounds = [
                             player.play();
                         }
                     }
-                })
+                });
+                $.each($scope.data.params, function(i,e) {
+
+                    if ( currentParams[i] != e) {
+                        console.log(i, e);
+                        //cambio detectado
+                        currentParams[i] = e;
+
+                        switch(i) {
+                            case 'ADN':
+                                switch(e) {
+                                    case 'escaneando':
+                                        
+                                        break;
+                                }
+                                break;
+                            case '':
+                                switch(e) {
+                                    case '':
+                                        break;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                });
             }
         });
     }

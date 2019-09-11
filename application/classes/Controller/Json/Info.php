@@ -28,11 +28,18 @@ class Controller_Json_Info extends Controller_Json {
                 'minutesxclue'=> intval($group->minutesxclue),
                 'punishment'=> intval($group->punishment),
                 'team_name'=> $group->team_name,
+                'people'=> $group->people,
+                'puzzles'=> [],
+                'params'=> json_decode($group->params),
                 'lang'=> $group->language,
                 'clue'=> json_decode($group->clues)[0],
                 'progress'=> intval($group->progress),
                 'visualflash'=> intval($group->visualflash)
             );
+            $puzzles = json_decode($group->puzzles);
+            foreach($puzzles as $p) {
+                $json["puzzles"][] = $p->complete;
+            }
         } else {
             $json = array(
                 'status'=> 0,
@@ -43,6 +50,9 @@ class Controller_Json_Info extends Controller_Json {
                 'minutesxclue'=> 0,
                 'punishment'=> 0,
                 'team_name'=> 0,
+                'people'=> 0,
+                'puzzles' => [],
+                'params' => new StdClass(),
                 'lang'=> 'es',
                 'clue'=> "",
                 'progress'=> 0,
@@ -67,6 +77,8 @@ class Controller_Json_Info extends Controller_Json {
                 'status'=> intval($group->status),
                 'team_name'=> $group->team_name,
                 'progress'=> intval($group->progress),
+                'players'=> intval($group->people),
+                'params'=> json_decode($group->params),
                 'puzzles'=> []
             );
             $puzzles = json_decode($group->puzzles);
@@ -78,6 +90,8 @@ class Controller_Json_Info extends Controller_Json {
                 'status'=> 0,
                 'team_name'=> 0,
                 'progress'=> 0,
+                'players'=> 0,
+                'params' => new StdClass(),
                 'puzzles'=> []
             );
         }
