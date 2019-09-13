@@ -94,6 +94,7 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     }
 
     ctrl.sendClue = function(clue, counts) {
+        console.log(clue);
         if (angular.isObject(clue)) {
             if (counts) clue.sent = true;
             ctrl.cluesSent.unshift({date: (new Date()).getTime(), value: clue.value, counts: counts});
@@ -101,7 +102,8 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
             ctrl.data.total_clues = _.filter(ctrl.cluesSent, 'counts').length;
             ctrl.data.puzzles = JSON.stringify(ctrl.puzzles);
             ctrl.updateBackend(['clues', 'total_clues', 'puzzles']);
-        } else if (clue) {
+        } else {
+            if (clue == '') counts = false;
             ctrl.cluesSent.unshift({date: (new Date()).getTime(), value: clue, counts: counts});
             $scope.customClue = '';
             ctrl.data.clues = JSON.stringify(ctrl.cluesSent);

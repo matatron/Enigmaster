@@ -14,7 +14,7 @@
     <div ng-if="data.status == 3">
     </div>
     <div ng-if="data.status == 2 || data.status == 1">
-        <video style="width: 100%; height: 75vw;" id="tvvideo" autoplay></video>
+        <video id="tvvideo" autoplay></video>
     </div>
     <div ng-if="data.status == 1">
         <div class="giant-text endtext">
