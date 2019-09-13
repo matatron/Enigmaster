@@ -318,6 +318,8 @@ webApp = angular.module('Enigmaster', [])
                     if (player) $(player).hide();
                     switch($scope.data.status) {
                         case 2:
+                            alarma.play();
+                            break;
                         case 1:
                             break;
                         case 3:
@@ -351,6 +353,7 @@ webApp = angular.module('Enigmaster', [])
                             if (currentPuzzles[i]) {
                                 switch(i) {
                                     case 2:
+                                        alarma.pause();
                                         $scope.screen = "cluesInfo";
                                         break;
                                 }
