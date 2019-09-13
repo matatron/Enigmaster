@@ -9,7 +9,6 @@
     }
 </style>
 <div ng-controller="PlayerviewControllerPi1" ng-init="roomId = <?=$roomId; ?>" >
-    <div class="text"></div>
     <div ng-if="data.status == 3">
     </div>
     <div ng-if="data.status == 2 || data.status == 1" ng-class="{'isAlien': isAlien}">

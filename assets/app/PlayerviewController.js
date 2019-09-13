@@ -207,87 +207,271 @@ webApp = angular.module('Enigmaster', [])
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
         var alarma = new Audio('/assets/audio/alarma.mp3');
 
-
-        var videos = {
-            1: "",
-            2: "",
-            3: "",
-            4: "",
-            6: "",
-            7: "",
-            8: "",
-            9: "",
-            10: "",
-            11: "",
-            13: "",
-            21: "",
-            22: "",
-            23: "",
-            24: "",
-            25: ""
+        function playVideo(src) {
+            console.log("Video "+src);
+            if (player) {
+                player.src = '/assets/video/'+src;
+                $(player).show();
+                player.currentTime = 0;
+                player.play();
+            }
         }
-        var music = [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-        ];
-        var sounds = [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-        ];
+
+        function getBackend() {
+            if (player == null && document.getElementById('tvvideo') != null) {
+                player = document.getElementById('tvvideo');
+                player.addEventListener('ended',function() {
+                    $(player).hide();
+                },false);
+                $(player).hide();
+            }
+
+            $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
+                response.data.progress = parseInt(response.data.progress);
+                $scope.data = response.data;
+                if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
+                if (currentParams == null) currentParams = response.data.params;
+                if ($scope.data.status != lastStatus) {
+                    console.log("New status", lastStatus, "->", $scope.data.status);
+                    lastStatus = $scope.data.status;
+                    if (player) $(player).hide();
+                    switch($scope.data.status) {
+                        case 2:
+                            console.log(alarma);
+                            const playPromise = alarma.play();
+                            if (playPromise !== null){
+                                playPromise.catch(() => { alarma.play(); })
+                            }
+                            break;
+                        case 1:
+                            break;
+                        case 3:
+                            break;
+                        case 0:
+                            //play end game sound
+                            break;
+
+                    }
+                }
+
+                $scope.pistas = [];
+                for(var i=parseInt($scope.data.total_clues); i>0; i--) {
+                    $scope.pistas.push(i);
+                }
+                $scope.punishment = Math.max(0, $scope.data.total_clues-$scope.data.free_clues)*$scope.data.minutesxclue;
+                if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
+                    $scope.clue = $scope.data.clue.value;
+                    if ($scope.clue != '') ping.play();
+                }
+
+                if ($scope.data.status==2 || $scope.data.status==1) {
+                    if ($scope.data.puzzles) $.each($scope.data.puzzles, function(i,e) {
+                        if (currentPuzzles[i] != e) {
+                            //cambio detectado
+                            currentPuzzles[i] = e;
+
+                            if (currentPuzzles[i]) {
+                                switch(i+1) {
+                                    case 3:
+                                        alarma.pause();
+                                        $scope.screen = "cluesInfo";
+                                        break;
+                                }
+                            }
+
+                        }
+                    });
+                    if ($scope.data.params) $.each($scope.data.params, function(i,e) {
+                        if (currentParams[i] != e) {
+                            //cambio detectado
+                            currentParams[i] = e;
+                            i = String(i).toLowerCase();
+                            console.log(i, e);
+                            switch(String(i).toLowerCase()) {
+                                case 'adn':
+                                    $scope.isAlien = (e != "humano");
+                                    switch(e) {
+                                        case 'escaneando':
+                                            playVideo('adnscan.mp4');
+                                            break;
+                                    }
+                                    break;
+                                case 'alarma':
+                                    switch(e) {
+                                        case 'apagada':
+                                            alarma.pause();
+                                            break;
+                                        default:
+                                            alarma.play();
+                                            break;
+                                    }
+                                    break;
+                                case '':
+                                    switch(e) {
+                                        case '':
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                    });
+                }
+            });
+        }
+
+        $interval(function() {
+            var $now = (new Date()).getTime();
+            $scope.data.punishment = $scope.data.punishment || 0;
+            $scope.timePass = $now - $scope.data.start + $scope.data.punishment*60000;
+            $scope.timeLeft = 3600000 - $scope.timePass;
+        },100);
+
+        $interval(getBackend,500);
+        getBackend();
+
+    }])
+    .controller('PlayerviewControllerPi2', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
+        $scope.data={};
+        $scope.data.status = 0;
+        $scope.data.start = 0;
+        $scope.screen = ''
+        $scope.clue = '';
+        $scope.section = '';
+        var lastStatus = null;
+        var currentPuzzles = null;
+        var currentParams = null;
+        var player;
+        var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
+
+        function playVideo(src) {
+            if (player == null && document.getElementById('videoAndromeda') != null) {
+                player = document.getElementById('videoAndromeda');
+                player.addEventListener('ended',function() {
+                    $scope.section = '';
+                },false);
+            }
+
+            console.log("Video "+src, player);
+            if (player) {
+                player.src = '/assets/video/'+src;
+                $(player).show();
+                player.currentTime = 0;
+                player.play();
+            }
+        }
+
+        function getBackend() {
+            $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
+                response.data.progress = parseInt(response.data.progress);
+                $scope.data = response.data;
+                if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
+                if (currentParams == null) currentParams = response.data.params;
+                if ($scope.data.status != lastStatus) {
+                    console.log("New status", lastStatus, "->", $scope.data.status);
+                    lastStatus = $scope.data.status;
+                    if (player) $(player).hide();
+                    switch($scope.data.status) {
+                        case 2:
+                            break;
+                        case 1:
+                            break;
+                        case 3:
+                            break;
+                        case 0:
+                            //play end game sound
+                            break;
+
+                    }
+                }
+
+                $scope.pistas = [];
+                for(var i=parseInt($scope.data.total_clues); i>0; i--) {
+                    $scope.pistas.push(i);
+                }
+                $scope.punishment = Math.max(0, $scope.data.total_clues-$scope.data.free_clues)*$scope.data.minutesxclue;
+                if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
+                    $scope.clue = $scope.data.clue.value;
+                    if ($scope.clue != '') ping.play();
+                }
+
+                if ($scope.data.status==2 || $scope.data.status==1) {
+                    if ($scope.data.puzzles) $.each($scope.data.puzzles, function(i,e) {
+                        if (currentPuzzles[i] != e) {
+                            //cambio detectado
+                            currentPuzzles[i] = e;
+
+                            if (currentPuzzles[i]) {
+                                switch(i+1) {
+                                    case 9:
+                                        $scope.screen = "menuHex";
+                                        break;
+                                }
+                            }
+
+                        }
+                    });
+                    if ($scope.data.params) $.each($scope.data.params, function(i,e) {
+                        if (currentParams[i] != e) {
+                            //cambio detectado
+                            currentParams[i] = e;
+                            i = String(i).toLowerCase();
+                            console.log(i, e);
+                            switch(String(i).toLowerCase()) {
+                                case '':
+                                    switch(e) {
+                                        case '':
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                    });
+                }
+            });
+        }
+
+        $interval(function() {
+            var $now = (new Date()).getTime();
+            $scope.data.punishment = $scope.data.punishment || 0;
+            $scope.timePass = $now - $scope.data.start + $scope.data.punishment*60000;
+            $scope.timeLeft = 3600000 - $scope.timePass;
+        },100);
+
+        document.addEventListener('keydown', (event) => {
+            const keyName = event.key;
+            $("#pi2").removeClass().addClass("hex"+keyName);
+            $scope.section = "section"+keyName;
+            if (player) player.pause();
+            if (keyName == 6) {
+                setTimeout(function() {
+                    playVideo('andromeda.mp4');
+                }, 200);
+            }
+        });
+
+        $interval(getBackend,1000);
+        getBackend();
+
+    }])
+    .controller('PlayerviewControllerPi3', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
+        $scope.data={};
+        $scope.data.status = 0;
+        $scope.data.start = 0;
+        $scope.screen = ''
+        $scope.clue = '';
+        $scope.isAlien = true;
+        var lastStatus = null;
+        var currentPuzzles = null;
+        var currentParams = null;
+        var player;
+        var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
+        var alarma = new Audio('/assets/audio/alarma.mp3');
 
         function playVideo(src) {
             console.log("Video "+src);
@@ -352,12 +536,9 @@ webApp = angular.module('Enigmaster', [])
                             //cambio detectado
                             currentPuzzles[i] = e;
 
-                            if (currentPuzzles[i] && videos.hasOwnProperty(i+1)) {
-                                playVideo(videos[i+1]);
-                            }
                             if (currentPuzzles[i]) {
-                                switch(i) {
-                                    case 2:
+                                switch(i+1) {
+                                    case 3:
                                         alarma.pause();
                                         $scope.screen = "cluesInfo";
                                         break;

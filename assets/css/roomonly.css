@@ -68,6 +68,11 @@ body {
     font-family: 'ALIEN' !important;
     text-transform: uppercase;
 }
+.alien {
+    font-family: 'ALIEN' !important;
+    text-transform: uppercase;
+    font-size: 1em;
+}
 
 .moderne, h1 {
     font-family: 'Modern Sans';
@@ -133,6 +138,14 @@ body {
     position: absolute;
     background-size: cover;    
 }
+#pi2 {
+    background-image: url(/assets/images/fondoPI2.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-size: cover; 
+    overflow: hidden;
+}
 
 .O2timer {
     position: absolute;
@@ -166,6 +179,95 @@ body {
     font-size: 2.5em;
     line-height: 1;
 }
+
+
+.hexagonBig {
+    position: absolute;
+    width: 1300px;
+    height: 969px;
+    background-image: url(/assets/images/hexagonBig.png);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s linear;
+}
+.hex1 .hexagonBig {
+    top: 106%;
+    left: 0%;
+}
+.hex2 .hexagonBig {
+    top: 50%;
+    left: -13%;
+}
+.hex3 .hexagonBig {
+    top: -6%;
+    left: 0%;
+}
+.hex4 .hexagonBig {
+    top: -6%;
+    left: 100%;
+}
+.hex5 .hexagonBig {
+    top: 50%;
+    left: 113%;
+}
+.hex6 .hexagonBig {
+    top: 106%;
+    left: 100%;
+}
+.section1 {
+    position: absolute;
+    left: 20%;
+    width: 60% !important;
+    top: 20%;
+    height: 60%;
+    font-size: 0.8em !important;
+}
+.section2 {
+    position: absolute;
+    left: 20%;
+    width: 60% !important;
+    top: 20%;
+    height: 60%;
+    font-size: 0.4em !important;
+}
+.section3 {
+    position: absolute;
+    left: 20%;
+    width: 60% !important;
+    top: 20%;
+    height: 60%;
+    font-size: 0.4em !important;
+}
+.section4 {
+    position: absolute;
+    left: 20%;
+    width: 60% !important;
+    top: 20%;
+    height: 60%;
+    font-size: 0.4em !important;
+}
+.section5 {
+    position: absolute;
+    left: 20%;
+    width: 60% !important;
+    top: 20%;
+    height: 60%;
+    font-size: 0.4em !important;
+}
+.section6 {
+    position: absolute;
+    left: 5%;
+    width: 80% !important;
+    top: 5%;
+    height: 86%;
+    font-size: 0.4em !important;
+}
+#videoAndromeda {
+    width: 100%;
+}
+
+
 
 .futurepanel {
     box-sizing: border-box;
