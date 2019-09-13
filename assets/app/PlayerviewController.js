@@ -356,7 +356,7 @@ webApp = angular.module('Enigmaster', [])
 
             console.log("Video "+src, player);
             if (player) {
-                player.src = '/assets/video/'+src;
+                player.src = src;
                 $(player).show();
                 player.currentTime = 0;
                 player.play();
@@ -450,7 +450,7 @@ webApp = angular.module('Enigmaster', [])
             if (player) player.pause();
             if (keyName == 6) {
                 setTimeout(function() {
-                    playVideo('andromeda.mp4');
+                    playVideo('/home/pi/andromeda.mp4');
                 }, 200);
             }
         });
