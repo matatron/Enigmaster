@@ -266,8 +266,101 @@ body {
 #videoAndromeda {
     width: 100%;
 }
+.Cell {
+    display: inline-block;
+    border: solid 1px deepskyblue;
+    width: 30px;
+    height: 60px;
+    margin: 31px 10px;
+}
+.Cell.filled {
+    background-color: rgba(255,255,255,0.8);
+}
 
 
+.space {
+    background-image: url(/assets/images/fondoPI3.jpg);
+    background-size: 100%;
+    width: 4000px;
+    height: 1800px;
+    position: absolute;
+}
+
+.spaceship {
+    width: 100%;
+    background-image: url(/assets/images/pi3nave.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0;
+    height: 152px;
+}
+.arrowLeft {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+}
+.arrowRight {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+}
+.arrowFront {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+}
+
+.currentLocation {
+    font: normal 100 45px/1.2em "Exo 2", Arial, sans-serif;
+    letter-spacing: .06em;
+    background-color: rgba(120, 200, 255, 0.9);
+    border: 1px solid rgba(120, 200, 255, 0.8);
+    color: black;
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    height: 10%;
+    bottom: 0;
+}
+
+.nextLocation {
+    font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
+    letter-spacing: .06em;
+    background-color: rgba(120, 200, 255, 0.2);
+    border: 1px solid rgba(120, 200, 255, 0.8);
+    color: rgba(120, 200, 255, 0.8);
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    height: 8%;
+    top: 10%;
+}
+.leftLocation {
+    font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
+    letter-spacing: .06em;
+    background-color: rgba(120, 200, 255, 0.2);
+    border: 1px solid rgba(120, 200, 255, 0.8);
+    color: rgba(120, 200, 255, 0.8);
+    position: absolute;
+    width: 20%;
+    left: 0%;
+    height: 8%;
+    top: 20%;
+}
+.rightLocation {
+    font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
+    letter-spacing: .06em;
+    background-color: rgba(120, 200, 255, 0.2);
+    border: 1px solid rgba(120, 200, 255, 0.8);
+    color: rgba(120, 200, 255, 0.8);
+    position: absolute;
+    width: 20%;
+    right: 0%;
+    height: 8%;
+    top: 20%;
+}
 
 .futurepanel {
     box-sizing: border-box;

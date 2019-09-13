@@ -73,6 +73,20 @@
                     </h1>
                 </div>
                 <div class="futurepanel__body">
+                    <div>
+                        Combustible: {{combustible}} / 18
+                    </div>
+                    <div>
+                        <div ng-repeat="i in celdas track by $index" class="Cell" ng-class="{'filled': $index<combustible}">
+                        </div>
+
+                    </div>
+                    <div ng-if="combustible < 18">
+                        Error: no hay combustible suficiente para esta operación
+                    </div>
+                    <div ng-if="combustible >= 18">
+                        Acceso al Centro de Mando autorizado
+                    </div>
                 </div>
             </div>
             <div class="section4 futurepanel" ng-show="section=='section4'">
@@ -84,7 +98,7 @@
                 <div class="futurepanel__body" style="font-size: 3em; line-height: 1.5em">
                     <div>C2 + C3 + C4 = 15</div>
                     <div>C3 + C4 = 11</div>
-                    <div>C1 + C2 = 14</div>
+                    <div>C1 + C3 = 14</div>
                     <div>C1 + C2 = 10</div>
                 </div>
             </div>

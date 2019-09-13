@@ -40,7 +40,7 @@ window.sounds = [
 <?php echo $content; ?>
         </div> <!-- /container -->
 
-        <script src="/assets/js/jquery-2.1.4.min.js"></script>
+        <script src="/assets/js/jquery-3.4.1.min.js"></script>
         <script src="/assets/js/lodash.min.js"></script>
         <script src="/assets/angular/angular.min.js"></script>
         <script src="/assets/app/PlayerviewController.js"></script>

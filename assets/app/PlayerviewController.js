@@ -340,6 +340,9 @@ webApp = angular.module('Enigmaster', [])
         $scope.screen = ''
         $scope.clue = '';
         $scope.section = '';
+        $scope.combustible = 0;
+        $scope.celdas = new Array(18);
+
         var lastStatus = null;
         var currentPuzzles = null;
         var currentParams = null;
@@ -420,6 +423,10 @@ webApp = angular.module('Enigmaster', [])
                             i = String(i).toLowerCase();
                             console.log(i, e);
                             switch(String(i).toLowerCase()) {
+                                case 'nivel':
+                                    var nivel = parseInt(e);
+                                    $scope.combustible = nivel*(nivel+3);
+                                    break;
                                 case '':
                                     switch(e) {
                                         case '':
@@ -466,13 +473,42 @@ webApp = angular.module('Enigmaster', [])
         $scope.data.start = 0;
         $scope.screen = ''
         $scope.clue = '';
-        $scope.isAlien = true;
         var lastStatus = null;
-        var currentPuzzles = null;
-        var currentParams = null;
+        $scope.currentPuzzles = null;
+        $scope.currentParams = null;
+        $scope.validFront = false;
+        $scope.validLeft = false;
+        $scope.validRight = false;
+        $scope.leftLocation = '';
+        $scope.rightLocation = '';
         var player;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
-        var alarma = new Audio('/assets/audio/alarma.mp3');
+
+        var nextKeyPress = (new Date()).getTime();
+
+        $scope.posX = 0;
+        $scope.posY = 0;
+        reportGizmo();
+        var direccion = 0;
+        var lastDireccion = -1;
+        var letras = ["A", "B", "C", "D", "E", "F", "G"];
+        var mapa = [
+            [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  1,  8,  1,  8,  1,  8,  1,  8,  1,  8,  0,  8,  0],
+            [  0,  1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0],
+            [  0,  1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  0,  8,  1,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0],
+            [  0,  1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  1,  8,  1,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0],
+            [  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0],
+            [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0],
+            [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0],
+            [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]
+        ];
 
         function playVideo(src) {
             console.log("Video "+src);
@@ -482,6 +518,53 @@ webApp = angular.module('Enigmaster', [])
                 player.currentTime = 0;
                 player.play();
             }
+        }
+
+
+        $scope.currentLocation = function() {
+            return letras[$scope.posX] + "-" + $scope.posY;
+        }
+        $scope.nextLocation = function() {
+            var nextX, nextY;
+            switch (direccion) {
+                case 0:
+                    nextX = $scope.posX;
+                    nextY = $scope.posY-1;
+                    $scope.leftLocation = letras[$scope.posX-1] + "-" + $scope.posY;
+                    $scope.rightLocation = letras[$scope.posX+1] + "-" + $scope.posY;
+                    $scope.validFront = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);
+                    $scope.validLeft = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
+                    $scope.validRight = (mapa[$scope.posY*2+1][$scope.posX*2+2] == 1);
+                    break;
+                case 1:
+                    nextX = $scope.posX+1;
+                    nextY = $scope.posY;
+                    $scope.leftLocation = letras[$scope.posX] + "-" + ($scope.posY-1);
+                    $scope.rightLocation = letras[$scope.posX] + "-" + ($scope.posY+1);
+                    $scope.validFront = (mapa[$scope.posY*2+1][$scope.posX*2+2] == 1);
+                    $scope.validLeft = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);
+                    $scope.validRight = (mapa[$scope.posY*2+2][$scope.posX*2+1] == 1);
+                    break;
+                case 2:
+                    nextX = $scope.posX;
+                    nextY = $scope.posY+1;
+                    $scope.leftLocation = letras[$scope.posX+1] + "-" + $scope.posY;
+                    $scope.rightLocation = letras[$scope.posX-1] + "-" + $scope.posY;
+                    $scope.validFront = (mapa[$scope.posY*2+2][$scope.posX*2+1] == 1);
+                    $scope.validLeft = (mapa[$scope.posY*2+1][$scope.posX*2+2] == 1);
+                    $scope.validRight = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
+                    break;
+                case 3:
+                    nextX = $scope.posX-1;
+                    nextY = $scope.posY;
+                    $scope.leftLocation = letras[$scope.posX] + "-" + ($scope.posY+1);
+                    $scope.rightLocation = letras[$scope.posX] + "-" + ($scope.posY-1);
+                    $scope.validFront = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
+                    $scope.validLeft = (mapa[$scope.posY*2+2][$scope.posX*2+1] == 1);
+                    $scope.validRight = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);
+                    break;
+            }
+            return letras[nextX] + "-" + nextY;
         }
 
         function getBackend() {
@@ -496,19 +579,14 @@ webApp = angular.module('Enigmaster', [])
             $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
                 response.data.progress = parseInt(response.data.progress);
                 $scope.data = response.data;
-                if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
-                if (currentParams == null) currentParams = response.data.params;
+                if ($scope.currentPuzzles == null) $scope.currentPuzzles = response.data.puzzles;
+                if ($scope.currentParams == null) $scope.currentParams = response.data.params;
                 if ($scope.data.status != lastStatus) {
                     console.log("New status", lastStatus, "->", $scope.data.status);
                     lastStatus = $scope.data.status;
                     if (player) $(player).hide();
                     switch($scope.data.status) {
                         case 2:
-                            console.log(alarma);
-                            const playPromise = alarma.play();
-                            if (playPromise !== null){
-                                playPromise.catch(() => { alarma.play(); })
-                            }
                             break;
                         case 1:
                             break;
@@ -533,15 +611,13 @@ webApp = angular.module('Enigmaster', [])
 
                 if ($scope.data.status==2 || $scope.data.status==1) {
                     if ($scope.data.puzzles) $.each($scope.data.puzzles, function(i,e) {
-                        if (currentPuzzles[i] != e) {
+                        if ($scope.currentPuzzles[i] != e) {
                             //cambio detectado
-                            currentPuzzles[i] = e;
+                            $scope.currentPuzzles[i] = e;
 
-                            if (currentPuzzles[i]) {
+                            if ($scope.currentPuzzles[i]) {
                                 switch(i+1) {
                                     case 3:
-                                        alarma.pause();
-                                        $scope.screen = "cluesInfo";
                                         break;
                                 }
                             }
@@ -549,30 +625,12 @@ webApp = angular.module('Enigmaster', [])
                         }
                     });
                     if ($scope.data.params) $.each($scope.data.params, function(i,e) {
-                        if (currentParams[i] != e) {
+                        if ($scope.currentParams[i] != e) {
                             //cambio detectado
-                            currentParams[i] = e;
+                            $scope.currentParams[i] = e;
                             i = String(i).toLowerCase();
                             console.log(i, e);
                             switch(String(i).toLowerCase()) {
-                                case 'adn':
-                                    $scope.isAlien = (e != "humano");
-                                    switch(e) {
-                                        case 'escaneando':
-                                            playVideo('adnscan.mp4');
-                                            break;
-                                    }
-                                    break;
-                                case 'alarma':
-                                    switch(e) {
-                                        case 'apagada':
-                                            alarma.pause();
-                                            break;
-                                        default:
-                                            alarma.play();
-                                            break;
-                                    }
-                                    break;
                                 case '':
                                     switch(e) {
                                         case '':
@@ -588,6 +646,81 @@ webApp = angular.module('Enigmaster', [])
                 }
             });
         }
+
+        function animateSpace() {
+            if (direccion == 0 && lastDireccion == 3) {
+                $(".space").animate({
+                    left: -4*800,
+                }, 500, function() {
+                    $(".space").css("left", 0);
+                    // Animation complete.
+                });
+            } else if (direccion == 3 && lastDireccion == 0) {
+                $(".space").css("left", -3200).animate({
+                    left: -direccion*800,
+                }, 500, function() {
+                    // Animation complete.
+                });
+            } else {
+                $(".space").animate({
+                    left: -direccion*800,
+                }, 500, function() {
+                    // Animation complete.
+                });
+            }
+        }
+
+        function reportGizmo() {
+            $http.get('/gizmo/reportjson/PI3/?posX='+$scope.posX+"&posY="+$scope.posY);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const keyName = event.key;
+            if ((new Date()).getTime() > nextKeyPress) {
+                nextKeyPress = (new Date()).getTime();
+                console.log(nextKeyPress);
+                switch(keyName) {
+                    case "a":
+                        lastDireccion = direccion;
+                        direccion = (direccion+3)%4;
+                        nextKeyPress += 500;
+                        animateSpace();
+                        break;
+                    case "d":
+                        lastDireccion = direccion;
+                        direccion = (direccion+1)%4;
+                        nextKeyPress += 500;
+                        animateSpace();
+                        break;
+                    case "w":
+                        if ($scope.validFront) {
+                            switch(direccion) {
+                                case 0:
+                                    $scope.posY--;
+                                    break;
+                                case 1:
+                                    $scope.posX++;
+                                    break;
+                                case 2:
+                                    $scope.posY++;
+                                    break;
+                                case 3:
+                                    $scope.posX--;
+                                    break;
+                            };
+                        }
+                        reportGizmo();
+                        if ($scope.posX == 4 && $scope.posY == 0) {
+                            playVideo("aterrizaje.mp4");
+                        } else {
+                            //playVideo("ftl.mp4");
+                            //nextKeyPress += 10000;
+                        }
+                        break;
+                }
+            }
+        });
+
 
         $interval(function() {
             var $now = (new Date()).getTime();
