@@ -314,11 +314,16 @@ webApp = angular.module('Enigmaster', [])
                 if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
                 if (currentParams == null) currentParams = response.data.params;
                 if ($scope.data.status != lastStatus) {
+                    console.log("New status", lastStatus, "->", $scope.data.status);
                     lastStatus = $scope.data.status;
                     if (player) $(player).hide();
                     switch($scope.data.status) {
                         case 2:
-                            alarma.play();
+                            console.log(alarma);
+                            const playPromise = alarma.play();
+                            if (playPromise !== null){
+                                playPromise.catch(() => { alarma.play(); })
+                            }
                             break;
                         case 1:
                             break;
@@ -378,11 +383,11 @@ webApp = angular.module('Enigmaster', [])
                                     break;
                                 case 'alarma':
                                     switch(e) {
-                                        case 'encendida':
-                                            alarma.play();
+                                        case 'apagada':
+                                            alarma.pause();
                                             break;
                                         default:
-                                            alarma.pause();
+                                            alarma.play();
                                             break;
                                     }
                                     break;
