@@ -713,8 +713,8 @@ webApp = angular.module('Enigmaster', [])
                         if ($scope.posX == 4 && $scope.posY == 0) {
                             playVideo("http://127.0.0.1/aterrizaje.mp4");
                         } else {
-                            //playVideo("http://127.0.0.1/ftl.mp4");
-                            //nextKeyPress += 10000;
+                            playVideo("http://127.0.0.1/ftl.mp4");
+                            nextKeyPress += 10000;
                         }
                         break;
                 }
