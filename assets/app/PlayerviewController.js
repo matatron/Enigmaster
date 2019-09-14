@@ -486,8 +486,8 @@ webApp = angular.module('Enigmaster', [])
 
         var nextKeyPress = (new Date()).getTime();
 
-        $scope.posX = 0;
-        $scope.posY = 0;
+        $scope.posX = 3;
+        $scope.posY = 5;
         reportGizmo();
         var direccion = 0;
         var lastDireccion = -1;
@@ -513,7 +513,7 @@ webApp = angular.module('Enigmaster', [])
         function playVideo(src) {
             console.log("Video "+src);
             if (player) {
-                player.src = '/assets/video/'+src;
+                player.src = src;
                 $(player).show();
                 player.currentTime = 0;
                 player.play();
@@ -522,7 +522,7 @@ webApp = angular.module('Enigmaster', [])
 
 
         $scope.currentLocation = function() {
-            return letras[$scope.posX] + "-" + $scope.posY;
+            return letras[$scope.posX] + "-" + ($scope.posY+1);
         }
         $scope.nextLocation = function() {
             var nextX, nextY;
@@ -530,8 +530,8 @@ webApp = angular.module('Enigmaster', [])
                 case 0:
                     nextX = $scope.posX;
                     nextY = $scope.posY-1;
-                    $scope.leftLocation = letras[$scope.posX-1] + "-" + $scope.posY;
-                    $scope.rightLocation = letras[$scope.posX+1] + "-" + $scope.posY;
+                    $scope.leftLocation = letras[$scope.posX-1] + "-" + ($scope.posY+1);
+                    $scope.rightLocation = letras[$scope.posX+1] + "-" + ($scope.posY+1);
                     $scope.validFront = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);
                     $scope.validLeft = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
                     $scope.validRight = (mapa[$scope.posY*2+1][$scope.posX*2+2] == 1);
@@ -539,8 +539,8 @@ webApp = angular.module('Enigmaster', [])
                 case 1:
                     nextX = $scope.posX+1;
                     nextY = $scope.posY;
-                    $scope.leftLocation = letras[$scope.posX] + "-" + ($scope.posY-1);
-                    $scope.rightLocation = letras[$scope.posX] + "-" + ($scope.posY+1);
+                    $scope.leftLocation = letras[$scope.posX] + "-" + ($scope.posY);
+                    $scope.rightLocation = letras[$scope.posX] + "-" + ($scope.posY+2);
                     $scope.validFront = (mapa[$scope.posY*2+1][$scope.posX*2+2] == 1);
                     $scope.validLeft = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);
                     $scope.validRight = (mapa[$scope.posY*2+2][$scope.posX*2+1] == 1);
@@ -548,8 +548,8 @@ webApp = angular.module('Enigmaster', [])
                 case 2:
                     nextX = $scope.posX;
                     nextY = $scope.posY+1;
-                    $scope.leftLocation = letras[$scope.posX+1] + "-" + $scope.posY;
-                    $scope.rightLocation = letras[$scope.posX-1] + "-" + $scope.posY;
+                    $scope.leftLocation = letras[$scope.posX+1] + "-" + ($scope.posY+2);
+                    $scope.rightLocation = letras[$scope.posX-1] + "-" + ($scope.posY+2);
                     $scope.validFront = (mapa[$scope.posY*2+2][$scope.posX*2+1] == 1);
                     $scope.validLeft = (mapa[$scope.posY*2+1][$scope.posX*2+2] == 1);
                     $scope.validRight = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
@@ -557,8 +557,8 @@ webApp = angular.module('Enigmaster', [])
                 case 3:
                     nextX = $scope.posX-1;
                     nextY = $scope.posY;
-                    $scope.leftLocation = letras[$scope.posX] + "-" + ($scope.posY+1);
-                    $scope.rightLocation = letras[$scope.posX] + "-" + ($scope.posY-1);
+                    $scope.leftLocation = letras[$scope.posX] + "-" + ($scope.posY+2);
+                    $scope.rightLocation = letras[$scope.posX] + "-" + ($scope.posY);
                     $scope.validFront = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
                     $scope.validLeft = (mapa[$scope.posY*2+2][$scope.posX*2+1] == 1);
                     $scope.validRight = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);

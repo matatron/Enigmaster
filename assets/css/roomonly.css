@@ -278,6 +278,15 @@ body {
 }
 
 
+.spacecontainer {
+    width: 800px;
+    height: 450px;
+    overflow: hidden;
+    position: absolute;
+    top: 75px;
+    left: 0;
+}
+
 .space {
     background-image: url(/assets/images/fondoPI3.jpg);
     background-size: 100%;
@@ -285,7 +294,12 @@ body {
     height: 1800px;
     position: absolute;
 }
-
+.small {
+    font-size: 10px;
+    display: block;
+    line-height: 2;
+    margin-bottom: -12px;
+}
 .spaceship {
     width: 100%;
     background-image: url(/assets/images/pi3nave.png);
@@ -313,16 +327,17 @@ body {
 }
 
 .currentLocation {
-    font: normal 100 45px/1.2em "Exo 2", Arial, sans-serif;
+    font: normal 100 40px/1.2em "Exo 2", Arial, sans-serif;
     letter-spacing: .06em;
     background-color: rgba(120, 200, 255, 0.9);
     border: 1px solid rgba(120, 200, 255, 0.8);
     color: black;
     position: absolute;
-    width: 30%;
-    left: 35%;
-    height: 10%;
-    bottom: 0;
+    width: 20%;
+    left: 40%;
+    height: 13%;
+    bottom: 15px;
+    font-weight: bold;
 }
 
 .nextLocation {
@@ -332,10 +347,10 @@ body {
     border: 1px solid rgba(120, 200, 255, 0.8);
     color: rgba(120, 200, 255, 0.8);
     position: absolute;
-    width: 20%;
-    left: 40%;
-    height: 8%;
-    top: 10%;
+    width: 16%;
+    left: 42%;
+    height: 10%;
+    top: 4%;
 }
 .leftLocation {
     font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
@@ -344,10 +359,11 @@ body {
     border: 1px solid rgba(120, 200, 255, 0.8);
     color: rgba(120, 200, 255, 0.8);
     position: absolute;
-    width: 20%;
-    left: 0%;
-    height: 8%;
-    top: 20%;
+    width: 16%;
+    left: -4%;
+    height: 10%;
+    top: 30%;
+    transform: rotate(-45deg);
 }
 .rightLocation {
     font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
@@ -356,10 +372,11 @@ body {
     border: 1px solid rgba(120, 200, 255, 0.8);
     color: rgba(120, 200, 255, 0.8);
     position: absolute;
-    width: 20%;
-    right: 0%;
-    height: 8%;
-    top: 20%;
+    width: 16%;
+    right: -4%;
+    height: 10%;
+    top: 30%;
+    transform: rotate(45deg);
 }
 
 .futurepanel {
