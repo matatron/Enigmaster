@@ -458,7 +458,7 @@ webApp = angular.module('Enigmaster', [])
             if (keyName == 6) {
                 setTimeout(function() {
                     //playVideo('file:///home/pi/andromeda.mp4');
-                    playVideo('/assets/video/andromeda.mp4');
+                    playVideo('http://127.0.0.1/andromeda.mp4');
                 }, 200);
             }
         });
@@ -711,9 +711,9 @@ webApp = angular.module('Enigmaster', [])
                         }
                         reportGizmo();
                         if ($scope.posX == 4 && $scope.posY == 0) {
-                            playVideo("aterrizaje.mp4");
+                            playVideo("http://127.0.0.1/aterrizaje.mp4");
                         } else {
-                            //playVideo("ftl.mp4");
+                            //playVideo("http://127.0.0.1/ftl.mp4");
                             //nextKeyPress += 10000;
                         }
                         break;
