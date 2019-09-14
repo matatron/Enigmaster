@@ -564,7 +564,7 @@ webApp = angular.module('Enigmaster', [])
                     $scope.validRight = (mapa[$scope.posY*2+0][$scope.posX*2+1] == 1);
                     break;
             }
-            return letras[nextX] + "-" + nextY;
+            return letras[nextX] + "-" + (nextY+1);
         }
 
         function getBackend() {
@@ -714,7 +714,7 @@ webApp = angular.module('Enigmaster', [])
                             playVideo("http://127.0.0.1/aterrizaje.mp4");
                         } else {
                             playVideo("http://127.0.0.1/ftl.mp4");
-                            nextKeyPress += 10000;
+                            //nextKeyPress += 10000;
                         }
                         break;
                 }

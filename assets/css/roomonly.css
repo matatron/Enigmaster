@@ -322,7 +322,7 @@ body {
 .arrowFront {
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 0;
     transform: translateX(-50%);
 }
 
@@ -350,7 +350,7 @@ body {
     width: 16%;
     left: 42%;
     height: 10%;
-    top: 4%;
+    top: 13%;
 }
 .leftLocation {
     font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
