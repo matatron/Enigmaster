@@ -8,16 +8,16 @@
         background-color: black;
     }
     .colorX {
-        color: blue;
+        color: red;
     }
     .colorY {
-        color: green;
-    }
-    .colorZ {
         color: yellow;
     }
+    .colorZ {
+        color: green;
+    }
     .colorW {
-        color: red;
+        color: blue;
     }
     .sum {
         background-color: black;
