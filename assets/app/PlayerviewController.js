@@ -206,6 +206,7 @@ webApp = angular.module('Enigmaster', [])
         var player;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
         var alarma = new Audio('/assets/audio/alarma.mp3');
+        var musica = new Audio('/assets/audio/espacio1.mp3');
 
         function playVideo(src) {
             console.log("Video "+src);
@@ -238,6 +239,7 @@ webApp = angular.module('Enigmaster', [])
                     switch($scope.data.status) {
                         case 2:
                             console.log(alarma);
+                            musica.play();
                             const playPromise = alarma.play();
                             if (playPromise !== null){
                                 playPromise.catch(() => { alarma.play(); })
@@ -246,8 +248,16 @@ webApp = angular.module('Enigmaster', [])
                         case 1:
                             break;
                         case 3:
+                            alarma.currentTime = 0;
+                            musica.currentTime = 0;
+                            alarma.pause();
+                            musica.pause();
                             break;
                         case 0:
+                            alarma.currentTime = 0;
+                            musica.currentTime = 0;
+                            alarma.pause();
+                            musica.pause();
                             //play end game sound
                             break;
 
