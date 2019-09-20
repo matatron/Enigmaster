@@ -9,6 +9,12 @@
     }
 </style>
 <div ng-controller="PlayerviewControllerPi1" ng-init="roomId = <?=$roomId; ?>" >
+    <audio id="alarma">
+      <source src="/assets/audio/alarma.mp3">
+    </audio>
+    <audio autoplay loop  id="bgmusic">
+      <source src="/assets/audio/tension.mp3">
+    </audio>
     <div ng-if="data.status == 3">
     </div>
     <div ng-if="data.status == 2 || data.status == 1" ng-class="{'isAlien': isAlien}">

@@ -46,8 +46,15 @@
 }
 
 @font-face {
-    font-family: 'ALIEN';
+    font-family: 'ALIEN2';
     src: url('../webfonts/AlienScript-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ALIEN';
+    src: url('../webfonts/Alien_lines_1.9.ttf');
     font-weight: normal;
     font-style: normal;
 }

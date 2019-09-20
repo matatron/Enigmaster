@@ -21,12 +21,13 @@
                     </h1>
                 </div>
                 <div class="futurepanel__body">
-                    <div>Planeta C4: Listo</div>
-                    <div>Planeta E3: Listo</div>
-                    <div>Planeta F2: Listo</div>
-                    <div>Planeta E1: Listo</div>
+                    <div>Planeta C-5: Visitado</div>
+                    <div>Planeta C-4: Visitado</div>
+                    <div>Planeta E-3: Visitado</div>
+                    <div>Planeta F-2: Visitado</div>
+                    <div>Planeta E-1: Visitado</div>
                     <div>Misión Completa</div>
-                    <div>Volver al planeta hogar</div>
+                    <div style="color: red">Volver al planeta hogar</div>
                 </div>
             </div>
             <div class="section2 futurepanel" ng-show="section=='section2'">
@@ -96,10 +97,10 @@
                     </h1>
                 </div>
                 <div class="futurepanel__body" style="font-size: 3em; line-height: 1.5em">
-                    <div>C2 + C3 + C4 = 15</div>
-                    <div>C3 + C4 = 11</div>
-                    <div>C1 + C3 = 14</div>
-                    <div>C1 + C2 = 10</div>
+                    <div><span class="alien">Y</span> + <span class="alien">Z</span> + <span class="alien">W</span> = <span class="alien">E</span></div>
+                    <div><span class="alien">Z</span> + <span class="alien">W</span> = <span class="alien">O</span></div>
+                    <div><span class="alien">X</span> + <span class="alien">Z</span> = <span class="alien">M</span></div>
+                    <div><span class="alien">X</span> + <span class="alien">Y</span> = <span class="alien">U</span></div>
                 </div>
             </div>
             <div class="section5 futurepanel" ng-show="section=='section5'">
