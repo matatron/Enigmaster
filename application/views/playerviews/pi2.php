@@ -7,6 +7,31 @@
         margin: 0 !important;
         background-color: black;
     }
+    .colorX {
+        color: red;
+    }
+    .colorY {
+        color: yellow;
+    }
+    .colorZ {
+        color: green;
+    }
+    .colorW {
+        color: blue;
+    }
+    .sum {
+        background-color: black;
+        color: white;
+        letter-spacing: 12px;
+    }
+    .third {
+        display: inline-block;
+        width: 30%;
+        border: solid 1px #215d91;
+        height: 250px;
+        vertical-align: top;
+        margin: 18px 0;
+    }
 </style>
 <div ng-controller="PlayerviewControllerPi2" ng-init="roomId = <?=$roomId; ?>" >
     <div ng-if="data.status == 3">
@@ -24,7 +49,7 @@
                     <div>Planeta C-5: Visitado</div>
                     <div>Planeta C-4: Visitado</div>
                     <div>Planeta E-3: Visitado</div>
-                    <div>Planeta F-2: Visitado</div>
+                    <div>Planeta D-2: Visitado</div>
                     <div>Planeta E-1: Visitado</div>
                     <div>Misión Completa</div>
                     <div style="color: red">Volver al planeta hogar</div>
@@ -83,7 +108,11 @@
 
                     </div>
                     <div ng-if="combustible < 18">
-                        Error: no hay combustible suficiente para esta operación
+                        <div>Error: no hay combustible suficiente para esta operación</div>
+                        <div class="third">Ajustar ingredientes a su valor correcto</div>
+                        <div class="third">Mezclar ingredientes</div>
+                        <div class="third">Abrir valvulas de paso al tanque</div>
+                        <div>Recuerde esperar a que termine la mezcla antes de abrir las valvulas</div>
                     </div>
                     <div ng-if="combustible >= 18">
                         Acceso al Centro de Mando autorizado
@@ -97,10 +126,10 @@
                     </h1>
                 </div>
                 <div class="futurepanel__body" style="font-size: 3em; line-height: 1.5em">
-                    <div><span class="alien">Y</span> + <span class="alien">Z</span> + <span class="alien">W</span> = <span class="alien">E</span></div>
-                    <div><span class="alien">Z</span> + <span class="alien">W</span> = <span class="alien">O</span></div>
-                    <div><span class="alien">X</span> + <span class="alien">Z</span> = <span class="alien">M</span></div>
-                    <div><span class="alien">X</span> + <span class="alien">Y</span> = <span class="alien">U</span></div>
+                    <div><span class="alien colorY">Y</span> + <span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">E</span></div>
+                    <div><span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">O</span></div>
+                    <div><span class="alien colorX">X</span> + <span class="alien colorZ">Z</span> = <span class="alien sum">M</span></div>
+                    <div><span class="alien colorX">X</span> + <span class="alien colorY">Y</span> = <span class="alien sum">U</span></div>
                 </div>
             </div>
             <div class="section5 futurepanel" ng-show="section=='section5'">

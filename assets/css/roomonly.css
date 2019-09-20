@@ -279,6 +279,7 @@ body {
     width: 30px;
     height: 60px;
     margin: 31px 10px;
+    transition: background-color 0.5s linear;
 }
 .Cell.filled {
     background-color: rgba(255,255,255,0.8);
@@ -293,14 +294,19 @@ body {
     top: 75px;
     left: 0;
 }
-
 .space {
     background-image: url(/assets/images/fondoPI3.jpg);
     background-size: 100%;
     width: 4000px;
-    height: 1800px;
+    height: 450px;
     position: absolute;
 }
+#planeta {
+    position: absolute;
+    left: 800px;
+    top: 0;
+}
+
 .small {
     font-size: 10px;
     display: block;
@@ -315,6 +321,51 @@ body {
     position: absolute;
     bottom: 0;
     height: 152px;
+    background-position: center;
+}
+.fuelContainer {
+    border: solid 1px white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 200px;
+    text-align: left;
+}
+.fuel.full {
+    background-color: white;
+}
+.fuel {
+    display: inline-block;
+    height: 20px;
+    width: 5px;
+    border: solid 1px #444;
+    margin: 4px 2px;
+    font-size: 13px;
+    line-height: 2;
+    vertical-align: top;
+    transition: background-color 0.5s linear;
+}
+.o2Container {
+    border: solid 1px red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 200px;
+    text-align: right;
+}
+.o2 {
+    display: inline-block;
+    height: 22px;
+    width: 50px;
+    background-color: red;
+    margin: 4px 2px;
+    font-size: 13px;
+    line-height: 2;
+    vertical-align: top;
+    color: black;
+    font: normal 100 16px"Exo 2";
 }
 .arrowLeft {
     position: absolute;
@@ -336,7 +387,7 @@ body {
 .currentLocation {
     font: normal 100 40px/1.2em "Exo 2", Arial, sans-serif;
     letter-spacing: .06em;
-    background-color: rgba(120, 200, 255, 0.9);
+    background-color: #fff;
     border: 1px solid rgba(120, 200, 255, 0.8);
     color: black;
     position: absolute;
@@ -347,7 +398,10 @@ body {
     font-weight: bold;
 }
 
-.nextLocation {
+.next0,
+.next1,
+.next2,
+.next3 {
     font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
     letter-spacing: .06em;
     background-color: rgba(120, 200, 255, 0.2);
@@ -355,35 +409,43 @@ body {
     color: rgba(120, 200, 255, 0.8);
     position: absolute;
     width: 16%;
+    transition: all 0.5s;
+}
+.dir0 .next0,
+.dir1 .next1,
+.dir2 .next2,
+.dir3 .next3 {
     left: 42%;
     height: 10%;
     top: 13%;
+    transform: rotate(0deg);
 }
-.leftLocation {
-    font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
-    letter-spacing: .06em;
-    background-color: rgba(120, 200, 255, 0.2);
-    border: 1px solid rgba(120, 200, 255, 0.8);
-    color: rgba(120, 200, 255, 0.8);
-    position: absolute;
-    width: 16%;
-    left: -4%;
+.dir0 .next1,
+.dir1 .next2,
+.dir2 .next3,
+.dir3 .next0 {
+    left: 88%;
     height: 10%;
-    top: 30%;
-    transform: rotate(-45deg);
+    top: 80%;
+    transform: rotate(90deg);
 }
-.rightLocation {
-    font: normal 100 35px/1.2em "Exo 2", Arial, sans-serif;
-    letter-spacing: .06em;
-    background-color: rgba(120, 200, 255, 0.2);
-    border: 1px solid rgba(120, 200, 255, 0.8);
-    color: rgba(120, 200, 255, 0.8);
-    position: absolute;
-    width: 16%;
-    right: -4%;
+.dir0 .next2,
+.dir1 .next3,
+.dir2 .next0,
+.dir3 .next1 {
+    left: 42%;
     height: 10%;
-    top: 30%;
-    transform: rotate(45deg);
+    top: 150%;
+    transform: rotate(180deg);
+}
+.dir0 .next3,
+.dir1 .next0,
+.dir2 .next1,
+.dir3 .next2 {
+    left: -5%;
+    height: 10%;
+    top: 80%;
+    transform: rotate(-90deg);
 }
 
 .futurepanel {
