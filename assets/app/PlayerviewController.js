@@ -447,9 +447,11 @@ webApp = angular.module('Enigmaster', [])
                             i = String(i).toLowerCase();
                             console.log(i, e);
                             switch(String(i).toLowerCase()) {
-                                case 'consumido':
                                 case 'generado':
+                                    ping.play();
+                                case 'consumido':
                                     selectScreen(3);
+                                    $scope.data.params.consumido = $scope.data.params.consumido || 0;
                                     $scope.combustible = $scope.data.params.generado - $scope.data.params.consumido;
                                     break;
                                 case '':
