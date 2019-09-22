@@ -28,9 +28,14 @@
         display: inline-block;
         width: 30%;
         border: solid 1px #215d91;
-        height: 250px;
+        height: 300px;
         vertical-align: top;
         margin: 18px 0;
+    }
+    .third img {
+        display: block;
+        margin: 0 auto;
+        width: 70%;
     }
 </style>
 <div ng-controller="PlayerviewControllerPi2" ng-init="roomId = <?=$roomId; ?>" >
@@ -109,9 +114,16 @@
                     </div>
                     <div ng-if="combustible < 18">
                         <div>Error: no hay combustible suficiente para esta operación</div>
-                        <div class="third">Ajustar ingredientes a su valor correcto</div>
-                        <div class="third">Mezclar ingredientes</div>
-                        <div class="third">Abrir valvulas de paso al tanque</div>
+                        <div class="third">Ajustar ingredientes a su valor correcto
+                            <img src="/assets/images/diagram1.png" width="100%" />
+                        </div>
+                        <div class="third">Mezclar ingredientes<br/>(botón verde)
+                            <img src="/assets/images/diagram2.png" width="100%" />
+                        </div>
+                        <div class="third">
+                            Abrir valvulas de paso al tanque
+                            <img src="/assets/images/diagram3.png" width="100%" />
+                        </div>
                         <div>Recuerde esperar a que termine la mezcla antes de abrir las valvulas</div>
                     </div>
                     <div ng-if="combustible >= 18">
