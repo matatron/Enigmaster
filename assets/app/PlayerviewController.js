@@ -365,9 +365,9 @@ webApp = angular.module('Enigmaster', [])
         $scope.section = '';
         $scope.combustible = 0;
         $scope.celdas = new Array(18);
+        $scope.currentPuzzles = null;
 
         var lastStatus = null;
-        var currentPuzzles = null;
         var currentParams = null;
         var player;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
@@ -394,7 +394,7 @@ webApp = angular.module('Enigmaster', [])
             $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
                 response.data.progress = parseInt(response.data.progress);
                 $scope.data = response.data;
-                if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
+                if ($scope.currentPuzzles == null) $scope.currentPuzzles = response.data.puzzles;
                 if (currentParams == null) currentParams = response.data.params;
                 if ($scope.data.status != lastStatus) {
                     console.log("New status", lastStatus, "->", $scope.data.status);
@@ -427,11 +427,11 @@ webApp = angular.module('Enigmaster', [])
 
                 if ($scope.data.status==2 || $scope.data.status==1) {
                     if ($scope.data.puzzles) $.each($scope.data.puzzles, function(i,e) {
-                        if (currentPuzzles[i] != e) {
+                        if ($scope.currentPuzzles[i] != e) {
                             //cambio detectado
-                            currentPuzzles[i] = e;
+                            $scope.currentPuzzles[i] = e;
 
-                            if (currentPuzzles[i]) {
+                            if ($scope.currentPuzzles[i]) {
                                 switch(i+1) {
                                     case 9:
                                         $scope.screen = "menuHex";

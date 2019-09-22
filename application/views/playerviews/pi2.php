@@ -37,6 +37,9 @@
         margin: 0 auto;
         width: 70%;
     }
+    .half {
+        opacity: 0.5;
+    }
 </style>
 <div ng-controller="PlayerviewControllerPi2" ng-init="roomId = <?=$roomId; ?>" >
     <div ng-if="data.status == 3">
@@ -114,7 +117,7 @@
                     </div>
                     <div ng-if="combustible < 18">
                         <div>Error: no hay combustible suficiente para esta operación</div>
-                        <div class="third">Ajustar ingredientes a su valor correcto
+                        <div class="third" ng-class="{'half': currentPuzzles[14] == 1}">Ajustar ingredientes a su valor correcto
                             <img src="/assets/images/diagram1.png" width="100%" />
                         </div>
                         <div class="third">Mezclar ingredientes<br/>(botón verde)
