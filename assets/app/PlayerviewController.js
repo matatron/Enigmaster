@@ -434,6 +434,20 @@ webApp = angular.module('Enigmaster', [])
                             if ($scope.currentPuzzles[i]) {
                                 switch(i+1) {
                                     case 9:
+                                        $scope.screen = "hexagons";
+                                        //                                        $scope.screen = "authorizado";
+                                        console.log($scope.screen);
+                                        console.log($(".hex"));
+                                        $timeout(function() {
+                                            $(".hex").each(function(i, e) {
+                                                console.log(i*60);
+                                                $(e).data("angle", i*60);
+                                                $(e).css("transform", "rotate("+(i*60)+"deg)");
+                                            });
+                                        }, 500);
+
+                                        break;
+                                    case 12:
                                         $scope.screen = "menuHex";
                                         break;
                                 }
@@ -492,8 +506,39 @@ webApp = angular.module('Enigmaster', [])
         }
 
         document.addEventListener('keydown', (event) => {
-            (new Audio('/assets/audio/blip.mp3')).play();
-            selectScreen(event.key)
+            console.log(event.key);
+            switch(event.key) {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                    (new Audio('/assets/audio/blip.mp3')).play();
+                    if ($scope.screen == "hexagons") {
+                        var hex = $(".h"+event.key); 
+                        var angle = hex.data("angle") || 0;
+                        var win = true;
+                        angle += 60;
+                        hex.css("transform", "rotate("+angle+"deg)");
+                        hex.data("angle", angle);
+                        $(".hex").each(function(i, e) {
+                            if ($(e).data("angle")%360 != 0) {
+                                win = false;
+                            }
+                        });
+                        if (win) {
+                            $scope.screen = "authorizado";
+                            setTimeout(function() {
+                                $scope.screen = "menuHex";
+                            }, 2000);
+                        }
+                    } else if ($scope.screen == "menuHex") {
+
+                        selectScreen(event.key)
+                    }
+                    break;
+            }
         });
 
         $interval(getBackend,1000);
@@ -629,7 +674,7 @@ webApp = angular.module('Enigmaster', [])
                         if ($scope.currentPuzzles[i] != e) {
                             //cambio detectado
                             $scope.currentPuzzles[i] = e;
-                            
+
                             if ($scope.currentPuzzles[17]==1 && $scope.currentPuzzles[19]==1) {
                                 nextKeyPress = (new Date()).getTime();
                             }
@@ -675,7 +720,7 @@ webApp = angular.module('Enigmaster', [])
             $scope.location3 = letras[$scope.posX+0]+"-"+($scope.posY+1);
             $scope.valid3 = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
 
-            
+
             switch ($scope.direccion) {
                 case 0:
                     $scope.validFront = $scope.valid0;

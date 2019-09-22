@@ -3,6 +3,7 @@
         height: 100%;
     }
     body {
+        font-family: "Exo 2", Arial, sans-serif;
         height: 100%;
         margin: 0 !important;
         background-color: black;
@@ -40,12 +41,154 @@
     .half {
         opacity: 0.5;
     }
+    .authorizado {
+        padding-top: 3em;
+        font-size: 2em;
+    }
+
+    .hex {
+        background-image: url(/assets/images/hex.png);
+        width: 220px;
+        height: 190px;
+        position: absolute;
+        transition: transform 0.2s;
+        cursor: pointer;
+        font-family: 'Alien';
+        font-size: 50px;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+
+
+    .lado {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        pointer-events: none;
+        color: black;
+    }
+
+    .l1 {
+        bottom: 1px;
+        left: 85px;
+    }
+    .l2 {
+        transform: rotate(-60deg);
+        top: 103px;
+        left: 146px;
+    }
+    .l3 {
+        transform: rotate(-120deg);
+        top: 35px;
+        left: 145px;
+    }
+    .l4 {
+        transform: rotate(180deg);
+        top: 0px;
+        left: 85px;
+    }
+    .l5 {
+        transform: rotate(120deg);
+        top: 36px;
+        left: 25px;
+    }
+    .l6 {
+        transform: rotate(60deg);
+        top: 105px;
+        left: 25px;
+    }
+
+    .h1 {
+        top: 50px;
+        left: 175px;
+    }
+    .h2 {
+        top: 150px;
+        left: 350px;
+    }
+    .h3 {
+        top: 350px;
+        left: 350px;
+    }
+    .h4 {
+        top: 450px;
+        left: 175px;
+    }
+    .h5 {
+        top: 350px;
+        left: 0px;
+    }
+    .h6 {
+        top: 150px;
+        left: 0px;
+    }
 </style>
-<div ng-controller="PlayerviewControllerPi2" ng-init="roomId = <?=$roomId; ?>" >
+<div id="pi2" ng-controller="PlayerviewControllerPi2" ng-init="roomId = <?=$roomId; ?>" >
     <div ng-if="data.status == 3">
     </div>
     <div ng-if="data.status == 2 || data.status == 1">
-        <div id="pi2" ng-if="screen=='menuHex'">
+        <div ng-show="screen == 'hexagons'"  style="transform: rotate(30deg) scale(1.5) translate(900px, 0px)">
+            <div class="hex h1">
+                <div class="lado l1">H</div>
+                <div class="lado l2">M</div>
+                <div class="lado l3">S</div>
+                <div class="lado l4">T</div>
+                <div class="lado l5">Z</div>
+                <div class="lado l6">V</div>
+            </div>
+
+            <div class="hex h2">
+                <div class="lado l1">H</div>
+                <div class="lado l2">Z</div>
+                <div class="lado l3">V</div>
+                <div class="lado l4">T</div>
+                <div class="lado l5">M</div>
+                <div class="lado l6">S</div>
+            </div>
+
+            <div class="hex h3">
+                <div class="lado l1">S</div>
+                <div class="lado l2">M</div>
+                <div class="lado l3">T</div>
+                <div class="lado l4">H</div>
+                <div class="lado l5">V</div>
+                <div class="lado l6">Z</div>
+            </div>
+
+            <div class="hex h4">
+                <div class="lado l1">H</div>
+                <div class="lado l2">V</div>
+                <div class="lado l3">Z</div>
+                <div class="lado l4">M</div>
+                <div class="lado l5">T</div>
+                <div class="lado l6">S</div>
+            </div>
+
+            <div class="hex h5">
+                <div class="lado l1">V</div>
+                <div class="lado l2">T</div>
+                <div class="lado l3">H</div>
+                <div class="lado l4">S</div>
+                <div class="lado l5">M</div>
+                <div class="lado l6">Z</div>
+            </div>
+
+            <div class="hex h6">
+                <div class="lado l1">S</div>
+                <div class="lado l2">M</div>
+                <div class="lado l3">V</div>
+                <div class="lado l4">T</div>
+                <div class="lado l5">H</div>
+                <div class="lado l6">Z</div>
+            </div>
+
+        </div>
+        <div ng-show="screen == 'authorizado'"  class="authorizado">
+            <div class="">ACCESO AUTHORIZADO</div>
+        </div>
+        <div ng-show="screen=='menuHex'">
             <div class="hexagonBig"></div>
             <div class="section1 futurepanel" ng-show="section=='section1'">
                 <div class="futurepanel__header">
