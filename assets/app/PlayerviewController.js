@@ -371,6 +371,7 @@ webApp = angular.module('Enigmaster', [])
         var currentParams = null;
         var player;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
+        var blip = new Audio('/assets/audio/blip.mp3');
 
         function playVideo(src) {
             if (player == null && document.getElementById('videoAndromeda') != null) {
@@ -491,6 +492,7 @@ webApp = angular.module('Enigmaster', [])
         }
 
         document.addEventListener('keydown', (event) => {
+            blip.play();
             selectScreen(event.key)
         });
 
