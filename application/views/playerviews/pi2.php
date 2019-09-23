@@ -51,7 +51,7 @@
         width: 220px;
         height: 190px;
         position: absolute;
-        transition: transform 0.2s;
+        transition: transform 0.5s;
         cursor: pointer;
         font-family: 'Alien';
         font-size: 50px;
