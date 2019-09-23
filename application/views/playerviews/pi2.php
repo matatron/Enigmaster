@@ -129,7 +129,7 @@
     <div ng-if="data.status == 3">
     </div>
     <div ng-if="data.status == 2 || data.status == 1">
-        <div ng-show="screen == 'hexagons'"  style="transform: rotate(30deg) scale(1.5) translate(900px, 0px)">
+        <div ng-show="screen == 'hexagons'"  style="transform: rotate(30deg) scale(1.5) translate(860px, 0px)">
             <div class="hex h1">
                 <div class="lado l1">H</div>
                 <div class="lado l2">M</div>

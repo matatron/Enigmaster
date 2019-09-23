@@ -256,12 +256,14 @@ webApp = angular.module('Enigmaster', [])
                         case 1:
                             break;
                         case 3:
+                            $(player).hide();
                             alarma.currentTime = 0;
                             musica.currentTime = 0;
                             alarma.pause();
                             musica.pause();
                             break;
                         case 0:
+                            $(player).hide();
                             alarma.currentTime = 0;
                             musica.currentTime = 0;
                             alarma.pause();
@@ -421,8 +423,10 @@ webApp = angular.module('Enigmaster', [])
                 $scope.punishment = Math.max(0, $scope.data.total_clues-$scope.data.free_clues)*$scope.data.minutesxclue;
                 if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                     $scope.clue = $scope.data.clue.value;
-                    if ($scope.clue != '') ping.play();
-                    selectScreen(5);
+                    if ($scope.screen == "menuHex") {
+                        if ($scope.clue != '') ping.play();
+                        selectScreen(5);
+                    }
                 }
 
                 if ($scope.data.status==2 || $scope.data.status==1) {
@@ -498,8 +502,11 @@ webApp = angular.module('Enigmaster', [])
             if (player) player.pause();
             if (n == 6) {
                 setTimeout(function() {
-                    //playVideo('file:///home/pi/andromeda.mp4');
-                    playVideo('http://127.0.0.1/andromeda.mp4');
+                    if (document.location.host == "localhost:8081") {
+                        playVideo('/assets/video/andromeda.mp4');
+                    } else {
+                        playVideo('http://127.0.0.1/andromeda.mp4');
+                    }
                 }, 200);
             }
 
@@ -800,11 +807,17 @@ webApp = angular.module('Enigmaster', [])
                             reportGizmo();
                             if ($scope.posX == 4 && $scope.posY == 0) {
                                 $scope.missionCompleted = true;
-                                playVideo("http://127.0.0.1/aterrizaje.mp4");
-                                //playVideo("/assets/video/aterrizaje.mp4");
+                                if (document.location.host == "localhost:8081") {
+                                    playVideo("/assets/video/aterrizaje.mp4");
+                                } else {
+                                    playVideo("http://127.0.0.1/aterrizaje.mp4");
+                                }
                             } else {
-                                //playVideo("/assets/video/ftl.mp4");
-                                playVideo("http://127.0.0.1/ftl.mp4");
+                                if (document.location.host == "localhost:8081") {
+                                    playVideo("/assets/video/ftl.mp4");
+                                }else {
+                                    playVideo("http://127.0.0.1/ftl.mp4");
+                                }
                                 nextKeyPress += 6500;
                                 animateSpace();
                             }
