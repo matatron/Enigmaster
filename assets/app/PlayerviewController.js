@@ -573,7 +573,7 @@ webApp = angular.module('Enigmaster', [])
         var player;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
 
-        var nextKeyPress = (new Date()).getTime() + 3600*24;
+        var nextKeyPress = (new Date()).getTime() + 3600000*24;
 
         $scope.posX = 3;
         $scope.posY = 5;
@@ -657,7 +657,7 @@ webApp = angular.module('Enigmaster', [])
                             animateSpace();
                             break;
                         case 3:
-                            nextKeyPress = (new Date()).getTime() + 3600*24;
+                            nextKeyPress = (new Date()).getTime() + 3600000*24;
                             break;
                         case 0:
                             //play end game sound
