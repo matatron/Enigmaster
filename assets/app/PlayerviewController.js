@@ -296,7 +296,11 @@ webApp = angular.module('Enigmaster', [])
                                     case 1:
                                     case 3:
                                         alarma.pause();
+                                        stopVideo();
                                         $scope.screen = "cluesInfo";
+                                        break;
+                                    case 4:
+                                        $scope.isAlien = false;
                                         break;
                                 }
                             }
