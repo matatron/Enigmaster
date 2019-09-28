@@ -132,36 +132,36 @@
         <div ng-show="screen == 'hexagons'"  style="transform: rotate(30deg) scale(1.5) translate(860px, 0px)">
             <div class="hex h1">
                 <div class="lado l1">H</div>
-                <div class="lado l2">M</div>
+                <div class="lado l2">A</div>
                 <div class="lado l3">S</div>
                 <div class="lado l4">T</div>
-                <div class="lado l5">Z</div>
+                <div class="lado l5">D</div>
                 <div class="lado l6">V</div>
             </div>
 
             <div class="hex h2">
                 <div class="lado l1">H</div>
-                <div class="lado l2">Z</div>
+                <div class="lado l2">D</div>
                 <div class="lado l3">V</div>
                 <div class="lado l4">T</div>
-                <div class="lado l5">M</div>
+                <div class="lado l5">A</div>
                 <div class="lado l6">S</div>
             </div>
 
             <div class="hex h3">
                 <div class="lado l1">S</div>
-                <div class="lado l2">M</div>
+                <div class="lado l2">A</div>
                 <div class="lado l3">T</div>
                 <div class="lado l4">H</div>
                 <div class="lado l5">V</div>
-                <div class="lado l6">Z</div>
+                <div class="lado l6">D</div>
             </div>
 
             <div class="hex h4">
                 <div class="lado l1">H</div>
                 <div class="lado l2">V</div>
-                <div class="lado l3">Z</div>
-                <div class="lado l4">M</div>
+                <div class="lado l3">D</div>
+                <div class="lado l4">A</div>
                 <div class="lado l5">T</div>
                 <div class="lado l6">S</div>
             </div>
@@ -171,17 +171,17 @@
                 <div class="lado l2">T</div>
                 <div class="lado l3">H</div>
                 <div class="lado l4">S</div>
-                <div class="lado l5">M</div>
-                <div class="lado l6">Z</div>
+                <div class="lado l5">A</div>
+                <div class="lado l6">D</div>
             </div>
 
             <div class="hex h6">
                 <div class="lado l1">S</div>
-                <div class="lado l2">M</div>
+                <div class="lado l2">A</div>
                 <div class="lado l3">V</div>
                 <div class="lado l4">T</div>
                 <div class="lado l5">H</div>
-                <div class="lado l6">Z</div>
+                <div class="lado l6">D</div>
             </div>
 
         </div>

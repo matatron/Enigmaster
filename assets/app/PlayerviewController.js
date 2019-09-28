@@ -209,7 +209,12 @@ webApp = angular.module('Enigmaster', [])
         var musica = new Audio('/assets/audio/espacio1.mp3');
 
         function playVideo(src) {
-            console.log("Video "+src);
+            if (player == null && document.getElementById('tvvideo') != null) {
+                player = document.getElementById('tvvideo');
+                player.addEventListener('ended',function() {
+                    $(player).hide();
+                },false);
+            }
             if (player) {
                 player.src = '/assets/video/'+src;
                 $(player).show();
@@ -227,14 +232,6 @@ webApp = angular.module('Enigmaster', [])
 
 
         function getBackend() {
-            if (player == null && document.getElementById('tvvideo') != null) {
-                player = document.getElementById('tvvideo');
-                player.addEventListener('ended',function() {
-                    $(player).hide();
-                },false);
-                $(player).hide();
-            }
-
             $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
                 response.data.progress = parseInt(response.data.progress);
                 $scope.data = response.data;
@@ -300,6 +297,8 @@ webApp = angular.module('Enigmaster', [])
                                         $scope.screen = "cluesInfo";
                                         break;
                                     case 4:
+                                        alarma.pause();
+                                        stopVideo();
                                         $scope.isAlien = false;
                                         break;
                                 }
@@ -550,7 +549,12 @@ webApp = angular.module('Enigmaster', [])
                     }
                     break;
             }
+            reportGizmo();
         });
+
+        function reportGizmo() {
+            $http.get('/gizmo/reportjson/PI2/?pantalla='+$scope.screen+"&seccion="+$scope.section);
+        }
 
         $interval(getBackend,1000);
         getBackend();
@@ -811,6 +815,7 @@ webApp = angular.module('Enigmaster', [])
                             reportGizmo();
                             if ($scope.posX == 4 && $scope.posY == 0) {
                                 $scope.missionCompleted = true;
+                                reportGizmo();
                                 if (document.location.host == "localhost:8081") {
                                     playVideo("/assets/video/aterrizaje.mp4");
                                 } else {
