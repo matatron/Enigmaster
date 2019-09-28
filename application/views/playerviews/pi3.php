@@ -63,7 +63,7 @@
             <div class="arrowLeft"><img src="/assets/images/arrowLeft.png" /></div>
             <div class="arrowRight"><img src="/assets/images/arrowRight.png" /></div>
             <div class="arrowFront"  ng-show="validFront"><img src="/assets/images/arrowFront.png" /></div>
-            <div class="currentLocation"><span class="small">POSICIÓN ACTUAL</span>{{currentLocation()}}</div>
+            <div class="currentLocation"><span class="small">POSICIÓN ACTUAL</span>{{currentLocation}}</div>
 
             <div class="next0" ng-show="valid0">{{location0}}</div>
             <div class="next1" ng-show="valid1">{{location1}}</div>

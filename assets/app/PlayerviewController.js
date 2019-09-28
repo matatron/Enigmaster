@@ -225,19 +225,19 @@ webApp = angular.module('Enigmaster', [])
         function stopVideo() {
             console.log("Deteniendo video", player);
             if (player == null && document.getElementById('tvvideo') != null) {
-            console.log(1,player);
+                console.log(1,player);
                 player = document.getElementById('tvvideo');
                 player.addEventListener('ended',function() {
                     $(player).hide();
                 },false);
             }
             if (player) {
-            console.log(2,player);
+                console.log(2,player);
                 $(player).hide();
-            console.log(3,player);
+                console.log(3,player);
                 player.currentTime = 0;
                 player.pause();
-            console.log(4,player);
+                console.log(4,player);
             }
         }
 
@@ -590,6 +590,7 @@ webApp = angular.module('Enigmaster', [])
         $scope.missionCompleted = false;
         $scope.currentPuzzles = null;
         $scope.currentParams = null;
+        $scope.currentLocation = '';
         $scope.validFront = false;
         $scope.validLeft = false;
         $scope.validRight = false;
@@ -604,7 +605,7 @@ webApp = angular.module('Enigmaster', [])
         var nextKeyPress = (new Date()).getTime() + 3600000*24;
 
         $scope.posX = 3;
-        $scope.posY = 5;
+        $scope.posY = 1; //5
         reportGizmo();
         $scope.direccion = 0;
         var lastDireccion = -1;
@@ -636,13 +637,6 @@ webApp = angular.module('Enigmaster', [])
                 player.currentTime = 0;
                 player.play();
             }
-        }
-
-
-        $scope.currentLocation = function() {
-            $(".space").css("background-position", "0 -"+(450*($scope.posX+$scope.posY))+"px");
-            $("#planeta").attr("src", "/assets/images/planetas/planeta"+letras[$scope.posX+1]+($scope.posY+1)+".png");
-            return letras[$scope.posX+1] + "-" + ($scope.posY+1);
         }
 
         function getBackend() {
@@ -755,6 +749,9 @@ webApp = angular.module('Enigmaster', [])
             $scope.location3 = letras[$scope.posX+0]+"-"+($scope.posY+1);
             $scope.valid3 = (mapa[$scope.posY*2+1][$scope.posX*2+0] == 1);
 
+            $(".space").css("background-position", "0 -"+(450*($scope.posX+$scope.posY))+"px");
+            $("#planeta").attr("src", "/assets/images/planetas/planeta"+letras[$scope.posX+1]+($scope.posY+1)+".png");
+            $scope.currentLocation = letras[$scope.posX+1] + "-" + ($scope.posY+1);
 
             switch ($scope.direccion) {
                 case 0:
@@ -791,10 +788,11 @@ webApp = angular.module('Enigmaster', [])
                     // Animation complete.
                 });
             }
+            reportGizmo();
         }
 
         function reportGizmo() {
-            $http.get('/gizmo/reportjson/PI3/?posX='+$scope.posX+"&posY="+$scope.posY+"&consumido="+$scope.consumido+"&mission="+($scope.missionCompleted?"completa":"incompleta"));
+            $http.get('/gizmo/reportjson/PI3/?PLANETA='+$scope.currentLocation+'&posX='+$scope.posX+"&posY="+$scope.posY+"&consumido="+$scope.consumido+"&mission="+($scope.missionCompleted?"completa":"incompleta"));
         }
 
         document.addEventListener('keydown', (event) => {
@@ -832,15 +830,17 @@ webApp = angular.module('Enigmaster', [])
                                     break;
                             };
                             $scope.consumido++;
-                            reportGizmo();
                             if ($scope.posX == 4 && $scope.posY == 0) {
-                                $scope.missionCompleted = true;
                                 reportGizmo();
                                 if (document.location.host == "localhost:8081") {
                                     playVideo("/assets/video/aterrizaje.mp4");
                                 } else {
                                     playVideo("http://127.0.0.1/aterrizaje.mp4");
                                 }
+                                $timeout(function() {
+                                    $scope.missionCompleted = true;
+                                    reportGizmo();
+                                }, 13000);
                             } else {
                                 if (document.location.host == "localhost:8081") {
                                     playVideo("/assets/video/ftl.mp4");
