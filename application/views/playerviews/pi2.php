@@ -126,9 +126,9 @@
     }
 </style>
 <div id="pi2" ng-controller="PlayerviewControllerPi2" ng-init="roomId = <?=$roomId; ?>" >
-    <div ng-if="data.status == 3">
+    <div ng-show="data.status == 3">
     </div>
-    <div ng-if="data.status == 2 || data.status == 1">
+    <div ng-show="data.status == 2 || data.status == 1">
         <div ng-show="screen == 'hexagons'"  style="transform: rotate(30deg) scale(1.5) translate(860px, 0px)">
             <div class="hex h1">
                 <div class="lado l1">H</div>
@@ -329,8 +329,8 @@
             </div>
         </div>
     </div>
-    <div ng-if="data.status == 1">
+    <div ng-show="data.status == 1">
     </div>
-    <div ng-if="data.status == 0">
+    <div ng-show="data.status == 0">
     </div>
 </div>

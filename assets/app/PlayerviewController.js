@@ -203,7 +203,7 @@ webApp = angular.module('Enigmaster', [])
         var lastStatus = null;
         var currentPuzzles = null;
         var currentParams = null;
-        var player;
+        var player = null;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
         var alarma = new Audio('/assets/audio/alarma.mp3');
         var musica = new Audio('/assets/audio/espacio1.mp3');
@@ -223,10 +223,21 @@ webApp = angular.module('Enigmaster', [])
             }
         }
         function stopVideo() {
+            console.log("Deteniendo video", player);
+            if (player == null && document.getElementById('tvvideo') != null) {
+            console.log(1,player);
+                player = document.getElementById('tvvideo');
+                player.addEventListener('ended',function() {
+                    $(player).hide();
+                },false);
+            }
             if (player) {
+            console.log(2,player);
                 $(player).hide();
+            console.log(3,player);
                 player.currentTime = 0;
                 player.pause();
+            console.log(4,player);
             }
         }
 
@@ -243,7 +254,9 @@ webApp = angular.module('Enigmaster', [])
                     if (player) $(player).hide();
                     switch($scope.data.status) {
                         case 2:
-                            console.log(alarma);
+                            stopVideo();
+                            $scope.screen = '';
+                            $scope.isAlien = true;
                             musica.play();
                             const playPromise = alarma.play();
                             if (playPromise !== null){
@@ -254,6 +267,8 @@ webApp = angular.module('Enigmaster', [])
                             break;
                         case 3:
                             $(player).hide();
+                            $scope.isAlien = true;
+                            $scope.screen = '';
                             alarma.currentTime = 0;
                             musica.currentTime = 0;
                             alarma.pause();
@@ -289,14 +304,14 @@ webApp = angular.module('Enigmaster', [])
 
                             if (currentPuzzles[i]) {
                                 switch(i+1) {
-                                    case 0:
-                                    case 1:
                                     case 3:
-                                        alarma.pause();
-                                        stopVideo();
                                         $scope.screen = "cluesInfo";
+                                        alarma.pause();
+                                        console.log("alarma apagada");
+                                        stopVideo();
                                         break;
                                     case 4:
+                                        $scope.screen = "cluesInfo";
                                         alarma.pause();
                                         stopVideo();
                                         $scope.isAlien = false;
@@ -316,6 +331,9 @@ webApp = angular.module('Enigmaster', [])
                                 case 'adn':
                                     $scope.isAlien = (e != "humano");
                                     switch(e) {
+                                        case 'humano':
+                                            $scope.screen = "cluesInfo";
+                                            break;
                                         case 'escaneando':
                                             playVideo('adnscan.mp4');
                                             break;
@@ -390,6 +408,7 @@ webApp = angular.module('Enigmaster', [])
             if (player) {
                 player.src = src;
                 $(player).show();
+                $(player).css("display", "block");
                 player.currentTime = 0;
                 player.play();
             }
@@ -505,6 +524,7 @@ webApp = angular.module('Enigmaster', [])
             if (player) player.pause();
             if (n == 6) {
                 setTimeout(function() {
+                    $(player).show();
                     if (document.location.host == "localhost:8081") {
                         playVideo('/assets/video/andromeda.mp4');
                     } else {

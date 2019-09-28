@@ -6,16 +6,22 @@
         height: 100%;
         margin: 0 !important;
         background-color: black;
+        color: white;
+        font-family: "Exo 2";
     }
 </style>
 <div ng-controller="PlayerviewControllerPi1" ng-init="roomId = <?=$roomId; ?>" >
     <audio id="alarma">
-      <source src="/assets/audio/alarma.mp3">
+        <source src="/assets/audio/alarma.mp3">
     </audio>
-    <div ng-if="data.status == 3">
+    <div ng-show="data.status == 3">
+        &#128077;
     </div>
-    <div ng-if="data.status == 2 || data.status == 1" ng-class="{'isAlien': isAlien}">
-        <div class="pi1" ng-if="screen=='cluesInfo'">
+    <div ng-show="data.status == 2 || data.status == 1" ng-class="{'isAlien': isAlien}">
+        <div class="" ng-show="screen==''">
+            <div class="alien" style="color: red; margin: 3em auto;">ALERTA</div>
+        </div>
+        <div class="pi1" ng-show="screen=='cluesInfo'">
             <video id="tvvideo" autoplay></video>
             <div class="O2timer">
                 <div class="futurepanel danger">
@@ -72,77 +78,12 @@
                 </div>  
 
             </div>
-
-        </div>
-        <div class="screen" ng-if="screen=='muestra'">
-
-            <div class="futurepanel">
-                <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">Text Options</h1>
-                </div>
-                <div class="futurepanel__body">
-                    <h2 class="heading">title</h2>
-                    <p>This is default text.</p>
-                    <h3 class="heading">title</h3>
-                    <p>This is default text.</p>
-                    <h4 class="heading">title</h4>
-                    <p>This is default text.</p>
-                    <h5 class="heading">title</h5>
-                    <p>This is default text.</p>
-                    <h6 class="heading">title</h6>
-                    <p>This is default text.</p>
-                </div>
-            </div>  
-            <div class="futurepanel ">
-                <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">Metrics</h1>
-                </div>
-                <div class="futurepanel__body">
-                    <div class="futuremetric futuremetric--circle">
-                        <div class="futuremetric__value">74</div>
-                        <div class="futuremetric__label">tonnes</div>
-                    </div>
-                    <div class="futuremetric futuremetric--circle">
-                        <div class="futuremetric__value futuremetric__value--optimal">94</div>
-                        <div class="futuremetric__label">LBS</div>
-                    </div>
-                    <div class="futuremetric futuremetric--circle">
-                        <div class="futuremetric__value futuremetric__value--warning">54</div>
-                        <div class="futuremetric__label">Hours</div>
-                    </div>
-                    <div class="futuremetric futuremetric--circle">
-                        <div class="futuremetric__value futuremetric__value--alert">24</div>
-                        <div class="futuremetric__label">pixels</div>
-                    </div>
-                </div>
-                <div class="futurepanel__footer">
-                    <div>#0002134678 TFFC:3 ///////////// </div>
-                </div>
-            </div>  
-
-            <div class="futurepanel">
-                <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">Map Grid</h1>
-                </div>
-                <div class="futurepanel__body">
-                    <div class="futuregrid">
-                        <div class="futuregrid__row">
-                            <div class="futuregrid__cell">A1</div>
-                            <div class="futuregrid__cell">A2</div>
-                            <div class="futuregrid__cell">A3</div>
-                            <div class="futuregrid__cell">A4</div>
-                            <div class="futuregrid__cell">A5</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="futurepanel__footer">
-                    <div>#0002134678 TFFC:3 ///////////// </div>
-                </div>
-            </div>
         </div>
     </div>
-    <div ng-if="data.status == 1">
+    <div ng-show="data.status == 1">
+        Fin del juego
     </div>
-    <div ng-if="data.status == 0">
+    <div ng-show="data.status == 0">
+        Modo Reset. No hay juego iniciado
     </div>
 </div>
