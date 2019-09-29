@@ -259,7 +259,7 @@
 
                     </div>
                     <div ng-if="combustible < 18">
-                        <div>Error: no hay combustible suficiente para esta operación</div>
+                        <div>Error: Mezclador automático de combustible dañado. Mezclar combustible manualmente.</div>
                         <div class="third" ng-class="{'half': currentPuzzles[14] == 1}">Ajustar ingredientes a su valor correcto
                             <img src="/assets/images/diagram1.png" width="100%" />
                         </div>
@@ -270,7 +270,7 @@
                             Abrir valvulas de paso al tanque
                             <img src="/assets/images/diagram3.png" width="100%" />
                         </div>
-                        <div>Recuerde esperar a que termine la mezcla antes de abrir las valvulas</div>
+                        <div>Recuerde esperar a que termine la mezcla antes de abrir las valvulas redondas</div>
                     </div>
                     <div ng-if="combustible >= 18">
                         Acceso al Centro de Mando autorizado
