@@ -830,6 +830,7 @@ webApp = angular.module('Enigmaster', [])
                                     break;
                             };
                             $scope.consumido++;
+                            $scope.consumido++;
                             if ($scope.posX == 4 && $scope.posY == 0) {
                                 reportGizmo();
                                 if (document.location.host == "localhost:8081") {
