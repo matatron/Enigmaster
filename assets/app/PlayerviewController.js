@@ -605,7 +605,7 @@ webApp = angular.module('Enigmaster', [])
         var nextKeyPress = (new Date()).getTime() + 3600000*24;
 
         $scope.posX = 3;
-        $scope.posY = 1; //5
+        $scope.posY = 5;
         reportGizmo();
         $scope.direccion = 0;
         var lastDireccion = -1;
