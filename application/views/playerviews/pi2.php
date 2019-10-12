@@ -263,14 +263,14 @@
                         <div class="third" ng-class="{'half': currentPuzzles[14] == 1}">Ajustar ingredientes a su valor correcto
                             <img src="/assets/images/diagram1.png" width="100%" />
                         </div>
-                        <div class="third">Mezclar ingredientes<br/>(botón verde)
+                        <div class="third">Mezclar ingredientes<br/>(botón gris)
                             <img src="/assets/images/diagram2.png" width="100%" />
                         </div>
                         <div class="third">
                             Abrir valvulas de paso al tanque
                             <img src="/assets/images/diagram3.png" width="100%" />
                         </div>
-                        <div>Recuerde esperar a que termine la mezcla antes de abrir las valvulas redondas</div>
+                        <div>Antes de presionar los botones redondos, observe la secuencia de luces</div>
                     </div>
                     <div ng-if="combustible >= 18">
                         Acceso al Centro de Mando autorizado
