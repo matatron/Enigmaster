@@ -833,6 +833,7 @@ webApp = angular.module('Enigmaster', [])
                                 $scope.consumido+=2;
                             } else {
                                 $scope.consumido++;
+                                $scope.consumido++;
                             }
                             if ($scope.posX == 4 && $scope.posY == 0) {
                                 reportGizmo();
