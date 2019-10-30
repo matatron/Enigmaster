@@ -829,10 +829,9 @@ webApp = angular.module('Enigmaster', [])
                                     $scope.posX--;
                                     break;
                             };
-                            if ($scope.data.people >= 6) {
+                            if ($scope.data.people >= 4) {
                                 $scope.consumido+=2;
                             } else {
-                                $scope.consumido++;
                                 $scope.consumido++;
                             }
                             if ($scope.posX == 4 && $scope.posY == 0) {
