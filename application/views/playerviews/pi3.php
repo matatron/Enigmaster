@@ -72,8 +72,8 @@
         </div>
         <div ng-if="missionCompleted">
             ¡BIENVENIDOS A LA TIERRA!<br/>
-            Fin del juego
-
+            {{data.team_name}}<br/>
+            Fin del juego<br/>
         </div>
         <video id="tvvideo" autoplay></video>
     </div>
