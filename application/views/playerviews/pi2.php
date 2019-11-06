@@ -320,7 +320,7 @@
             <div class="section6 futurepanel" ng-show="section=='section6'">
                 <div class="futurepanel__header">
                     <h1 class="futurepanel__title">
-                        Publicidad de Andromeda
+                        Misión Andromeda
                     </h1>
                 </div>
                 <div class="futurepanel__body">

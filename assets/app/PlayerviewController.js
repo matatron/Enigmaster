@@ -561,6 +561,7 @@ webApp = angular.module('Enigmaster', [])
                             $scope.screen = "authorizado";
                             setTimeout(function() {
                                 $scope.screen = "menuHex";
+                                $scope.section = "";
                             }, 2000);
                         }
                     } else if ($scope.screen == "menuHex") {
@@ -584,7 +585,6 @@ webApp = angular.module('Enigmaster', [])
         $scope.data={};
         $scope.data.status = 0;
         $scope.data.start = 0;
-        $scope.screen = ''
         $scope.clue = '';
         var lastStatus = null;
         $scope.missionCompleted = false;
@@ -679,9 +679,16 @@ webApp = angular.module('Enigmaster', [])
                             animateSpace();
                             break;
                         case 3:
+                            $scope.missionCompleted = false;
+                            $scope.currentLocation = '';
+                            $scope.consumido = 0;
                             nextKeyPress = (new Date()).getTime() + 3600000*24;
                             break;
                         case 0:
+                            $(player).hide();
+                            $scope.missionCompleted = false;
+                            $scope.currentLocation = '';
+                            $scope.consumido = 0;
                             //play end game sound
                             break;
 
