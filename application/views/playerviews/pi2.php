@@ -186,17 +186,22 @@
 
         </div>
         <div ng-show="screen == 'authorizado'"  class="authorizado">
-            <div class="">ACCESO AUTHORIZADO</div>
+            <div class="" ng-if="data.lang == 'es'">ACCESO AUTHORIZADO</div>
+            <div class="" ng-if="data.lang == 'en'">ACCESS AUTHORIZED</div>
         </div>
         <div ng-show="screen=='menuHex'">
-            <div class="hexagonBig"></div>
+            <div class="hexagonBig" ng-if="data.lang == 'es'"></div>
+            <div class="hexagonBig en" ng-if="data.lang == 'en'"></div>
             <div class="section1 futurepanel" ng-show="section=='section1'">
                 <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'es'">
                         Orden Pendiente
                     </h1>
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'en'">
+                        Pending order
+                    </h1>
                 </div>
-                <div class="futurepanel__body">
+                <div class="futurepanel__body" ng-if="data.lang == 'es'">
                     <div>Planeta C-5: Visitado</div>
                     <div>Planeta C-4: Visitado</div>
                     <div>Planeta E-3: Visitado</div>
@@ -205,11 +210,23 @@
                     <div>Misión Completa</div>
                     <div style="color: red">Volver al planeta hogar</div>
                 </div>
+                <div class="futurepanel__body" ng-if="data.lang == 'en'">
+                    <div>Planet C-5: Visited</div>
+                    <div>Planet C-4: Visited</div>
+                    <div>Planet E-3: Visited</div>
+                    <div>Planet D-2: Visited</div>
+                    <div>Planet E-1: Visited</div>
+                    <div>Mission Complete</div>
+                    <div style="color: red">Back to home planet</div>
+                </div>
             </div>
             <div class="section2 futurepanel" ng-show="section=='section2'">
                 <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'es'">
                         Estado de la Nave
+                    </h1>
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'en'">
+                        Ship Status
                     </h1>
                 </div>
                 <div class="futurepanel__body">
@@ -245,13 +262,18 @@
             </div>
             <div class="section3 futurepanel" ng-show="section=='section3'">
                 <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'es'">
                         Abrir Puerta al Centro de Mando
+                    </h1>
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'en'">
+                        Open Command Center Door
                     </h1>
                 </div>
                 <div class="futurepanel__body">
-                    <div>
-                        Combustible: {{combustible}} / 18
+                    <div >
+                        <span ng-if="data.lang == 'es'">Combustible:</span>
+                        <span ng-if="data.lang == 'en'">Fuel:</span>
+                            {{combustible}} / 18
                     </div>
                     <div>
                         <div ng-repeat="i in celdas track by $index" class="Cell" ng-class="{'filled': $index<combustible}">
@@ -279,8 +301,11 @@
             </div>
             <div class="section4 futurepanel" ng-show="section=='section4'">
                 <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'es'">
                         Receta correcta del combustible
+                    </h1>
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'en'">
+                        Recipe for fuel synthesis
                     </h1>
                 </div>
                 <div class="futurepanel__body" style="font-size: 3em; line-height: 1.5em">
@@ -292,8 +317,11 @@
             </div>
             <div class="section5 futurepanel" ng-show="section=='section5'">
                 <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'es'">
                         Pistas
+                    </h1>
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'en'">
+                        Clues
                     </h1>
                 </div>
                 <div class="futurepanel__body">
@@ -319,8 +347,11 @@
             </div>
             <div class="section6 futurepanel" ng-show="section=='section6'">
                 <div class="futurepanel__header">
-                    <h1 class="futurepanel__title">
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'es'">
                         Misión Andromeda
+                    </h1>
+                    <h1 class="futurepanel__title" ng-if="data.lang == 'en'">
+                        Mission Andromeda
                     </h1>
                 </div>
                 <div class="futurepanel__body">

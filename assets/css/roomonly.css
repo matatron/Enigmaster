@@ -198,6 +198,10 @@ body {
     transform: translate(-50%, -50%);
     transition: all 0.5s linear;
 }
+.hexagonBig.en {
+    background-image: url(/assets/images/hexagonBigEn.png);
+}
+
 .hex1 .hexagonBig {
     top: 106%;
     left: 0%;

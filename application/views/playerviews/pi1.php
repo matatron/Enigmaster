@@ -70,7 +70,11 @@
             <div class="clues">
                 <div class="futurepanel">
                     <div class="futurepanel__header">
-                        <h1 class="futurepanel__title">Asistente</h1>
+                        <h1 class="futurepanel__title">
+                            <span ng-if="data.lang == 'es'">Misión:</span>
+                            <span ng-if="data.lang == 'en'">Mission:</span>
+                            {{data.team_name}}
+                        </h1>
                     </div>
                     <div class="futurepanel__body cluebody">
                         {{clue}}

@@ -400,7 +400,7 @@ webApp = angular.module('Enigmaster', [])
             if (player == null && document.getElementById('videoAndromeda') != null) {
                 player = document.getElementById('videoAndromeda');
                 player.addEventListener('ended',function() {
-                    $scope.section = '';
+                    selectScreen(0);
                 },false);
             }
 
@@ -493,7 +493,7 @@ webApp = angular.module('Enigmaster', [])
                                 case 'consumido':
                                     selectScreen(3);
                                     $scope.data.params.consumido = $scope.data.params.consumido || 0;
-                                    $scope.combustible = $scope.data.params.generado - $scope.data.params.consumido;
+                                    $scope.combustible = $scope.data.params.generado - $scope.data.params.consumido + ($scope.data.params.extrafuel || 0);
                                     break;
                                 case '':
                                     switch(e) {
@@ -526,9 +526,17 @@ webApp = angular.module('Enigmaster', [])
                 setTimeout(function() {
                     $(player).show();
                     if (document.location.host == "localhost:8081") {
-                        playVideo('/assets/video/andromeda.mp4');
+                        if ($scope.data.lang =="en") {
+                            playVideo('/assets/video/andromedaEn.mp4');
+                        } else {
+                            playVideo('/assets/video/andromeda.mp4');
+                        }
                     } else {
-                        playVideo('http://127.0.0.1/andromeda.mp4');
+                        if ($scope.data.lang =="en") {
+                            playVideo('http://127.0.0.1/andromedaEn.mp4');
+                        } else {
+                            playVideo('http://127.0.0.1/andromeda.mp4');
+                        }
                     }
                 }, 200);
             }
@@ -561,7 +569,7 @@ webApp = angular.module('Enigmaster', [])
                             $scope.screen = "authorizado";
                             setTimeout(function() {
                                 $scope.screen = "menuHex";
-                                $scope.section = "";
+                                selectScreen(0);
                             }, 2000);
                         }
                     } else if ($scope.screen == "menuHex") {
@@ -580,6 +588,35 @@ webApp = angular.module('Enigmaster', [])
         $interval(getBackend,1000);
         getBackend();
 
+    }])
+    .controller('PlayerviewControllerHouston', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
+        $scope.extrafuel = 0;
+        $scope.easymode = 0;
+        var letras = ["x", "A", "B", "C", "D", "E", "F", "G", "x"];
+        var mapa = [
+            //     A       B       C       D       E       F       G
+            [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+            [  0,  8,  0,  8,  0,  8,  1,  8,  1,  8,  0,  8,  1,  8,  0],
+            [  0,  1,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0],
+            [  0,  8,  1,  8,  1,  8,  0,  8,  1,  8,  0,  8,  1,  8,  0],
+            [  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0],
+            [  0,  8,  1,  8,  0,  8,  0,  8,  1,  8,  1,  8,  0,  8,  0],
+            [  0,  0,  0,  1,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0],
+            [  0,  8,  0,  8,  1,  8,  1,  8,  1,  8,  0,  8,  1,  8,  0],
+            [  0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  1,  0],
+            [  0,  8,  1,  8,  1,  8,  1,  8,  0,  8,  1,  8,  0,  8,  0],
+            [  0,  1,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  0,  0],
+            [  0,  8,  0,  8,  1,  8,  1,  8,  1,  8,  0,  8,  1,  8,  0],
+            [  0,  0,  0,  1,  0,  0,  0,  1,  0,  1,  0,  0,  0,  0,  0],
+            [  0,  8,  1,  8,  0,  8,  1,  8,  0,  8,  1,  8,  1,  8,  0],
+            [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]
+        ];    
+
+
+        $scope.reportGizmo = function () {
+            $http.get('/gizmo/reportjson/Houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal"));
+        }
+        $scope.reportGizmo();
     }])
     .controller('PlayerviewControllerPi3', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
         $scope.data={};
@@ -821,7 +858,7 @@ webApp = angular.module('Enigmaster', [])
                         animateSpace();
                         break;
                     case "w":
-                        if ($scope.validFront && ($scope.generado - $scope.consumido > 0)) {
+                        if ($scope.validFront && ($scope.generado - $scope.consumido + ($scope.extrafuel || 0) > 0)) {
                             switch($scope.direccion) {
                                 case 0:
                                     $scope.posY--;
