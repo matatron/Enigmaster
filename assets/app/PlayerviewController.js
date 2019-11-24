@@ -512,6 +512,9 @@ webApp = angular.module('Enigmaster', [])
                                 case 'dificultad':
                                     $scope.dificultad = $scope.data.params.dificultad;
                                     break;
+                                case 'sumas':
+                                    $scope.sumas = $scope.data.params.sumas;
+                                    break;
                                 default:
                                     break;
                             }
@@ -624,7 +627,7 @@ webApp = angular.module('Enigmaster', [])
 
 
         $scope.reportGizmo = function () {
-            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal"))+'&sumas='+($scope.sumas?"coded":"visible"));
+            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal")+'&sumas='+($scope.sumas?"coded":"visible"));
         }
         $scope.reportGizmo();
     }])
