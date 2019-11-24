@@ -281,21 +281,37 @@
 
                     </div>
                     <div ng-if="combustible < 18">
-                        <div>Error: Mezclador automático de combustible dañado. Mezclar combustible manualmente.</div>
-                        <div class="third" ng-class="{'half': currentPuzzles[14] == 1}">Ajustar ingredientes a su valor correcto
+                        <div ng-if="data.lang == 'es'">Error: Mezclador automático de combustible dañado. Mezclar combustible manualmente.</div>
+                        <div ng-if="data.lang == 'en'">Error: Authomatic Fuel Synthesis damaged. Mix the fuel manually.</div>
+                        <div class="third" ng-class="{'half': currentPuzzles[14] == 1}">
+                            <span ng-if="data.lang == 'es'">Ajustar ingredientes a su valor correcto</span>
+                            <span ng-if="data.lang == 'en'">Set ingredients to the correct value</span>
                             <img src="/assets/images/diagram1.png" width="100%" />
                         </div>
-                        <div class="third">Mezclar ingredientes<br/>(botón gris)
+                        <div class="third">
+                            <span ng-if="data.lang == 'es'">Mezclar ingredientes<br/>(botón gris)</span>
+                            <span ng-if="data.lang == 'en'">Mix ingredients<br/>(gray button)</span>
+                            
                             <img src="/assets/images/diagram2.png" width="100%" />
                         </div>
                         <div class="third">
-                            Abrir valvulas de paso al tanque
+                            <span ng-if="data.lang == 'es'">Abrir valvulas de paso al tanque</span>
+                            <span ng-if="data.lang == 'en'">Open gates to the tank</span>
+                            
+                            
                             <img src="/assets/images/diagram3.png" width="100%" />
                         </div>
-                        <div>Antes de presionar los botones redondos, observe la secuencia de luces</div>
+                        <div>
+                            <span ng-if="data.lang == 'es'">Observe y memorice la secuencia de luces antes de presionar los botones redondos.</span>
+                            <span ng-if="data.lang == 'en'">Watch and memorize the color sequence before pressing the round buttons.</span>
+                            
+                        </div>
                     </div>
                     <div ng-if="combustible >= 18">
-                        Acceso al Centro de Mando autorizado
+                        <span ng-if="data.lang == 'es'">Acceso al Centro de Mando autorizado</span>
+                        <span ng-if="data.lang == 'es'">Access to Command Center authorized</span>
+                        
+                        
                     </div>
                 </div>
             </div>
