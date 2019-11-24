@@ -624,7 +624,7 @@ webApp = angular.module('Enigmaster', [])
 
 
         $scope.reportGizmo = function () {
-            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal"));
+            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal"))+'&sumas='+($scope.sumas?"coded":"visible"));
         }
         $scope.reportGizmo();
     }])

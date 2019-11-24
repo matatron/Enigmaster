@@ -25,5 +25,8 @@
         <label><input type="radio" ng-model="easymode" ng-value="true" ng-change="reportGizmo()"/>Fácil</label>
     </div>
     <div class="config">
+        Resultados de sumas: 
+        <label><input type="radio" ng-model="sumas" ng-value="false" ng-change="reportGizmo()" />Codificados</label>
+        <label><input type="radio" ng-model="sumas" ng-value="true" ng-change="reportGizmo()"/>Visibles</label>
     </div>
 </div>

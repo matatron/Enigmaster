@@ -309,11 +309,11 @@
                     </h1>
                 </div>
                 <div class="futurepanel__body" style="font-size: 3em; line-height: 1.5em">
-                    <div ng-show="dificultad != 'facil'"><span class="alien colorY">Y</span> + <span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">E</span></div>
-                    <div ng-show="dificultad == 'facil'"><span class="alien colorY">Y</span> x 5 = <span class="alien sum">E</span></div>
-                    <div><span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">O</span></div>
-                    <div><span class="alien colorX">X</span> + <span class="alien colorZ">Z</span> = <span class="alien sum">M</span></div>
-                    <div><span class="alien colorX">X</span> + <span class="alien colorY">Y</span> = <span class="alien sum">U</span></div>
+                    <div ng-show="dificultad != 'facil'"><span class="alien colorY">Y</span> + <span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum" ng-hide="sumas == 'visible'">E</span> <span class="sum" ng-show="sumas == 'visible'">15</span></div>
+                    <div ng-show="dificultad == 'facil'"><span class="alien colorY">W</span> x 5 = <span class="alien sum" ng-hide="sumas == 'visible'">E</span> <span class="sum" ng-show="sumas == 'visible'">15</span></div>
+                    <div><span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum" ng-hide="sumas == 'visible'">O</span> <span class="sum" ng-show="sumas == 'visible'">11</span></div>
+                    <div><span class="alien colorX">X</span> + <span class="alien colorZ">Z</span> = <span class="alien sum" ng-hide="sumas == 'visible'">M</span> <span class="sum" ng-show="sumas == 'visible'">14</span></div>
+                    <div><span class="alien colorX">X</span> + <span class="alien colorY">Y</span> = <span class="alien sum" ng-hide="sumas == 'visible'">U</span> <span class="sum" ng-show="sumas == 'visible'">10</span></div>
                 </div>
             </div>
             <div class="section5 futurepanel" ng-show="section=='section5'">
