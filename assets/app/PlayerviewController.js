@@ -605,6 +605,7 @@ webApp = angular.module('Enigmaster', [])
     .controller('PlayerviewControllerHouston', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
         $scope.extrafuel = 0;
         $scope.easymode = 0;
+        $scope.sumas = 0;
         var letras = ["x", "A", "B", "C", "D", "E", "F", "G", "x"];
         var mapa = [
             //     A       B       C       D       E       F       G
@@ -627,7 +628,7 @@ webApp = angular.module('Enigmaster', [])
 
 
         $scope.reportGizmo = function () {
-            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal")+'&sumas='+($scope.sumas?"coded":"visible"));
+            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal")+'&sumas='+($scope.sumas?"visible":"coded"));
         }
         $scope.reportGizmo();
     }])
