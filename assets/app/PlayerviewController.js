@@ -493,7 +493,7 @@ webApp = angular.module('Enigmaster', [])
                                 case 'consumido':
                                     selectScreen(3);
                                     $scope.data.params.consumido = $scope.data.params.consumido || 0;
-                                    $scope.combustible = $scope.data.params.generado - $scope.data.params.consumido + ($scope.data.params.extrafuel || 0);
+                                    $scope.combustible = parseInt($scope.data.params.generado) - parseInt($scope.data.params.consumido) + (parseInt($scope.data.params.extrafuel) || 0);
                                     break;
                                 case '':
                                     switch(e) {
@@ -614,7 +614,7 @@ webApp = angular.module('Enigmaster', [])
 
 
         $scope.reportGizmo = function () {
-            $http.get('/gizmo/reportjson/Houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal"));
+            $http.get('/gizmo/reportjson/houston/?extrafuel='+$scope.extrafuel+'&dificultad='+($scope.easymode?"facil":"normal"));
         }
         $scope.reportGizmo();
     }])
@@ -773,6 +773,14 @@ webApp = angular.module('Enigmaster', [])
                                             break;
                                     }
                                     break;
+                                case 'generado':
+                                case 'extrafuel':
+                                case 'consumido':
+                                    $scope.data.params.generado = parseInt($scope.data.params.generado) || 0;
+                                    $scope.data.params.consumido = parseInt($scope.data.params.consumido) || 0;
+                                    $scope.data.params.extrafuel = parseInt($scope.data.params.extrafuel) || 0;
+                                    $scope.combustible = $scope.data.params.generado - $scope.data.params.consumido + $scope.data.params.extrafuel;
+                                    break;
                                 default:
                                     break;
                             }
@@ -858,7 +866,7 @@ webApp = angular.module('Enigmaster', [])
                         animateSpace();
                         break;
                     case "w":
-                        if ($scope.validFront && ($scope.generado - $scope.consumido + ($scope.extrafuel || 0) > 0)) {
+                        if ($scope.validFront && (parseInt($scope.generado) - parseInt($scope.consumido) + (parseInt($scope.extrafuel) || 0) > 0)) {
                             switch($scope.direccion) {
                                 case 0:
                                     $scope.posY--;

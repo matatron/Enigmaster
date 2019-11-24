@@ -66,7 +66,11 @@
             </div>
             <div class="spaceship"></div>
             <div class="fuelContainer">
-                <div ng-repeat="cell in fuel track by $index" class="fuel" ng-class="{'full':($index < generado - consumido)}"></div>
+                <div ng-repeat="cell in fuel track by $index" class="fuel" ng-class="{'full':($index < combustible)}"></div>
+            </div>
+            <div class="fuelMessage" ng-show="combustible<5">
+                <span class="small" ng-if="data.lang == 'es'">Recargar mas combustible</span>
+                <span class="small" ng-if="data.lang == 'en'">Synth more fuel</span>
             </div>
             <div class="o2Container">
                 <div class="o2">O<sub>2</sub></div>
