@@ -9,6 +9,13 @@
         background-color: black;
         background-image: url(/assets/images/hexagons.jpg);
     }
+    .fuelMessage {
+        position: absolute;
+        top: 32px;
+        text-transform: uppercase;
+        font: normal 100 15px/1.2em "Exo 2", Arial, sans-serif;
+        color: red;
+    }
 </style>
 <div ng-controller="PlayerviewControllerPi3" class="spacecontainer" ng-init="roomId = <?=$roomId; ?>" >
     <div class="text"></div>
@@ -69,8 +76,8 @@
                 <div ng-repeat="cell in fuel track by $index" class="fuel" ng-class="{'full':($index < combustible)}"></div>
             </div>
             <div class="fuelMessage" ng-show="combustible<5">
-                <span class="small" ng-if="data.lang == 'es'">Recargar mas combustible</span>
-                <span class="small" ng-if="data.lang == 'en'">Synth more fuel</span>
+                <span ng-if="data.lang == 'es'">Recargar mas combustible</span>
+                <span ng-if="data.lang == 'en'">Synth more fuel</span>
             </div>
             <div class="o2Container">
                 <div class="o2">O<sub>2</sub></div>
@@ -91,14 +98,14 @@
         </div>
         <div ng-if="missionCompleted">
             <p ng-if="data.lang == 'es'">
-            ¡BIENVENIDOS A LA TIERRA!<br/>
-            {{data.team_name}}<br/>
-            Fin del juego<br/>
+                ¡BIENVENIDOS A LA TIERRA!<br/>
+                {{data.team_name}}<br/>
+                Fin del juego<br/>
             </p>
             <p ng-if="data.lang == 'en'">
-            ¡WELCOME BACK TO EARTH!<br/>
-            {{data.team_name}}<br/>
-            Game Over<br/>
+                ¡WELCOME BACK TO EARTH!<br/>
+                {{data.team_name}}<br/>
+                Game Over<br/>
             </p>
 
         </div>

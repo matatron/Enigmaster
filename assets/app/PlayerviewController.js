@@ -474,7 +474,12 @@ webApp = angular.module('Enigmaster', [])
 
                                         break;
                                     case 12:
-                                        $scope.screen = "menuHex";
+                                        $scope.screen = "authorizado";
+                                        setTimeout(function() {
+                                            $scope.screen = "menuHex";
+                                            selectScreen(0);
+                                        }, 2000);
+
                                         break;
                                 }
                             }
@@ -490,10 +495,13 @@ webApp = angular.module('Enigmaster', [])
                             switch(String(i).toLowerCase()) {
                                 case 'generado':
                                     ping.play();
+                                    $scope.data.params.generado = parseInt($scope.data.params.generado) || 0;
+                                case 'extrafuel':
+                                    $scope.data.params.extrafuel = parseInt($scope.data.params.extrafuel) || 0;
                                 case 'consumido':
                                     selectScreen(3);
-                                    $scope.data.params.consumido = $scope.data.params.consumido || 0;
-                                    $scope.combustible = parseInt($scope.data.params.generado) - parseInt($scope.data.params.consumido) + (parseInt($scope.data.params.extrafuel) || 0);
+                                    $scope.data.params.consumido = parseInt($scope.data.params.consumido) || 0;
+                                    $scope.combustible = $scope.data.params.generado - $scope.data.params.consumido + $scope.data.params.extrafuel;
                                     break;
                                 case '':
                                     switch(e) {
@@ -573,7 +581,6 @@ webApp = angular.module('Enigmaster', [])
                             }, 2000);
                         }
                     } else if ($scope.screen == "menuHex") {
-
                         selectScreen(event.key)
                     }
                     break;
