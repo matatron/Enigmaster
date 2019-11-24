@@ -509,6 +509,9 @@ webApp = angular.module('Enigmaster', [])
                                             break;
                                     }
                                     break;
+                                case 'dificultad':
+                                    $scope.dificultad = $scope.data.params.dificultad;
+                                    break;
                                 default:
                                     break;
                             }

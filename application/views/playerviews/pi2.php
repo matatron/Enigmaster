@@ -309,7 +309,8 @@
                     </h1>
                 </div>
                 <div class="futurepanel__body" style="font-size: 3em; line-height: 1.5em">
-                    <div><span class="alien colorY">Y</span> + <span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">E</span></div>
+                    <div ng-show="dificultad != 'facil'"><span class="alien colorY">Y</span> + <span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">E</span></div>
+                    <div ng-show="dificultad == 'facil'"><span class="alien colorY">Y</span> x 5 = <span class="alien sum">E</span></div>
                     <div><span class="alien colorZ">Z</span> + <span class="alien colorW">W</span> = <span class="alien sum">O</span></div>
                     <div><span class="alien colorX">X</span> + <span class="alien colorZ">Z</span> = <span class="alien sum">M</span></div>
                     <div><span class="alien colorX">X</span> + <span class="alien colorY">Y</span> = <span class="alien sum">U</span></div>
