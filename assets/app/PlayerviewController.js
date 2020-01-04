@@ -200,6 +200,7 @@ webApp = angular.module('Enigmaster', [])
         $scope.screen = ''
         $scope.clue = '';
         $scope.isAlien = true;
+        var loading = false;
         var lastStatus = null;
         var currentPuzzles = null;
         var currentParams = null;
@@ -243,7 +244,10 @@ webApp = angular.module('Enigmaster', [])
 
 
         function getBackend() {
+            if (loading) return;
+            loading = true;
             $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
+                loading = false;
                 response.data.progress = parseInt(response.data.progress);
                 $scope.data = response.data;
                 if (currentPuzzles == null) currentPuzzles = response.data.puzzles;
@@ -375,7 +379,7 @@ webApp = angular.module('Enigmaster', [])
             $scope.timeLeft = 3600000 - $scope.timePass;
         },100);
 
-        $interval(getBackend,500);
+        $interval(getBackend,1000);
         getBackend();
 
     }])
@@ -390,6 +394,7 @@ webApp = angular.module('Enigmaster', [])
         $scope.celdas = new Array(18);
         $scope.currentPuzzles = null;
 
+        var loading = false;
         var lastStatus = null;
         var currentParams = null;
         var player;
@@ -415,7 +420,10 @@ webApp = angular.module('Enigmaster', [])
         }
 
         function getBackend() {
+            if (loading) return;
+            loading = true;
             $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
+                loading = false;
                 response.data.progress = parseInt(response.data.progress);
                 $scope.data = response.data;
                 if ($scope.currentPuzzles == null) $scope.currentPuzzles = response.data.puzzles;
@@ -652,7 +660,7 @@ webApp = angular.module('Enigmaster', [])
         $scope.generado = 18;
         var player;
         var ping = new Audio('/assets/audio/glass_ping-Go445-1207030150.mp3');
-
+        var loading = false;
         var nextKeyPress = (new Date()).getTime() + 3600000*24;
 
         $scope.posX = 3;
@@ -691,6 +699,8 @@ webApp = angular.module('Enigmaster', [])
         }
 
         function getBackend() {
+            if (loading) return;
+            loading = true;
             if (player == null && document.getElementById('tvvideo') != null) {
                 player = document.getElementById('tvvideo');
                 player.addEventListener('ended',function() {
@@ -700,6 +710,7 @@ webApp = angular.module('Enigmaster', [])
             }
 
             $http.get('/json_info/roomcompact/'+$scope.roomId).then(function(response) {
+                loading = false;
                 response.data.progress = parseInt(response.data.progress);
                 $scope.data = response.data;
 
@@ -880,7 +891,7 @@ webApp = angular.module('Enigmaster', [])
                         animateSpace();
                         break;
                     case "w":
-                        if ($scope.validFront && (parseInt($scope.generado) - parseInt($scope.consumido) + (parseInt($scope.extrafuel) || 0) > 0)) {
+                        if ($scope.validFront && $scope.combustible > 0) {
                             switch($scope.direccion) {
                                 case 0:
                                     $scope.posY--;
