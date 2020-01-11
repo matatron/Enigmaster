@@ -76,6 +76,9 @@ class Controller_Gizmo extends Controller {
 
     public function action_reportjson()
     {
+        $start = microtime(true);
+        $times = [];
+        $times[] = microtime(true) - $start;
         $json = [
             "status" => 0,
             "puzzles" => ""
@@ -87,11 +90,13 @@ class Controller_Gizmo extends Controller {
                 ->where('room_id', '=', $gizmo->room)
                 ->and_where('status', '>', 0)
                 ->find();
+            $times[] = microtime(true) - $start;
             if ($group->loaded()) {
                 $json["status"] = $group->status;
                 $json["players"] = $group->people;
                 if ($group->status == 2) { // not started
                     $this->checkRules($gizmo, $group);
+                    $times[] = microtime(true) - $start;
                     if ($gizmo->params) {
                         $json["params"] = new stdClass();
                         $requestedParams = preg_split('/[\,\ ]+/', $gizmo->params);
@@ -102,12 +107,15 @@ class Controller_Gizmo extends Controller {
                     }
                     $puzzles = json_decode($group->puzzles);
                     $s = "";
+                    $times[] = microtime(true) - $start;
                     foreach($puzzles as $p) {
                         $s .= 0+$p->complete;
                     }
                     $json["puzzles"] = $s;
                 }
+                $times[] = microtime(true) - $start;
             }
+            $json["times"] = $times;
             echo json_encode($json);
 
             echo "\r";

@@ -453,10 +453,10 @@ webApp = angular.module('Enigmaster', [])
                 $scope.punishment = Math.max(0, $scope.data.total_clues-$scope.data.free_clues)*$scope.data.minutesxclue;
                 if ($scope.data.clue && $scope.data.clue.value != $scope.clue) {
                     $scope.clue = $scope.data.clue.value;
-                    if ($scope.screen == "menuHex") {
-                        if ($scope.clue != '') ping.play();
-                        selectScreen(5);
-                    }
+                    if ($scope.clue != '') ping.play();
+//                    if ($scope.screen == "menuHex") {
+//                        selectScreen(5);
+//                    }
                 }
 
                 if ($scope.data.status==2 || $scope.data.status==1) {
