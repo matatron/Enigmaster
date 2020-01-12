@@ -76,8 +76,6 @@ class Controller_Gizmo extends Controller {
 
     public function action_reportjson()
     {
-        $start = microtime(true);
-        $times = [];
         $json = [
             "status" => 0,
             "puzzles" => ""
@@ -93,9 +91,7 @@ class Controller_Gizmo extends Controller {
                 $json["status"] = $group->status;
                 $json["players"] = $group->people;
                 if ($group->status == 2) { // not started
-                    $times[] = microtime(true) - $start; //////////////////////////////////////
-                    $this->checkRules($gizmo, $group);
-                    $times[] = microtime(true) - $start; //////////////////////////////////////
+                    $json["times"] = $this->checkRules($gizmo, $group);
                     if ($gizmo->params) {
                         $json["params"] = new stdClass();
                         $requestedParams = preg_split('/[\,\ ]+/', $gizmo->params);
@@ -112,7 +108,6 @@ class Controller_Gizmo extends Controller {
                     $json["puzzles"] = $s;
                 }
             }
-            $json["times"] = $times;
             echo json_encode($json);
 
             echo "\r";
@@ -122,7 +117,10 @@ class Controller_Gizmo extends Controller {
 
 
     private function checkRules(&$gizmo, &$group) {
+        $start = microtime(true);
+        $times = [];
 
+        $times[] = microtime(true) - $start; //////////////////////////////////////
         $query = $this->request->query();
         $newData = json_encode($query);
         if ($gizmo->data !== $newData) {
@@ -137,6 +135,7 @@ class Controller_Gizmo extends Controller {
             $group->params = json_encode($params);
 
             $rules = json_decode($gizmo->ifttt);
+            $times[] = microtime(true) - $start; //////////////////////////////////////
             foreach($rules as $rule) {
                 if (isset($query[$rule->if]) &&  strtolower($query[$rule->if]) == strtolower($rule->this)) {
                     switch (strtolower($rule->then)) {
@@ -168,9 +167,12 @@ class Controller_Gizmo extends Controller {
                     }
                 }
             }
+            $times[] = microtime(true) - $start; //////////////////////////////////////
             $group->save();
             $gizmo->save();
+            $times[] = microtime(true) - $start; //////////////////////////////////////
         }
+        return $times;
     }
 
     public function action_config()
