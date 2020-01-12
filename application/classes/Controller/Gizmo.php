@@ -120,7 +120,8 @@ class Controller_Gizmo extends Controller {
         $start = microtime(true);
         $times = [];
 
-        $times[] = microtime(true) - $start; //////////////////////////////////////
+        $times[] = 1;
+        //$times[] = microtime(true) - $start; //////////////////////////////////////
         $query = $this->request->query();
         $newData = json_encode($query);
         if ($gizmo->data !== $newData) {
@@ -135,7 +136,8 @@ class Controller_Gizmo extends Controller {
             $group->params = json_encode($params);
 
             $rules = json_decode($gizmo->ifttt);
-            $times[] = microtime(true) - $start; //////////////////////////////////////
+            $times[] = 2;
+            //$times[] = microtime(true) - $start; //////////////////////////////////////
             foreach($rules as $rule) {
                 if (isset($query[$rule->if]) &&  strtolower($query[$rule->if]) == strtolower($rule->this)) {
                     switch (strtolower($rule->then)) {
@@ -167,10 +169,12 @@ class Controller_Gizmo extends Controller {
                     }
                 }
             }
-            $times[] = microtime(true) - $start; //////////////////////////////////////
+            $times[] = 3;
+            //$times[] = microtime(true) - $start; //////////////////////////////////////
             $group->save();
             $gizmo->save();
-            $times[] = microtime(true) - $start; //////////////////////////////////////
+            $times[] = 4;
+            //$times[] = microtime(true) - $start; //////////////////////////////////////
         }
         return $times;
     }
