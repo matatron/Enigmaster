@@ -88,6 +88,6 @@
         Fin del juego
     </div>
     <div ng-show="data.status == 0">
-        Modo Reset. No hay juego iniciado
+		<div ng-click="playPing()">Modo Reset. No hay juego iniciado</div>
     </div>
 </div>

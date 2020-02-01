@@ -209,6 +209,9 @@ webApp = angular.module('Enigmaster', [])
         var alarma = new Audio('/assets/audio/alarma.mp3');
         var musica = new Audio('/assets/audio/espacio1.mp3');
 
+		$scope.playPing = function () {
+			ping.play();
+		}
         function playVideo(src) {
             if (player == null && document.getElementById('tvvideo') != null) {
                 player = document.getElementById('tvvideo');
@@ -311,12 +314,14 @@ webApp = angular.module('Enigmaster', [])
                                     case 3:
                                         $scope.screen = "cluesInfo";
                                         alarma.pause();
+										ping.play();
                                         console.log("alarma apagada");
                                         stopVideo();
                                         break;
                                     case 4:
                                         $scope.screen = "cluesInfo";
                                         alarma.pause();
+										ping.play();
                                         stopVideo();
                                         $scope.isAlien = false;
                                         break;
@@ -381,6 +386,7 @@ webApp = angular.module('Enigmaster', [])
 
         $interval(getBackend,1000);
         getBackend();
+		ping.play();
 
     }])
     .controller('PlayerviewControllerPi2', ['$scope', '$http', '$timeout', '$interval', '$filter', function($scope, $http, $timeout, $interval, $filter) {
@@ -701,7 +707,7 @@ webApp = angular.module('Enigmaster', [])
         function getBackend() {
             if (loading) return;
             loading = true;
-            if (player == null && document.getElementById('tvvideo') != null) {
+            if (document.getElementById('tvvideo')!= null && player != document.getElementById('tvvideo')) {
                 player = document.getElementById('tvvideo');
                 player.addEventListener('ended',function() {
                     $(player).hide();
@@ -731,6 +737,7 @@ webApp = angular.module('Enigmaster', [])
 
                 if ($scope.data.status != lastStatus) {
                     console.log("New status", lastStatus, "->", $scope.data.status);
+					console.log(player);
                     lastStatus = $scope.data.status;
                     if (player) $(player).hide();
                     switch($scope.data.status) {
@@ -741,6 +748,7 @@ webApp = angular.module('Enigmaster', [])
                             animateSpace();
                             break;
                         case 3:
+							$(player).hide();
                             $scope.missionCompleted = false;
                             $scope.currentLocation = '';
                             $scope.consumido = 0;
@@ -779,7 +787,10 @@ webApp = angular.module('Enigmaster', [])
 
                             if ($scope.currentPuzzles[i]) {
                                 switch(i+1) {
-                                    case 3:
+                                    case 1:
+                                    case 2:
+                                    case 9:
+										$(player).hide();
                                         break;
                                 }
                             }
@@ -877,21 +888,25 @@ webApp = angular.module('Enigmaster', [])
             if ((new Date()).getTime() > nextKeyPress) {
                 nextKeyPress = (new Date()).getTime();
                 console.log(nextKeyPress);
+				 
                 switch(keyName) {
                     case "a":
                         lastDireccion = $scope.direccion;
                         $scope.direccion = ($scope.direccion+3)%4;
                         nextKeyPress += 500;
+						(new Audio('/assets/audio/blip.mp3')).play();
                         animateSpace();
                         break;
                     case "d":
                         lastDireccion = $scope.direccion;
                         $scope.direccion = ($scope.direccion+1)%4;
                         nextKeyPress += 500;
+						(new Audio('/assets/audio/blip.mp3')).play();
                         animateSpace();
                         break;
                     case "w":
                         if ($scope.validFront && $scope.combustible > 0) {
+							(new Audio('/assets/audio/blip.mp3')).play();
                             switch($scope.direccion) {
                                 case 0:
                                     $scope.posY--;
@@ -919,6 +934,7 @@ webApp = angular.module('Enigmaster', [])
                                     playVideo("http://127.0.0.1/aterrizaje.mp4");
                                 }
                                 $timeout(function() {
+									$(player).hide();
                                     $scope.missionCompleted = true;
                                     reportGizmo();
                                 }, 13000);
@@ -931,7 +947,9 @@ webApp = angular.module('Enigmaster', [])
                                 nextKeyPress += 6500;
                                 animateSpace();
                             }
-                        }
+                        } else {
+							(new Audio('/assets/audio/chicharra-error-incorrecto-.mp3')).play();
+						}
                         break;
                 }
             }
