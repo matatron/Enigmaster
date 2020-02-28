@@ -90,7 +90,7 @@ class Controller_Gizmo extends Controller {
             if ($group->loaded()) {
                 $json["status"] = $group->status;
                 $json["players"] = $group->people;
-                if ($group->status == 2) { // not started
+//                if ($group->status == 2) { // not started
                     $this->checkRules($gizmo, $group);
                     if ($gizmo->params) {
                         $json["params"] = new stdClass();
@@ -106,7 +106,7 @@ class Controller_Gizmo extends Controller {
                         $s .= 0+$p->complete;
                     }
                     $json["puzzles"] = $s;
-                }
+//                }
             }
             echo json_encode($json);
 

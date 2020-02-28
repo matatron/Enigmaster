@@ -7,6 +7,10 @@ webApp.controller('GameController', ['$scope', '$http', '$timeout', '$interval',
     ctrl.modifier = 0;
     ctrl.now = 0;
     ctrl.tiempoPistas = 0;
+	
+	ctrl.trans = {
+		C1: 'Rojo'
+	};
 
     ctrl.startTime = function() {
         var now = new Date();

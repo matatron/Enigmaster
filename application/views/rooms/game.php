@@ -209,7 +209,7 @@
                                     </td>
                                     <td>
                                         <div ng-repeat="(key, value) in ctrl.gizmos[<?=$gizmo->id; ?>].data track by $index">
-                                            <strong>{{key}}</strong>: {{value}}
+                                            <strong>{{ctrl.trans[key] || key}}</strong>: {{value}}
                                         </div>
                                     </td>
                                 </tr>
@@ -219,7 +219,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="row">
                 <div class="col-sm-6">
